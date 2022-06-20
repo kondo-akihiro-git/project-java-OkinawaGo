@@ -11,16 +11,10 @@ import java.sql.SQLException;
  */
 public class DbUtil {
 	// 定数定義（共通）
-	private static final String DB_HOST = "127.0.0.1";
-	private static final String DB_NAME = "rezodb";
-	private static final String DB_USER = "rezouser";
-	private static final String DB_PASS = "Rezo_0000";
-
-	// 定数定義（PostgreSQL用）
-//	private static final String DBMS = "postgresql";
-//	private static final String DB_DRIVER = "org." + DBMS + ".Driver";
-//	private static final String DB_PORT = "5432";
-//	private static final String DB_URL = "jdbc:" + DBMS + "://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+	private static final String DB_HOST = "127.0.0.1"; // 要確認
+	private static final String DB_NAME = "okinawadb";
+	private static final String DB_USER = "go@localhost";
+	private static final String DB_PASS = "okinawa_05";
 
 	// 定数定義（MySQL用）
 	private static final String DBMS ="mysql";
@@ -37,9 +31,6 @@ public class DbUtil {
 
 	/**
 	 * DBのコネクションを取得
-	 * @return DBコネクション
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
 	 */
 	public static Connection getConnection(boolean autoCommitFlg) throws ClassNotFoundException, SQLException {
 		if (con == null || con.isClosed()) {
