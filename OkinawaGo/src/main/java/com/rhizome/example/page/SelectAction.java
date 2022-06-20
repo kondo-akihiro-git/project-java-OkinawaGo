@@ -9,13 +9,15 @@ public class SelectAction extends BaseServlet {
 	protected String getPageName() {
 		return "select";
 	}
-	
+
 	protected String doAction() throws Exception {
 		
 		if(super.request.getParameter("text") != null) {
 			
 		String text = super.request.getParameter("text");
-		
+
+		// 画面入力値 -> DTOへ
+				null null = new null();
 		// 検索を行う
 				SearchService service = new SearchService();
 				List<null> spotInfolist = service.searchInfo(text);
@@ -33,11 +35,21 @@ public class SelectAction extends BaseServlet {
 			return "adInsert_Input";
 		//詳細画面に遷移
 		} else if (super.request.getParameter("detail") != null) {
-			String 
+			String[] pageParam = super.getInputParameter(
+					"store_id" // 0
+					, "store_nm" // 
+					
+					SearchService service = new SearchService();
+					List<null> detailList = searchDetailBykey(pageParam[0],pageParam[1]);
+					
+					super.request.setAttribute("detailList", detailList);
+					return "detail";
 		}
 		//削除完了画面に遷移
-		} else if(super.request.getParameter("delete") != null) {
-			
-		}
-		
+		}else if(super.request.getParameter("delete")!=null)
+
+	{
+
 	}
+
+}
