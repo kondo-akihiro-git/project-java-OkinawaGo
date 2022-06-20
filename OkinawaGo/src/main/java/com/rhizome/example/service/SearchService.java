@@ -31,7 +31,7 @@ public class SearchService extends BaseService(){
 		null dao = new null(this.con);
 		List<null> list = null;
 		try {
-			list = dao.findByParam(null); //入力された値で条件検索
+			list = dao.findByInput(null); //入力された値で条件検索
 			if (list.size() == 0) {
 				list = null;
 			}
@@ -41,17 +41,34 @@ public class SearchService extends BaseService(){
 		return list;
 	}
 /**
-	 * 管理者トップ画面から詳細トップページに飛ぶ-------------------------------------------------------------------
+	 * 管理者トップ画面からスポット・グルメ詳細ページに飛ぶ-------------------------------------------------------------------
 
 	 */
-	public null searchSpotBykey(Integer cateId, String name) throws Exception {
+	public null searchDetailBykey(Integer cateId, String name) throws Exception {
 		null dao = new null(this.con);
 		null nullA = null;
 		try {
-			nullA = dao.findByKey(cateId, name);
+			nullA = dao.findDetailByIdName(cateId, name);
 		} finally {
 			DbUtil.closeConnection(this.con);
 		}
 		return nullA;
 	}
+	/**
+	 * 管理者トップ画面からコメント一覧ページに飛ぶ-------------------------------------------------------------------
+
+	 */
+	
+	public null searchCommentBykey(Integer cateId, String name) throws Exception {
+		null dao = new null(this.con);
+		List<null> list = null;
+		try {
+			list = dao.findCommentByIdName(cateId, name);
+		} finally {
+			DbUtil.closeConnection(this.con);
+		}
+		return list;
+	}
+	
 }
+　
