@@ -1,7 +1,10 @@
+import java.util.HashMap;
+public class SearchService extends BaseService(){
 
-public class SearchService extends BaseService()
-{
-
+	public SearchService() throws Exception {
+		super(true);
+	}
+	
 /**
 	 * メールアドレス、パスワードでログイン判定を行う
 	 * @param mail
