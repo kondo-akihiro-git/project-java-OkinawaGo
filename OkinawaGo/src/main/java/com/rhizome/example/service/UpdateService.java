@@ -6,7 +6,7 @@ public class UpdateService extends BaseService {
 	}
 
 	/**
-	 * スポットの登録を行う
+	 * スポットの登録を行う--------------------------------------------------------------------------
 	 */
 public int insertSpot(null null) throws Exception {
 		null dao = new null(this.con);
@@ -23,7 +23,7 @@ public int insertSpot(null null) throws Exception {
 				return count;
 }
 /**
-	 * グルメの登録を行う
+	 * グルメの登録を行う------------------------------------------------------------------------------
 	 */
 public int insertGou(null null) throws Exception {
 		null dao = new null(this.con);
@@ -40,66 +40,17 @@ public int insertGou(null null) throws Exception {
 				return count;
 }
 
-/**
-	 * スポットの更新を行う
-	 */
-public int updateSpot(null null ) {
-				null dao = null new null(this.con);
-				int count = -1;
-				try {
-					List<Object> paramList = new ArrayList<>();
-					paramList.add(null.getnull());
-					paramList.add(null.getnull());
-					paramList.add(null.getnull());
-					paramList.add(null.getnull());
-					paramList.add(null.getnull());
-					paramList.add(null.getnull());
-					count = dao.updateByPrimaryKey(paramList, null.getnull());
-			this.con.comit();
-			} catch (Exception e) {
-			e.printStackTrace();
-			this.con.rollback();
-		} finally {
-			DbUtil.closeConnection(this.con);
-		}
-		return count;
-	}
-
-/**
-	 * グルメの更新を行う
-	 */
-public int updateGou(null null ) {
-	null dao = null new null(this.con);
-	int count = -1;
-	try {
-				List<Object> paramList = new ArrayList<>();
-				paramList.add(null.getnull());
-				paramList.add(null.getnull());
-				paramList.add(null.getnull());
-				paramList.add(null.getnull());
-				paramList.add(null.getnull());
-				paramList.add(null.getnull());
-				count = dao.updateByPrimaryKey(paramList, emp.getnull());
-			this.con.comit();
-			} catch (Exception e) {
-			e.printStackTrace();
-			this.con.rollback();
-		} finally {
-			DbUtil.closeConnection(this.con);
-		}
-		return count;
-	}
 
 	/**
-	 * 社員情報の物理削除を行う
+	 * スポット情報の物理削除を行う--------------------------------------------------------------------
 	 */
 
-	public int deleteEmployee(Integer empId) throws Exception {
-		EmployeeDao dao = new EmployeeDao(this.con);
+	public int deleteSpot(Integer null) throws Exception {
+		null dao = new null(this.con);
 		int deleteCount = -1;
 
 		try {
-			deleteCount = dao.deleteByPrimaryKey(empId);
+			deleteCount = dao.deleteByPrimaryKey(null);
 			this.con.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -110,4 +61,26 @@ public int updateGou(null null ) {
 		}
 		return deleteCount;
 	}
+	
+	/**
+	 * グルメ情報の物理削除を行う--------------------------------------------------------------------
+	 */
+
+	public int deleteGou(Integer null) throws Exception {
+		null dao = new null(this.con);
+		int deleteCount = -1;
+
+		try {
+			deleteCount = dao.deleteByPrimaryKey(null);
+			this.con.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.con.rollback();
+			throw new Exception("削除できませんでした:" + e.getMessage());
+		} finally {
+			DbUtil.closeConnection(this.con);
+		}
+		return deleteCount;
+	}
+	
 }
