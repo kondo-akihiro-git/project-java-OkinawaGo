@@ -21,7 +21,7 @@ public class LoginAction extends BaseServlet {
 		if (loginData == null || loginData.get("EMP") == null) {
 			// ポップアップの表示方法不明
 			String message = "メールアドレスまたはパスワードが間違っています");
-			request.setAttribute("message", message)
+			request.setAttribute("alertMsg", message)
 		}
 		super.session.setAttribute("LOGIN", loginData.get("EMP"));
 		super.request.getRequestDispatcher("adSearch.jsp");

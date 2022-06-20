@@ -39,14 +39,14 @@ public abstract class BaseServlet extends HttpServlet {
 			// ログインチェック
 			if (!"login".equals(this.getPageName())) {
 				if (session != null) {
-					/*　DTOで変更する点
-					Employee employee = (Employee) session.getAttribute("LOGIN_EMP");
+					
+					null null = (null) session.getAttribute("LOGIN_EMP");
 					@SuppressWarnings("unchecked")
-					List<Department> departmentList = (List<Department>) session.getAttribute("DEP_LIST");
+					List<null> null = (List<null>) session.getAttribute("DEP_LIST");
 					if (
-							(employee == null || "".equals(employee.getNmEmployee()))
+							(null == null || "".equals(null.get null()))
 							||
-							(departmentList == null || departmentList.size() == 0)
+							(null == null || null.size() == 0)
 						){
 						/*
 						 * 不正アクセス時の遷移先バグに関する修正
