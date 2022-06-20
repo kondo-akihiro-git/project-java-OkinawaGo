@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +32,45 @@ public abstract class BaseServlet extends HttpServlet {
 		this.response = response;
 		this.session = request.getSession();
 		
+		this.message = null;
+
+		String nextPage = this.getPageName();
+		try {
+			// ログインチェック
+			if (!"login".equals(this.getPageName())) {
+				if (session != null) {
+					/*　DTOで変更する点
+					Employee employee = (Employee) session.getAttribute("LOGIN_EMP");
+					@SuppressWarnings("unchecked")
+					List<Department> departmentList = (List<Department>) session.getAttribute("DEP_LIST");
+					if (
+							(employee == null || "".equals(employee.getNmEmployee()))
+							||
+							(departmentList == null || departmentList.size() == 0)
+						){
+						/*
+						 * 不正アクセス時の遷移先バグに関する修正
+						 */
+						nextPage = "adLogin";
+
+						throw new Exception("不正なログイン、またはログイン有効期間が過ぎています");
+					}
+				}
+			}
+
+			// 画面ごとの処理
+			nextPage = this.doAction();
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = e.getMessage();
+		}
+
+		/*
+		 * エラーメッセージ表示バグの修正
+		 */
+		request.setAttribute("alertMsg", this.message);
+
+		request.getRequestDispatcher(nextPage + ".jsp").forward(request,  response);
 	}
 	
 	protected String[] getInputParameter(String... names) {
@@ -43,6 +83,12 @@ public abstract class BaseServlet extends HttpServlet {
 			this.request.setAttribute(names[i], values[i]);
 		}
 		return values;
+	}
+	
+	//-------------------------------------- 抽象メソッド群
+		protected abstract String getPageName();
+
+		protected abstract String doAction() throws Exception;
 	}
 	
 }

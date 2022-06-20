@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+        
     <wb-module deploy-name="group-development-2">
+                
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/OkinawaGo/src/main/java/com/rhizome/example/dao/base"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/OkinawaGo/src/main/java/com/rhizome/example/entity/base"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/OkinawaGo/src/main/java/com/rhizome/example/page/base"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/OkinawaGo/src/main/java/com/rhizome/example/service/base"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/OkinawaGo/src/main/java/com/rhizome/example/util"/>
+                
         <property name="context-root" value="group-development-2"/>
+                
         <property name="java-output-path" value="/group-development-2/bin"/>
+            
     </wb-module>
+    
 </project-modules>

@@ -1,7 +1,12 @@
 import java.util.Map;
 
-@WebServlet(name="login", urlPatterns={"/login"})
+@WebServlet(name = "login", urlPatterns = { "/login" })
 public class LoginAction extends BaseServlet {
+
+	@Override
+	protected String getPageName() {
+		return "login";
+	}
 
 	@Override
 	protected String doAction() throws Exception {
@@ -18,8 +23,8 @@ public class LoginAction extends BaseServlet {
 			String message = "メールアドレスまたはパスワードが間違っています");
 			request.setAttribute("message", message)
 		}
-		session.setAttribute("LOGIN", loginData.get("?"));
-		request.getRequestDispatcher("adSearch.jsp");
+		super.session.setAttribute("LOGIN", loginData.get("?"));
+		super.request.getRequestDispatcher("adSearch.jsp");
 		
 	}
 }

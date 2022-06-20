@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"/>
-	<classpathentry kind="src" path="OkinawaGo/src/main/java/com/rhizome/example/dao/base"/>
-	<classpathentry kind="src" path="OkinawaGo/src/main/java/com/rhizome/example/entity/base"/>
-	<classpathentry kind="src" path="OkinawaGo/src/main/java/com/rhizome/example/page/base"/>
-	<classpathentry kind="src" path="OkinawaGo/src/main/java/com/rhizome/example/service/base"/>
-	<classpathentry kind="src" path="OkinawaGo/src/main/java/com/rhizome/example/util"/>
 	<classpathentry kind="lib" path="OkinawaGo/src/main/webapp/WEB-INF/lib/jsonic-1.3.10.jar"/>
 	<classpathentry kind="lib" path="OkinawaGo/src/main/webapp/WEB-INF/lib/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="OkinawaGo/src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.23.jar"/>
