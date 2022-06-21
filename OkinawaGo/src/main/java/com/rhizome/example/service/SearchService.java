@@ -17,7 +17,7 @@ public class SearchService extends BaseService(){
 		//DAOによって変更
 		null dao = new null(this.con);
 		try {
-			loginData.put("null", dao.selectLoginInfo(mail, pass));
+			loginData.put("null", dao.loginInfo(mail, pass));//mailとpassからログイン
 		} finally {
 			DbUtil.closeConnection(this.con);
 		}
@@ -48,7 +48,7 @@ public class SearchService extends BaseService(){
 		null dao = new null(this.con);
 		null nullA = null;
 		try {
-			nullA = dao.findDetailByIdName(cateId, name);
+			nullA = dao.findDetailByIdName(cateId, name); // カテゴリーIDと名前からスポット詳細情報を取得
 		} finally {
 			DbUtil.closeConnection(this.con);
 		}
@@ -62,26 +62,38 @@ public class SearchService extends BaseService(){
 		null dao = new null(this.con);
 		null nullA = null;
 		try {
-			nullA = dao.findDetailByIdName(cateId, name);
+			nullA = dao.findDetailByIdName(cateId, name); //カテゴリーIDと名前からグルメ詳細情報を取得
 		} finally {
 			DbUtil.closeConnection(this.con);
 		}
 		return nullA;
 	}
 	/**
-	 * 管理者トップ画面からコメント一覧ページに飛ぶ-------------------------------------------------------------------
-
+	 * 管理者トップ画面からコメント一覧ページに遷移-------------------------------------------------------------------
 	 */
 	
 	public null searchCommentBykey(Integer cateId, String name) throws Exception {
 		null dao = new null(this.con);
 		List<null> list = null;
 		try {
-			list = dao.findCommentByIdName(cateId, name);
+			list = dao.findCommentByIdName(cateId, name); // カテゴリーIDと名前からコメント一覧を取得
 		} finally {
 			DbUtil.closeConnection(this.con);
 		}
 		return list;
+	}
+	/**
+	 * グルメ検索画面からカテゴリー検索後、検索結果画面に遷移-------------------------------------------------------------------
+	 */
+	public null conditionalSearchByRadio(Integer id, String[] array) throws Exception {
+		null dao = new null(this.con);
+		List<null> list = null;
+		try {
+			list = dao.findByIdList(id, array); //地域IDとチェックボックスからスポット・グルメの一覧を取得
+		}finnaly {
+			DbUtil.closeConnection(this.con);
+		}
+		return list
 	}
 	
 }

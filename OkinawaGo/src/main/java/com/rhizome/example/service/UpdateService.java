@@ -88,13 +88,13 @@ public int registerGou(null null) throws Exception {
 		return deleteCount;
 	}
 	/*
-	 * コメントとユーザー投稿の追加
+	 * コメントとユーザー投稿の追加-------------------------------------------------------------
 	 */
-	public int commentInput(null null) throws Exception {
+	public int commentInput(String name String text) throws Exception {
 		null dao = new null(this.con);
 		int count = -1;
 				try{
-					count = dao.inputComment(null);
+					count = dao.inputComment(name, text);
 					this.con.comit();
 					} catch (Exception e) {
 			e.printStackTrace();
