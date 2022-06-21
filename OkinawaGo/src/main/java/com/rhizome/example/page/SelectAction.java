@@ -16,7 +16,7 @@ public class SelectAction extends BaseServlet {
 			
 		String text = super.getInputParameter(
 				"text"
-				
+				);
 		// 検索を行う
 				SearchService service = new SearchService();
 				List<null> spotInfolist = service.searchInfo(text);
@@ -38,10 +38,11 @@ public class SelectAction extends BaseServlet {
 			String[] pageParam = super.getInputParameter(
 					"s_g_id"
 					, "info_nm" 
-					
-					null null = new null
-					null.set null(Integer.parseInt(pageParam[0]));
-					null.set null(pageParam[1]);
+					);
+			
+					Info_DTO info = new Info_DTO();
+					info.setS_g_id(pageParam[0]);
+					info.setInfo_nm(pageParam[1]);
 					
 					SearchService service = new SearchService();
 					List<null> detailList = searchDetailBykey(pageParam[0],pageParam[1]);
@@ -58,9 +59,9 @@ public class SelectAction extends BaseServlet {
 					"s_g_id"
 					, "info_nm" 
 					
-					null null = new null
-					null.set null(Integer.parseInt(pageParam[0]));
-					null.set null(pageParam[1]);
+					Info_DTO info = new Info_DTO();
+					info.setInfo_DTO(pageParam[0]);
+					info.setInfo_DTO(pageParam[1]);
 					
 					SearchService service = new SearchService();
 					List<null> commentList = searchCommentBykey(pageParam[0],pageParam[1]);

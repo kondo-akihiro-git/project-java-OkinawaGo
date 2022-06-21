@@ -10,9 +10,9 @@ public class ShowInfoAction extends BaseServlet {
 				"info_img"
 				,"info_id"
 				
-				 null img = new null();
-		        img.setnull(pageParam[0]);
-		        img.setnull(pageParam[1]);
+				Info_DTO img = new Info_DTO();
+		        img.setInfo_img(pageParam[0]);
+		        img.setInfo_id(pageParam[1]);
 				
 				SearchService service = new SearchService();
 				

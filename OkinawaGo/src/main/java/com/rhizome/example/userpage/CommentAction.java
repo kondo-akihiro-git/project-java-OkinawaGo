@@ -10,12 +10,12 @@ public class CommentAction extends BaseServlet {
 String[] pageParam = super.getInputParameter(
 		"comment_nm"
 		,"comment_tx"
-		."info_img"
+		."comment_img"
 		);
-        null comment = new null();
-        comment.setnull(pageParam[0]);
-        comment.setnull(pageParam[1]);
-        comment.setnull(pageParam[2]);
+        CommentDTO comment = new Comment_DTO();
+        comment.setComment_nm(pageParam[0]);
+        comment.setComment_tx(pageParam[1]);
+        comment.setComment(pageParam[2]);
         
 		UpdateService service = new UpdateService();
 		List<null> commentList =  service.commentInput(comment);

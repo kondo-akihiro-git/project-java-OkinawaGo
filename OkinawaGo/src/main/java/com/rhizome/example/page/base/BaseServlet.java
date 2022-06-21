@@ -40,17 +40,11 @@ public abstract class BaseServlet extends HttpServlet {
 			if (!"login".equals(this.getPageName())) {
 				if (session != null) {
 					
-					null null = (null) session.getAttribute("LOGIN_EMP");
+					Manager_DTO manager = (Manager_DTO) session.getAttribute("LOGIN");
 					@SuppressWarnings("unchecked")
-					List<null> null = (List<null>) session.getAttribute("DEP_LIST");
 					if (
-							(null == null || "".equals(null.get null()))
-							||
-							(null == null || null.size() == 0)
+							(manager == null || "".equals(manager.getManager_id()))
 						){
-						/*
-						 * 不正アクセス時の遷移先バグに関する修正
-						 */
 						nextPage = "adLogin";
 
 						throw new Exception("不正なログイン、またはログイン有効期間が過ぎています");
