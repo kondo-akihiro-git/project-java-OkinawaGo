@@ -18,6 +18,7 @@ public class DeleteAction extends BaseServlet {
 	@Override
 	protected String doAction() throws Exception {
 		
+		//トップページから遷移した時
 		if (super.request.getParameter("delete") != null) {
 		String[] pageParam = super.getInputParameter(
 				"s_g_id"
@@ -32,6 +33,7 @@ public class DeleteAction extends BaseServlet {
 				
 				super.request.setAttribute("deleteList", delitelList);
 				
+		//コメント検索画面から遷移された時		
 		} else if (super.request.getParameter("commentDelete") != null) {
 				"comment_nm"
 				,"comment_tx"

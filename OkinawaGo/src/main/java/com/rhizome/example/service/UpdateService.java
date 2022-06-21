@@ -87,5 +87,20 @@ public int registerGou(null null) throws Exception {
 		}
 		return deleteCount;
 	}
-
+	/*
+	 * コメントとユーザー投稿の追加
+	 */
+	public int commentInput(null null) throws Exception {
+		null dao = new null(this.con);
+		int count = -1;
+				try{
+					count = dao.inputComment(null);
+					this.con.comit();
+					} catch (Exception e) {
+			e.printStackTrace();
+			this.con.rollback();
+				}finally {
+					DbUtil.closeConnection(this.con);
+				}
+				return count;
 }

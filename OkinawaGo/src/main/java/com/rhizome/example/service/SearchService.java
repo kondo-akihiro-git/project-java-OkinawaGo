@@ -54,6 +54,20 @@ public class SearchService extends BaseService(){
 		}
 		return nullA;
 	}
+	
+	 /* ユーザー検索画面からスポット・グルメ詳細ページに飛ぶ-------------------------------------------------------------------
+
+	 */
+	public null searchDetailBykey(String img) throws Exception {
+		null dao = new null(this.con);
+		null nullA = null;
+		try {
+			nullA = dao.findDetailByIdName(cateId, name);
+		} finally {
+			DbUtil.closeConnection(this.con);
+		}
+		return nullA;
+	}
 	/**
 	 * 管理者トップ画面からコメント一覧ページに飛ぶ-------------------------------------------------------------------
 

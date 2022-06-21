@@ -14,7 +14,8 @@ public class SelectAction extends BaseServlet {
 		
 		if(super.request.getParameter("text") != null) {
 			
-		String text = super.request.getParameter("text");
+		String text = super.getInputParameter(
+				"text"
 				
 		// 検索を行う
 				SearchService service = new SearchService();
