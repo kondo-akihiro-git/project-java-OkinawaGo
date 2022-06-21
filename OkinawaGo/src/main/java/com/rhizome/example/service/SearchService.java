@@ -27,11 +27,11 @@ public class SearchService extends BaseService(){
 	/**
 	 * 管理者トップでフリーワードによるスポット・グルメ検索を行う---------------------------------------------------------------------------------
 	 */
-	public List< null > searchInfo(String null ) throws Exception {
+	public List< null > searchInfo(String text) throws Exception {
 		null dao = new null(this.con);
 		List<null> list = null;
 		try {
-			list = dao.findByInput(null); //入力された値で条件検索
+			list = dao.findByInput(text)); //入力された値で条件検索
 			if (list.size() == 0) {
 				list = null;
 			}
@@ -46,7 +46,7 @@ public class SearchService extends BaseService(){
 	 */
 	public null searchDetailBykey(Integer cateId, String name) throws Exception {
 		null dao = new null(this.con);
-		null nullA = null;
+		null nullA = null; // メソッドの戻り値のデータ型がわかっていません…ごめんなさい。
 		try {
 			nullA = dao.findDetailByIdName(cateId, name); // カテゴリーIDと名前からスポット詳細情報を取得
 		} finally {
@@ -60,7 +60,7 @@ public class SearchService extends BaseService(){
 	 */
 	public null searchDetailBykey(String img) throws Exception {
 		null dao = new null(this.con);
-		null nullA = null;
+		null nullA = null; // メソッドの戻り値のデータ型がわかっていません…ごめんなさい。
 		try {
 			nullA = dao.findDetailByIdName(cateId, name); //カテゴリーIDと名前からグルメ詳細情報を取得
 		} finally {
