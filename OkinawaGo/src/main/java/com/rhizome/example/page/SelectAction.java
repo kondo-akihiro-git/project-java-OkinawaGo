@@ -7,7 +7,7 @@ public class SelectAction extends BaseServlet {
 
 	@Override
 	protected String getPageName() {
-		return "select";
+		return "adSearch";
 	}
 
 	protected String doAction() throws Exception {
@@ -15,9 +15,7 @@ public class SelectAction extends BaseServlet {
 		if(super.request.getParameter("text") != null) {
 			
 		String text = super.request.getParameter("text");
-
-		// 画面入力値 -> DTOへ
-				null null = new null();
+				
 		// 検索を行う
 				SearchService service = new SearchService();
 				List<null> spotInfolist = service.searchInfo(text);
@@ -35,9 +33,14 @@ public class SelectAction extends BaseServlet {
 			return "adInsert_Input";
 		//詳細画面に遷移
 		} else if (super.request.getParameter("detail") != null) {
+			
 			String[] pageParam = super.getInputParameter(
-					"store_id" // 0
-					, "store_nm" // 
+					"s_g_id"
+					, "info_nm" 
+					
+					null null = new null
+					null.set null(Integer.parseInt(pageParam[0]));
+					null.set null(pageParam[1]);
 					
 					SearchService service = new SearchService();
 					List<null> detailList = searchDetailBykey(pageParam[0],pageParam[1]);
@@ -45,11 +48,23 @@ public class SelectAction extends BaseServlet {
 					super.request.setAttribute("detailList", detailList);
 					return "detail";
 		}
-		//削除完了画面に遷移
-		}else if(super.request.getParameter("delete")!=null)
+			
+		//コメント管理に遷移	
+		}else if(super.request.getParameter("comment")!=null)
 
 	{
-
-	}
+			String[] pageParam = super.getInputParameter(
+					"s_g_id"
+					, "info_nm" 
+					
+					null null = new null
+					null.set null(Integer.parseInt(pageParam[0]));
+					null.set null(pageParam[1]);
+					
+					SearchService service = new SearchService();
+					List<null> commentList = searchCommentBykey(pageParam[0],pageParam[1]);
+					super.request.setAttribute("detailList", detailList);
+					return "adcommentSearch";
+		}
 
 }
