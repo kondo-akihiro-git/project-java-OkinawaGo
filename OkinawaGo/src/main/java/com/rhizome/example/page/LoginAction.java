@@ -1,6 +1,10 @@
+package com.rhizome.example.page;
+
 import java.util.Map;
 
-@WebServlet(name = "login", urlPatterns = { "/login" })
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet(name="login", urlPatterns={"/login"})
 public class LoginAction extends BaseServlet {
 
 	@Override
@@ -18,12 +22,12 @@ public class LoginAction extends BaseServlet {
 		Map<String, Object> loginData = service.doLogin(param[0], param[1]);
 
 		// 結果の取得（検索結果0件）
-		if (loginData == null || loginData.get("EMP") == null) {
+		if (loginData == null || loginData.get("Manager") == null) {
 			// ポップアップの表示方法不明
 			String message = "メールアドレスまたはパスワードが間違っています";
 			request.setAttribute("alertMsg", message)
 		}
-		super.session.setAttribute("LOGIN", loginData.get("EMP"));
+		super.session.setAttribute("LOGIN", loginData.get("null"));
 		super.request.getRequestDispatcher("adSearch.jsp");
 		
 	}

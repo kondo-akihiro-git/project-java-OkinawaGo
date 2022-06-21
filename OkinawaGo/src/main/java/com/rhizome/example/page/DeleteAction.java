@@ -29,9 +29,7 @@ public class DeleteAction extends BaseServlet {
 				info.setInfo_nm(pageParam[1]);
 				
 				UpdateService service = new UpdateService();
-				List<null> deleteList =  service.deleteInfo(pageParam[0],pageParam[1]);
-				
-				super.request.setAttribute("deleteList", delitelList);
+				service.deleteInfo(pageParam[0],pageParam[1]);
 				
 		//コメント検索画面から遷移された時		
 		} else if (super.request.getParameter("commentDelete") != null) {
@@ -43,9 +41,7 @@ public class DeleteAction extends BaseServlet {
 				comment.setComment_tx(pageParam[1]);
 				
 				UpdateService service = new UpdateService();
-				List<null> commnetList =  service.deleteComment(pageParam[0],pageParam[1]);
-				
-				super.request.setAttribute("commentList", commentList);
+				service.deleteComment(pageParam[0],pageParam[1]);
 				
 		}
 		return "adDelete";

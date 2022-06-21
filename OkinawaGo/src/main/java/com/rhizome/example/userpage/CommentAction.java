@@ -18,7 +18,7 @@ String[] pageParam = super.getInputParameter(
         comment.setComment(pageParam[2]);
         
 		UpdateService service = new UpdateService();
-		List<null> commentList =  service.commentInput(comment);
+		List<comment_DTO> commentList =  service.commentInput(comment);
 		
 		super.request.setAttribute("commentList", commentList); // リストのままsetAttributeするかどうか放置。
 		

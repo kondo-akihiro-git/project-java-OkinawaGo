@@ -34,7 +34,7 @@ if(super.request.getParameter("goutext") != null) {
 		if(super.request.getParameter("gou_category" != null)) {
 			 String[] list = super.request.getParameterValues("checkbox");     //チェックボックスの値を配列で取得                                          //チェックボックスでチェックされた値を取得
 		}
-		infolist = service.conditionalSearchByRadio(id, list);
+		infolist = service.conditionalSearch(id, list);
 }
 	if (infolist == null || infolist.size() == 0) {
 		throw new Exception("入力された条件で情報が見つかりませんでした");

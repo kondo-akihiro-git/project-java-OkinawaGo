@@ -45,7 +45,7 @@ public class SelectAction extends BaseServlet {
 					info.setInfo_nm(pageParam[1]);
 					
 					SearchService service = new SearchService();
-					List<null> detailList = searchDetailBykey(pageParam[0],pageParam[1]);
+					List<null> detailList = service.searchDetailBykey(pageParam[0],pageParam[1]);
 					
 					super.request.setAttribute("detailList", detailList);
 					return "detail";
