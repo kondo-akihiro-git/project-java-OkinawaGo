@@ -42,7 +42,7 @@ if(param <= 25) {
 		 * 登録->内容編集時の値保持バグの修正
 		 */
 		
-			null info = new null();
+			info_DTO info = new info_DTO();
 			info.setnull(param[0]);
 			info.setnull(param[1]);
 			info.setnull(param[2]);

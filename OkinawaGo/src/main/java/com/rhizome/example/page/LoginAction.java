@@ -18,12 +18,12 @@ public class LoginAction extends BaseServlet {
 		Map<String, Object> loginData = service.doLogin(param[0], param[1]);
 
 		// 結果の取得（検索結果0件）
-		if (loginData == null || loginData.get("null") == null) {
+		if (loginData == null || loginData.get("EMP") == null) {
 			// ポップアップの表示方法不明
 			String message = "メールアドレスまたはパスワードが間違っています";
 			request.setAttribute("alertMsg", message)
 		}
-		super.session.setAttribute("LOGIN", loginData.get("null"));
+		super.session.setAttribute("LOGIN", loginData.get("EMP"));
 		super.request.getRequestDispatcher("adSearch.jsp");
 		
 	}
