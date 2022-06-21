@@ -24,9 +24,9 @@ public class DeleteAction extends BaseServlet {
 				"s_g_id"
 				, "info_nm" 
 				
-				null del = new null
-				null.set null(Integer.parseInt(pageParam[0]));
-				null.set null(pageParam[1]);
+				Info_DTO info = new InfoDTO();
+				info.setS_g_id(pageParam[0]));
+				info.setInfo_nm(pageParam[1]);
 				
 				UpdateService service = new UpdateService();
 				List<null> deleteList =  service.deleteInfo(pageParam[0],pageParam[1]);
@@ -38,9 +38,9 @@ public class DeleteAction extends BaseServlet {
 				"comment_nm"
 				,"comment_tx"
 				
-				null com = new null
-				null.set null(pageParam[0]);
-				null.set null(pageParam[1]);
+				Comment_DTO comment = new Comment_DTO();
+				comment.setComment_nm(pageParam[0]);
+				comment.setComment_tx(pageParam[1]);
 				
 				UpdateService service = new UpdateService();
 				List<null> commnetList =  service.deleteComment(pageParam[0],pageParam[1]);
