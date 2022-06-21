@@ -2,22 +2,25 @@ import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(name = "select", urlPatterns = { "/select" })
+@WebServlet(name = "comment", urlPatterns = { "/comment" })
 public class CommentAction extends BaseServlet {
 
 	//ユーザー名と投稿内容をデータベースに追加
+	
 String[] pageParam = super.getInputParameter(
 		"comment_nm"
 		,"comment_tx"
-		
-		null info = new null;
-		info.set null(pageParam[0]);
-		info.set null(pageParam[1]);
-		
+		."info_img"
+		);
+        null comment = new null();
+        comment.setnull(pageParam[0]);
+        comment.setnull(pageParam[1]);
+        comment.setnull(pageParam[2]);
+        
 		UpdateService service = new UpdateService();
-		List<null> commentList =  service.commentInput(pageParam[0],pageParam[1]);
+		List<null> commentList =  service.commentInput(comment);
 		
-		super.request.setAttribute("commentList", commentList);
+		super.request.setAttribute("commentList", commentList); // リストのままsetAttributeするかどうか放置。
 		
-		return "search";
+		return "detail";
 }

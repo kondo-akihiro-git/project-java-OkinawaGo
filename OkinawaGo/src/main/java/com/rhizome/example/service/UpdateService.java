@@ -44,8 +44,6 @@ public int registerGou(null null) throws Exception {
 				}
 				return count;
 }
-
-
 	/**
 	 * スポット・グルメ情報の削除--------------------------------------------------------------------
 	 */
