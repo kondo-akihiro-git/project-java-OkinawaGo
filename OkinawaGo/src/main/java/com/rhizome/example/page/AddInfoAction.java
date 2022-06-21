@@ -8,7 +8,7 @@ import com.rhizome.example.page.base.BaseServlet;
 import com.rhizome.example.service.UpdateService;
 import com.rhizome.example.service.UpdateService.UPDATE_MODE;
 
-@WebServlet(name = "add", urlPatterns = { "/add" })
+@WebServlet(name = "addinfo", urlPatterns = { "/addinfo" })
 public class AddInfoAction extends BaseServlet {
 	@Override
 	protected String getPageName() {

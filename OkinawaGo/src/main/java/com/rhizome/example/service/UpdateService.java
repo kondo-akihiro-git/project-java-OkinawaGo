@@ -1,4 +1,9 @@
-r// 決まっていない部分はnull
+// 決まっていない部分はnull
+
+package com.rhizome.example.service;
+
+import java.util.ArrayList;
+
 public class UpdateService extends BaseService {
 
 	public UpdateService() throws Exception {
@@ -63,7 +68,7 @@ public int registerGou(null null) throws Exception {
 	}
 	
 	/**
-	 * コメントの削除--------------------------------------------------------------------
+	 * コメントの削除---------------------------------------------------------------------------
 	 */
 
 	public int deleteComment(Integer id) throws Exception { // 削除するコメントが所属するスポット・グルメのIDを引数とする
