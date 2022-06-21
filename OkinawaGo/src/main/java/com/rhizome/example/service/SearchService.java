@@ -27,9 +27,9 @@ public class SearchService extends BaseService(){
 	/**
 	 * 管理者トップでフリーワードによるスポット・グルメ検索を行う---------------------------------------------------------------------------------
 	 */
-	public List< null > searchInfo(String text) throws Exception {
+	public List<Info_DTO> searchInfo(String text) throws Exception {
 		null dao = new null(this.con);
-		List<null> list = null;
+		List<Info_DTO> list = null;
 		try {
 			list = dao.findByInput(text)); //入力された値で条件検索
 			if (list.size() == 0) {
@@ -44,37 +44,37 @@ public class SearchService extends BaseService(){
 	 * 管理者トップ画面からスポット・グルメ詳細ページに飛ぶ-------------------------------------------------------------------
 
 	 */
-	public null searchDetailBykey(Integer cateId, String name) throws Exception {
+	public List<Info_DTO> searchDetailBykey(Integer cateId, String name) throws Exception {
 		null dao = new null(this.con);
-		null nullA = null; // メソッドの戻り値のデータ型がわかっていません…ごめんなさい。
+		List<Info_DTO> list = null; // メソッドの戻り値のデータ型がわかっていません…ごめんなさい。
 		try {
-			nullA = dao.findDetailByIdName(cateId, name); // カテゴリーIDと名前からスポット詳細情報を取得
+			list = dao.findDetailByIdName(cateId, name); // カテゴリーIDと名前からスポット詳細情報を取得
 		} finally {
 			DbUtil.closeConnection(this.con);
 		}
-		return nullA;
+		return list;
 	}
 	
 	 /* ユーザー検索画面からスポット・グルメ詳細ページに飛ぶ-------------------------------------------------------------------
 
 	 */
-	public null searchDetailBykey(String img) throws Exception {
+	public List<Info_DTO> searchDetailBykey(String img) throws Exception {
 		null dao = new null(this.con);
-		null nullA = null; // メソッドの戻り値のデータ型がわかっていません…ごめんなさい。
+		Info_DTO list = null; // メソッドの戻り値のデータ型がわかっていません…ごめんなさい。
 		try {
-			nullA = dao.findDetailByIdName(cateId, name); //カテゴリーIDと名前からグルメ詳細情報を取得
+			list = dao.findDetailByIdName(img); //カテゴリーIDと名前からグルメ詳細情報を取得
 		} finally {
 			DbUtil.closeConnection(this.con);
 		}
-		return nullA;
+		return list;
 	}
 	/**
 	 * 管理者トップ画面からコメント一覧ページに遷移-------------------------------------------------------------------
 	 */
 	
-	public null searchCommentBykey(Integer cateId, String name) throws Exception {
+	public List<Comment_DTO> searchCommentBykey(Integer cateId, String name) throws Exception {
 		null dao = new null(this.con);
-		List<null> list = null;
+		List<Comment_DTO> list = null;
 		try {
 			list = dao.findCommentByIdName(cateId, name); // カテゴリーIDと名前からコメント一覧を取得
 		} finally {
@@ -83,11 +83,11 @@ public class SearchService extends BaseService(){
 		return list;
 	}
 	/**
-	 * グルメ検索画面からカテゴリー検索後、検索結果画面に遷移-------------------------------------------------------------------
+	 * ユーザー側でのグルメ検索画面からカテゴリー検索後、検索結果画面に遷移-------------------------------------------------------------------
 	 */
-	public null conditionalSearchByRadio(Integer id, String[] array) throws Exception {
+	public List<Info_DTO> conditionalSearch(Integer id, String[] array) throws Exception {
 		null dao = new null(this.con);
-		List<null> list = null;
+		List<Info_DTO> list = null;
 		try {
 			list = dao.findByIdList(id, array); //地域IDとチェックボックスからスポット・グルメの一覧を取得
 		}finnaly {
