@@ -3,7 +3,7 @@ package com.rhizome.example.userpage;
 @WebServlet(name = "search", urlPatterns = { "/search" })
 public class SelectAction extends BaseServlet {
 	public String doAction() {
-	
+
 String text;
 String value;
 Okinawa_DAO dao = new Okinawa_DAO();

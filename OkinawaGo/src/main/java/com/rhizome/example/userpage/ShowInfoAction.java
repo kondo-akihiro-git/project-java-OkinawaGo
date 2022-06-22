@@ -12,7 +12,7 @@ public class ShowInfoAction extends BaseServlet {
 		String info_id = super.request.getParameter("info_id");
 				
 				Okinawa_DAO dao = new Okinawa_DAO(this.con);
-				List<null> list = dao.findDetailByIdName(info_img, info_id);//画像から詳細データを取得するDAOメソッドが必要
+				List<Info_DTO> list = dao.findDetailByIdName(info_img, info_id);//画像から詳細データを取得するDAOメソッドが必要
 				
 				super.request.setAttribute("list", list);
 				
