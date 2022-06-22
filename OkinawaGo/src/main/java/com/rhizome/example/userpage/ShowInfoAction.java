@@ -6,19 +6,13 @@ import javax.servlet.annotation.WebServlet;
 public class ShowInfoAction extends BaseServlet {
 	//画像から詳細データを取得
 	protected String doAction() throws Exception {
-		String[] pageParam = super.getInputParameter(
-				"info_img"
-				,"info_id"
+		String info_img = super.request.getParameter("info_img");
+		String info_id = super.request.getParameter("info_id");
 				
-				Info_DTO img = new Info_DTO();
-		        img.setInfo_img(pageParam[0]);
-		        img.setInfo_id(pageParam[1]);
+				Okinawa_DAO dao = new Okinawa_DAO(this.con);
+				List<null> list = dao.findDetailByIdName(info_img, info_id);//画像から詳細データを取得するDAOメソッドが必要
 				
-				SearchService service = new SearchService();
-				
-				List<null> imgList = service.searchDetailBykey(pageParam[0],pageParam[1]);
-				
-				super.request.setAttribute("imgList", imgList);
+				super.request.setAttribute("list", list);
 				
 				return "detail";
 	}
