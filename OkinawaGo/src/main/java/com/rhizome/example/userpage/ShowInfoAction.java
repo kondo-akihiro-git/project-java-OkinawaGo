@@ -1,3 +1,5 @@
+package com.rhizome.example.userpage;
+
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;

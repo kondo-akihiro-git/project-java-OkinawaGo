@@ -1,3 +1,4 @@
+package com.rhizome.example.service;
 
 // 決まってない部分はnull
 import java.util.HashMap;

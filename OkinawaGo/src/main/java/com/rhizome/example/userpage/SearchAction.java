@@ -1,3 +1,5 @@
+package com.rhizome.example.userpage;
+
 @WebServlet(name = "search", urlPatterns = { "/search" })
 public class SelectAction extends BaseServlet {
 

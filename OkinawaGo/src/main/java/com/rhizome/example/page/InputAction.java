@@ -14,10 +14,10 @@ public class AddInfoAction extends BaseServlet {
 	@Override
 	protected String doAction() throws Exception {
 //スポットかグルメか判断
-String param = super.getInputParamert("s_g_id");
+String cate = super.getInputParamert("cate");
 String[] paramList;
 //IDが25以下の場合、スポット------------------------------------------------------------------------------
-if(param <= 25) {
+if(cate.equalus("スポット")) {
 		paramList = super.getInputParameter(
 				"info_nm"		// 0
 				,"area_id"	// 1
