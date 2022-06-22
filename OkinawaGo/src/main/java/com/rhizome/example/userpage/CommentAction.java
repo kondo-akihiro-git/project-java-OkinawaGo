@@ -2,25 +2,22 @@ import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
+import org.apache.coyote.Request;
+
 @WebServlet(name = "comment", urlPatterns = { "/comment" })
 public class CommentAction extends BaseServlet {
 
-	//ユーザー名と投稿内容をデータベースに追加
-	
-String[] pageParam = super.getInputParameter(
-		"comment_nm"
-		,"comment_tx"
-		."comment_img"
-		);
-        CommentDTO comment = new Comment_DTO();
-        comment.setComment_nm(pageParam[0]);
-        comment.setComment_tx(pageParam[1]);
-        comment.setComment(pageParam[2]);
-        
-		UpdateService service = new UpdateService();
-		List<comment_DTO> commentList =  service.commentInput(comment);
-		
-		super.request.setAttribute("commentList", commentList); // リストのままsetAttributeするかどうか放置。
-		
-		return "detail";
+	// ユーザー名と投稿内容をデータベースに追加
+	String info_id = super.request.getParameter("info_id");
+	String comment_id = super.request.getParameter("comment_id");
+	String comment_nm = super.request.getParameter("comment_nm");
+	String comment_tx = super.request.getParameter("comment_tx");
+	String comment_img = super.request.getParameter("comment_img");
+
+	UpdateService service = new UpdateService();
+	List<comment_DTO> commentList =  service.commentInput(info_id,comment_id,comment_nm, comment_tx, comment_img);
+
+	super.request.setAttribute("commentList",commentList); // リストのままsetAttributeするかどうか放置(06/17)。
+
+	return"detail";
 }

@@ -11,13 +11,13 @@ public class UpdateService extends BaseService {
 	}
 
 	/**
-	 * スポットの登録を行う--------------------------------------------------------------------------
+	 * 管理者側でスポットの登録を行う--------------------------------------------------------------------------
 	 */
-public int registerSpot(null null) throws Exception {
-		null dao = new null(this.con);
+public int registerSpot(Info_DTO info) throws Exception {
+		Okinawa_DAO dao = new Okinawa_DAO(this.con);
 		int count = -1;
 				try{
-					count = dao.insertSpot(null);
+					count = dao.insertSpot(info);
 					this.con.comit();
 					} catch (Exception e) {
 			e.printStackTrace();
@@ -28,13 +28,13 @@ public int registerSpot(null null) throws Exception {
 				return count;
 }
 /**
-	 * グルメの登録を行う------------------------------------------------------------------------------
+	 * 管理者側でグルメの登録を行う------------------------------------------------------------------------------
 	 */
-public int registerGou(null null) throws Exception {
-		null dao = new null(this.con);
+public int registerGou(Info_DTO info) throws Exception {
+		Okinawa_DAO dao = new Okinawa_DAO(this.con);
 		int count = -1;
 				try{
-					count = dao.insertGou(null);
+					count = dao.insertGou(info);
 					this.con.comit();
 					} catch (Exception e) {
 			e.printStackTrace();
@@ -49,11 +49,11 @@ public int registerGou(null null) throws Exception {
 	 */
 
 	public int deleteInfo(Integer id) throws Exception { // 削除するスポット・グルメのIDを引数とする
-		null dao = new null(this.con);
+		Okinawa_DAO dao = new Okinawa_DAO(this.con);
 		int deleteCount = -1;
 
 		try {
-			deleteCount = dao.deleteInfoByPrimaryKey(id);
+			deleteCount = dao.infoDelete(id);
 			this.con.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,11 +70,11 @@ public int registerGou(null null) throws Exception {
 	 */
 
 	public int deleteComment(Integer id) throws Exception { // 削除するコメントが所属するスポット・グルメのIDを引数とする
-		null dao = new null(this.con);
+		Okinawa_DAO dao = new Okinawa_DAO(this.con);
 		int deleteCount = -1;
 
 		try {
-			deleteCount = dao.deleteCommentByPrimaryKey(id);
+			deleteCount = dao.commentDelete(id);
 			this.con.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,11 +88,11 @@ public int registerGou(null null) throws Exception {
 	/*
 	 * コメントとユーザー投稿の追加-------------------------------------------------------------
 	 */
-	public int commentInput(String name String text) throws Exception {
-		null dao = new null(this.con);
+	public int commentInput(String info_id, String comment_id, String comment_nm, String comment_tx, String comment_img) throws Exception {
+		Okinawa_DAO dao = new Okinawa_DAO(this.con);
 		int count = -1;
 				try{
-					count = dao.inputComment(name, text);
+					count = dao.empInsert(info_id, comment_id, comment_nm, comment_tx, comment_img);
 					this.con.comit();
 					} catch (Exception e) {
 			e.printStackTrace();
