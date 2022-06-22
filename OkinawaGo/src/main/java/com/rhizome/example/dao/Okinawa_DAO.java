@@ -70,7 +70,7 @@ public class Okinawa_DAO {
 	 * @return リスト
 	 * @throws SQLException
 	 */
-	public Info_DTO rowMappingEmployee(ResultSet rs) throws SQLException {
+	public Info_DTO rowMappingInfo_m(ResultSet rs) throws SQLException {
 		Info_DTO InfoD = new Info_DTO();
 		InfoD.setInfo_id(rs.getInt(INFO_ID));
 		InfoD.setS_g_id(rs.getInt(S_G_ID));
@@ -112,7 +112,7 @@ public class Okinawa_DAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public List<Info_DTO> selectAll() throws SQLException, ClassNotFoundException {
+	public List<Info_DTO> InfoSelectAll() throws SQLException, ClassNotFoundException {
 		List<Info_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		sql.append(" SELECT ");
@@ -138,7 +138,7 @@ public class Okinawa_DAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public void empInsert(String info_id, String comment_id, String comment_nm, String comment_tx, String comment_img)
+	public void CommentInsert(String info_id, String comment_id, String comment_nm, String comment_tx, String comment_img)
 			throws NumberFormatException, SQLException, ClassNotFoundException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" INSERT " + " INTO ");
@@ -247,7 +247,7 @@ public class Okinawa_DAO {
 	}
 	
 	//グルメ条件検索
-	public List<Info_DTO> selectById(int area_id, String[] checkedbox) throws SQLException, ClassNotFoundException, NumberFormatException {
+	public List<Info_DTO> GurumeSelect(int area_id, String[] checkedbox) throws SQLException, ClassNotFoundException, NumberFormatException {
 		List<Info_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		if (checkedbox.length == 1) {
@@ -270,21 +270,178 @@ public class Okinawa_DAO {
 			} finally {
 				DbUtil.closeStatement(this.stmt);
 			}
-			return rtnList;
+			
 		} else if (checkedbox.length == 2) {
-
+			sql.append(" SELECT ");
+			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append(" FROM ");
+			sql.append("    " + INFO_TBL_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE ");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			try {
+				int category_id1 = Integer.parseInt(checkedbox[0]);
+				int category_id2 = Integer.parseInt(checkedbox[1]);
+				this.stmt = con.prepareStatement(sql.toString());
+				stmt.setInt(1, area_id);
+				stmt.setInt(2, category_id1);
+				stmt.setInt(3, category_id2);
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					rtnList.add(rowMappingEmployee(rs));
+				}
+			} finally {
+				DbUtil.closeStatement(this.stmt);
+			}
+			
 		} else if (checkedbox.length == 3) {
+			sql.append(" SELECT ");
+			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append(" FROM ");
+			sql.append("    " + INFO_TBL_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE ");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			try {
+				int category_id = Integer.parseInt(checkedbox[0]);
+				int category_id1 = Integer.parseInt(checkedbox[1]);
+				int category_id2 = Integer.parseInt(checkedbox[2]);
+				this.stmt = con.prepareStatement(sql.toString());
+				stmt.setInt(1, area_id);
+				stmt.setInt(2, category_id);
+				stmt.setInt(3, category_id1);
+				stmt.setInt(4, category_id2);
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					rtnList.add(rowMappingEmployee(rs));
+				}
+			} finally {
+				DbUtil.closeStatement(this.stmt);
+			}
 			
 		} else if (checkedbox.length == 4) {
+			sql.append(" SELECT ");
+			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append(" FROM ");
+			sql.append("    " + INFO_TBL_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE ");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			try {
+				int category_id = Integer.parseInt(checkedbox[0]);
+				int category_id1 = Integer.parseInt(checkedbox[1]);
+				int category_id2 = Integer.parseInt(checkedbox[2]);
+				int category_id3 = Integer.parseInt(checkedbox[3]);
+				this.stmt = con.prepareStatement(sql.toString());
+				stmt.setInt(1, area_id);
+				stmt.setInt(2, category_id);
+				stmt.setInt(3, category_id1);
+				stmt.setInt(4, category_id2);
+				stmt.setInt(5, category_id3);
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					rtnList.add(rowMappingEmployee(rs));
+				}
+			} finally {
+				DbUtil.closeStatement(this.stmt);
+			}
 			
 		} else if (checkedbox.length == 5) {
+			sql.append(" SELECT ");
+			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append(" FROM ");
+			sql.append("    " + INFO_TBL_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE ");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			try {
+				int category_id = Integer.parseInt(checkedbox[0]);
+				int category_id1 = Integer.parseInt(checkedbox[1]);
+				int category_id2 = Integer.parseInt(checkedbox[2]);
+				int category_id3 = Integer.parseInt(checkedbox[3]);
+				int category_id4 = Integer.parseInt(checkedbox[4]);
+				this.stmt = con.prepareStatement(sql.toString());
+				stmt.setInt(1, area_id);
+				stmt.setInt(2, category_id);
+				stmt.setInt(3, category_id1);
+				stmt.setInt(4, category_id2);
+				stmt.setInt(5, category_id3);
+				stmt.setInt(6, category_id4);
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					rtnList.add(rowMappingEmployee(rs));
+				}
+			} finally {
+				DbUtil.closeStatement(this.stmt);
+			}
 			
 		} else if (checkedbox.length == 6) {
+			sql.append(" SELECT ");
+			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append(" FROM ");
+			sql.append("    " + INFO_TBL_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE ");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			try {
+				int category_id = Integer.parseInt(checkedbox[0]);
+				int category_id1 = Integer.parseInt(checkedbox[1]);
+				int category_id2 = Integer.parseInt(checkedbox[2]);
+				int category_id3 = Integer.parseInt(checkedbox[3]);
+				int category_id4 = Integer.parseInt(checkedbox[4]);
+				int category_id5 = Integer.parseInt(checkedbox[5]);
+				this.stmt = con.prepareStatement(sql.toString());
+				stmt.setInt(1, area_id);
+				stmt.setInt(2, category_id);
+				stmt.setInt(3, category_id1);
+				stmt.setInt(4, category_id2);
+				stmt.setInt(5, category_id3);
+				stmt.setInt(6, category_id4);
+				stmt.setInt(7, category_id5);
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					rtnList.add(rowMappingEmployee(rs));
+				}
+			} finally {
+				DbUtil.closeStatement(this.stmt);
+			}
 			
 		} else if (checkedbox.length == 7) {
-		
+			sql.append(" SELECT ");
+			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append(" FROM ");
+			sql.append("    " + INFO_TBL_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE ");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			try {
+				int category_id = Integer.parseInt(checkedbox[0]);
+				int category_id1 = Integer.parseInt(checkedbox[1]);
+				int category_id2 = Integer.parseInt(checkedbox[2]);
+				int category_id3 = Integer.parseInt(checkedbox[3]);
+				int category_id4 = Integer.parseInt(checkedbox[4]);
+				int category_id5 = Integer.parseInt(checkedbox[5]);
+				int category_id6 = Integer.parseInt(checkedbox[6]);
+				this.stmt = con.prepareStatement(sql.toString());
+				stmt.setInt(1, area_id);
+				stmt.setInt(2, category_id);
+				stmt.setInt(3, category_id1);
+				stmt.setInt(4, category_id2);
+				stmt.setInt(5, category_id3);
+				stmt.setInt(6, category_id4);
+				stmt.setInt(7, category_id5);
+				stmt.setInt(8, category_id6);
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					rtnList.add(rowMappingEmployee(rs));
+				}
+			} finally {
+				DbUtil.closeStatement(this.stmt);
+			}
+			
 		}
 		return rtnList;
+		
 	}
 	
 	//スポット条件検索
