@@ -1,6 +1,8 @@
-package com.rhizome.example.service.base;
+package main.java.com.rhizome.example.service.base;
 
 import java.sql.Connection;
+
+import main.java.com.rhizome.example.util.DbUtil;
 
 public abstract class BaseService {
 	protected Connection con;

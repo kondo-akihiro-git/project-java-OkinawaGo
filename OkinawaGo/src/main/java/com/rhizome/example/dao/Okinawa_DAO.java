@@ -1,3 +1,5 @@
+package main.java.com.rhizome.example.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -5,7 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.rhizome.example.util.DbUtil;
+import main.java.com.rhizome.example.entity.Comment_DTO;
+import main.java.com.rhizome.example.entity.Info_DTO;
+import main.java.com.rhizome.example.entity.Info_id_DTO;
+import main.java.com.rhizome.example.entity.Info_id_img_DTO;
+import main.java.com.rhizome.example.util.DbUtil;
 
 public class Okinawa_DAO {
 	//infoテーブル

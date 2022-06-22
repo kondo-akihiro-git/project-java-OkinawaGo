@@ -1,8 +1,10 @@
-package com.rhizome.example.service;
+package main.java.com.rhizome.example.service;
 
 // 決まってない部分はnull
 import java.util.HashMap;
 import java.util.List;
+
+import main.java.com.rhizome.example.service.base.BaseService;
 
 public class SearchService extends BaseService(){
 
