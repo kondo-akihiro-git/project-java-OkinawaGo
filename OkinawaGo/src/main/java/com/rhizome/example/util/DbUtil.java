@@ -2,6 +2,7 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -40,7 +41,18 @@ public class DbUtil {
 		con.setAutoCommit(autoCommitFlg);
 		return con;
 	}
-
+	/**
+	 * DBステートメントを切断
+	 *
+	 * @param stmt DBステートメント
+	 * @throws SQLException
+	 */
+	public static void closeStatement(PreparedStatement stmt) throws SQLException {
+		if (stmt != null) {
+			stmt.close();
+		}
+	}
+	
 	/**
 	 * DBとのコネクションを切断
 	 * @param con DBコネクション

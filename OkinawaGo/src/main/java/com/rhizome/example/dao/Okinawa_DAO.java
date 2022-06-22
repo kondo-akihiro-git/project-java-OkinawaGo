@@ -70,7 +70,7 @@ public class Okinawa_DAO {
 	 * @return リスト
 	 * @throws SQLException
 	 */
-	public Info_DTO rowMappingInfo_m(ResultSet rs) throws SQLException {
+	public Info_DTO rowMappingInfo(ResultSet rs) throws SQLException {
 		Info_DTO InfoD = new Info_DTO();
 		InfoD.setInfo_id(rs.getInt(INFO_ID));
 		InfoD.setS_g_id(rs.getInt(S_G_ID));
@@ -124,7 +124,7 @@ public class Okinawa_DAO {
 			this.stmt = con.prepareStatement(sql.toString());
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				rtnList.add(rowMappingEmployee(rs));
+				rtnList.add(rowMappingInfo(rs));
 			}
 		} finally {
 			DbUtil.closeStatement(this.stmt);
@@ -244,6 +244,29 @@ public class Okinawa_DAO {
 		} finally {
 			DbUtil.closeStatement(this.stmt);
 		}
+	}
+	
+	//情報IDを使って詳細情報を検索するメソッド
+	public List<Info_DTO> selectByInfoId(String info_id) throws SQLException, ClassNotFoundException, NumberFormatException {
+		List<Info_DTO> rtnList = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT ");
+		sql.append("    " + "*");
+		sql.append(" FROM ");
+		sql.append("    " + INFO_TBL_NAME);
+		sql.append(" WHERE ");
+		sql.append("    " + INFO_ID + " = " + "?");
+		try {
+			this.stmt = con.prepareStatement(sql.toString());
+			stmt.setString(1, info_id);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				rtnList.add(rowMappingInfo(rs));
+			}
+		} finally {
+			DbUtil.closeStatement(this.stmt);
+		}
+		return rtnList;
 	}
 	
 	//グルメ条件検索
@@ -459,7 +482,7 @@ public class Okinawa_DAO {
 			stmt.setString(1, area_id);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				rtnList.add(rowMappingEmployee(rs));
+				rtnList.add(rowMappingInfo(rs));
 			}
 		} finally {
 			DbUtil.closeStatement(this.stmt);
@@ -485,7 +508,7 @@ public class Okinawa_DAO {
 			stmt.setString(2, huri_wa_do);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				rtnList.add(rowMappingEmployee(rs));
+				rtnList.add(rowMappingInfo(rs));
 			}
 		} finally {
 			DbUtil.closeStatement(this.stmt);
