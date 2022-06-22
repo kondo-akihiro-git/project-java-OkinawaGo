@@ -14,7 +14,7 @@ public class Okinawa_DAO {
 	private static final String S_G_ID = "s_g_id";
 	private static final String INFO_NM = "info_nm";
 	private static final String INFO_TABLE_AREA_ID = "area_id";
-	private static final String POST_CORD = "post_cord";
+	private static final String POST_CODE = "post_code";
 	private static final String ADDRESS = "address";
 	private static final String INFO_IMG = "info_img";
 	private static final String CR_DATE = "cr_date";
@@ -88,6 +88,35 @@ public class Okinawa_DAO {
 	}
 	
 	/**
+	 * DBから取得した検索結果（info_id_img_DTO）をDTO型のインスタンスにセットし、リストに格納する
+	 *
+	 * @param rs
+	 *            検索結果
+	 * @return リスト
+	 * @throws SQLException
+	 */
+	public Info_id_img_DTO rowMappingInfoIdImg(ResultSet rs) throws SQLException {
+		Info_id_img_DTO InfoD = new Info_id_img_DTO();
+		InfoD.setInfo_id(rs.getInt(INFO_ID));
+		InfoD.setInfo_img(rs.getString(INFO_IMG));
+		return InfoD;
+	}
+	
+	/**
+	 * DBから取得した検索結果（info_id_DTO）をDTO型のインスタンスにセットし、リストに格納する
+	 *
+	 * @param rs
+	 *            検索結果
+	 * @return リスト
+	 * @throws SQLException
+	 */
+	public Info_id_DTO rowMappingInfoId(ResultSet rs) throws SQLException {
+		Info_id_DTO InfoD = new Info_id_DTO();
+		InfoD.setInfo_id(rs.getInt(INFO_ID));
+		return InfoD;
+	}
+	
+	/**
 	 * DBから取得した検索結果（comment_mテーブル）をDTO型のインスタンスにセットし、リストに格納する
 	 *
 	 * @param rs
@@ -140,14 +169,13 @@ public class Okinawa_DAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public void CommentInsert(String info_id, String comment_id, String comment_nm, String comment_tx, String comment_img)
+	public void CommentInsert(String info_id, String comment_nm, String comment_tx, String comment_img)
 			throws NumberFormatException, SQLException, ClassNotFoundException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" INSERT " + " INTO ");
 		sql.append("    " + COMMENT_TABLE_NAME);
 		sql.append(" ( ");
-		sql.append("    " + COMMENT_TABLE_COMMENT_ID);
-		sql.append("   ," + COMMENT_TABLE_INFO_ID);
+		sql.append("    " + COMMENT_TABLE_INFO_ID);
 		sql.append("   ," + COMMENT_TABLE_COMMENT_NM);
 		sql.append("   ," + COMMENT_TABLE_COMMENT_TX);
 		sql.append("   ," + COMMENT_TABLE_COMMENT_IMG);
@@ -164,11 +192,10 @@ public class Okinawa_DAO {
 		sql.append(" ) ");
 		try {
 			this.stmt = con.prepareStatement(sql.toString());
-			stmt.setInt(1, Integer.parseInt(comment_id));
-			stmt.setInt(2, Integer.parseInt(info_id));
-			stmt.setString(3, comment_nm);
-			stmt.setString(4, comment_tx);
-			stmt.setString(5, comment_img);
+			stmt.setInt(1, Integer.parseInt(info_id));
+			stmt.setString(2, comment_nm);
+			stmt.setString(3, comment_tx);
+			stmt.setString(4, comment_img);
 			stmt.executeUpdate();
 		} finally {
 			DbUtil.closeStatement(this.stmt);
@@ -176,7 +203,7 @@ public class Okinawa_DAO {
 	}
 
 	//(スポット)掲載情報テーブルへの新規登録
-	public void empInsert(String s_g_id, String info_nm, String area_id, String address, String post_cord, String info_img, String cr_mana)
+	public void spotInsert(String s_g_id, String info_nm, String area_id, String address, String post_code, String info_img, String cr_mana)
 			throws NumberFormatException, SQLException, ClassNotFoundException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" INSERT " + " INTO ");
@@ -186,7 +213,7 @@ public class Okinawa_DAO {
 		sql.append("   ," + INFO_NM);
 		sql.append("   ," + INFO_TABLE_AREA_ID);
 		sql.append("   ," + ADDRESS);
-		sql.append("   ," + POST_CORD);
+		sql.append("   ," + POST_CODE);
 		sql.append("   ," + INFO_IMG);
 		sql.append("   ," + CR_DATE);
 		sql.append("   ," + CR_MANA);
@@ -208,7 +235,7 @@ public class Okinawa_DAO {
 			stmt.setString(2, info_nm);
 			stmt.setInt(3, Integer.parseInt(area_id));
 			stmt.setString(4, address);
-			stmt.setString(5, post_cord);
+			stmt.setString(5, post_code);
 			stmt.setString(6, info_img);
 			stmt.setString(7, cr_mana);
 			stmt.executeUpdate();
@@ -218,7 +245,7 @@ public class Okinawa_DAO {
 	}
 	
 	//(グルメ)掲載情報テーブルへの新規登録
-	public void InfoInsert(String s_g_id, String info_nm, String area_id, String address, String post_cord, String info_img, String cr_mana, String[] cateList)
+	public void InfoInsert(String s_g_id, String info_nm, String area_id, String address, String post_code, String info_img, String cr_mana, String[] cateList)
 			throws NumberFormatException, SQLException, ClassNotFoundException {
 		StringBuilder sql = new StringBuilder();
 		
@@ -230,15 +257,15 @@ public class Okinawa_DAO {
 		sql.append("   ," + INFO_NM);
 		sql.append("   ," + INFO_TABLE_AREA_ID);
 		sql.append("   ," + ADDRESS);
-		sql.append("   ," + POST_CORD);
+		sql.append("   ," + POST_CODE);
 		sql.append("   ," + INFO_IMG);
 		sql.append("   ," + CR_DATE);
 		sql.append("   ," + CR_MANA);
-		sql.append("   ," );
 		sql.append(" ) ");
 		sql.append(" VALUES ");
 		sql.append(" ( ");
 		sql.append("    " + " ? ");
+		sql.append("   ," + " ? ");
 		sql.append("   ," + " ? ");
 		sql.append("   ," + " ? ");
 		sql.append("   ," + " ? ");
@@ -252,12 +279,13 @@ public class Okinawa_DAO {
 			stmt.setString(2, info_nm);
 			stmt.setInt(3, area_id);
 			stmt.setString(4, address);
-			stmt.setString(5, post_cord);
+			stmt.setString(5, post_code);
 			stmt.setString(6, info_img);
 			stmt.setString(7, cr_mana);
 			stmt.executeUpdate();
 			
 			//情報ID取得
+			List<Info_Id_DTO> list = new ArrayList<>();
 			sql.append(" SELECT ");
 			sql.append("    " + " MAX( " + INFO_ID + ")");
 			sql.append(" FROM ");
@@ -266,6 +294,9 @@ public class Okinawa_DAO {
 			rs = stmt.executeQuery();
 			int infoId;
 			infoId = rs.getInt(INFO_ID);
+			while (rs.next()) {
+				list.add(rowMappingInfoId(rs));
+			}
 			
 			//店カテゴリーテーブルへの情報登録
 			for(int i = 0; i < cateList.length; i++) {
@@ -313,8 +344,8 @@ public class Okinawa_DAO {
 	}
 	
 	//グルメ条件検索
-	public List<Info_DTO> GurumeSelect(String area_id, String[] checkedbox) throws SQLException, ClassNotFoundException, NumberFormatException {
-		List<Info_DTO> rtnList = new ArrayList<>();
+	public List<Info_id_img_DTO> GurumeSelect(String area_id, String[] checkedbox) throws SQLException, ClassNotFoundException, NumberFormatException {
+		List<Info_id_img_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		if (checkedbox.length == 1) {
 			sql.append(" SELECT ");
@@ -331,7 +362,7 @@ public class Okinawa_DAO {
 				stmt.setInt(2, category_id);
 				rs = stmt.executeQuery();
 				while (rs.next()) {
-					rtnList.add(rowMappingEmployee(rs));
+					rtnList.add(rowMappingInfoIdImg(rs));
 				}
 			} finally {
 				DbUtil.closeStatement(this.stmt);
@@ -354,7 +385,7 @@ public class Okinawa_DAO {
 				stmt.setInt(3, category_id2);
 				rs = stmt.executeQuery();
 				while (rs.next()) {
-					rtnList.add(rowMappingEmployee(rs));
+					rtnList.add(rowMappingInfoIdImg(rs));
 				}
 			} finally {
 				DbUtil.closeStatement(this.stmt);
@@ -379,7 +410,7 @@ public class Okinawa_DAO {
 				stmt.setInt(4, category_id2);
 				rs = stmt.executeQuery();
 				while (rs.next()) {
-					rtnList.add(rowMappingEmployee(rs));
+					rtnList.add(rowMappingInfoIdImg(rs));
 				}
 			} finally {
 				DbUtil.closeStatement(this.stmt);
@@ -406,7 +437,7 @@ public class Okinawa_DAO {
 				stmt.setInt(5, category_id3);
 				rs = stmt.executeQuery();
 				while (rs.next()) {
-					rtnList.add(rowMappingEmployee(rs));
+					rtnList.add(rowMappingInfoIdImg(rs));
 				}
 			} finally {
 				DbUtil.closeStatement(this.stmt);
@@ -435,7 +466,7 @@ public class Okinawa_DAO {
 				stmt.setInt(6, category_id4);
 				rs = stmt.executeQuery();
 				while (rs.next()) {
-					rtnList.add(rowMappingEmployee(rs));
+					rtnList.add(rowMappingInfoIdImg(rs));
 				}
 			} finally {
 				DbUtil.closeStatement(this.stmt);
@@ -466,7 +497,7 @@ public class Okinawa_DAO {
 				stmt.setInt(7, category_id5);
 				rs = stmt.executeQuery();
 				while (rs.next()) {
-					rtnList.add(rowMappingEmployee(rs));
+					rtnList.add(rowMappingInfoIdImg(rs));
 				}
 			} finally {
 				DbUtil.closeStatement(this.stmt);
@@ -499,7 +530,7 @@ public class Okinawa_DAO {
 				stmt.setInt(8, category_id6);
 				rs = stmt.executeQuery();
 				while (rs.next()) {
-					rtnList.add(rowMappingEmployee(rs));
+					rtnList.add(rowMappingInfoIdImg(rs));
 				}
 			} finally {
 				DbUtil.closeStatement(this.stmt);

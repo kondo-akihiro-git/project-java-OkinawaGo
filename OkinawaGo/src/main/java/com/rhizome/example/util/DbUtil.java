@@ -15,7 +15,7 @@ public class DbUtil {
 	private static final String DB_HOST = "127.0.0.1"; // 要確認
 	private static final String DB_NAME = "okinawadb";
 	private static final String DB_USER = "go@localhost";
-	private static final String DB_PASS = "okinawa_05";
+	private static final String DB_PASS = "okonawa_05";
 
 	// 定数定義（MySQL用）
 	private static final String DBMS ="mysql";
