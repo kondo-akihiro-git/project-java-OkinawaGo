@@ -52,8 +52,9 @@ public class SelectAction extends BaseServlet {
 			String info_id = super.request.getParameter("info_id");
 
 			List<Comment_DTO> commentList = dao.selectComment(info_id);
-			
+			List<Info_DTO> list = dao.selectByInfoId(info_id);
 			super.request.setAttribute("commentList", commentList);
+			super.request.setAttribute("list", list);
 			return "adcommentSearch";
 		}
 		return getPageName();

@@ -1,3 +1,5 @@
+package main.java.com.rhizome.example.entity;
+
 
 public class Area_DTO {
 	//地域ID

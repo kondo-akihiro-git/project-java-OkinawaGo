@@ -28,7 +28,7 @@ public class AddInfoAction extends BaseServlet {
 			String info_img = super.request.getParameter("info_img");
 			String cr_mana = super.request.getParameter("cr_mana");
 		
-			dao.empInsert(s_g_id,info_nm,area_id,address,post_cord,info_img,cr_mana);
+			dao.spotInsert(s_g_id,info_nm,area_id,address,post_cord,info_img,cr_mana);
 			
 		// グルメ追加
 		} else if (name.equals("グルメ")) {
@@ -39,7 +39,7 @@ public class AddInfoAction extends BaseServlet {
 			String post_cord = super.request.getParameter("post_cord");
 			String info_img = super.request.getParameter("info_img");
 			String cr_mana = super.request.getParameter("cr_mana");
-			String[] cateList = super.request.getParameter("cateList");
+			String[] cateList = super.request.getParameterValues("cateList");
 
 			
 			dao.InfoInsert(s_g_id, info_nm, area_id, address, post_cord, info_img, cr_mana, cateList);

@@ -1,3 +1,5 @@
+package main.java.com.rhizome.example.entity;
+
 
 public class Gurume_Category_DTO {
 	//情報ID

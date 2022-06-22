@@ -1,4 +1,4 @@
-package com.rhizome.example.util;
+package main.java.com.rhizome.example.util;
 
 public class Util {
 	private Util() {}

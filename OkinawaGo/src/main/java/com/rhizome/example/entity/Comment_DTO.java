@@ -1,3 +1,5 @@
+package main.java.com.rhizome.example.entity;
+
 
 public class Comment_DTO {
 	//コメントID

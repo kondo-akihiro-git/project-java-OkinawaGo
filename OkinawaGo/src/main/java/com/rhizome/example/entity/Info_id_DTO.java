@@ -1,3 +1,5 @@
+package main.java.com.rhizome.example.entity;
+
 
 public class Info_id_DTO {
 	//情報ID
