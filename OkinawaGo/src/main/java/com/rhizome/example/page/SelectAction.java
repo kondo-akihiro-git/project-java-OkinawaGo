@@ -35,17 +35,12 @@ public class SelectAction extends BaseServlet {
 		//詳細画面に遷移
 		} else if (super.request.getParameter("detail") != null) {
 			
-			String[] pageParam = super.getInputParameter(
-					"s_g_id"
-					, "info_nm" 
+			String info_id = super.request.getParameter(
+	"info_id"
 					);
 			
-					Info_DTO info = new Info_DTO();
-					info.setS_g_id(pageParam[0]);
-					info.setInfo_nm(pageParam[1]);
-					
 					SearchService service = new SearchService();
-					List<null> detailList = service.searchDetailBykey(pageParam[0],pageParam[1]);
+					List<Info_DTO> detailList = service.searchDetailBykey(info_id);
 					
 					super.request.setAttribute("detailList", detailList);
 					return "detail";
@@ -55,18 +50,12 @@ public class SelectAction extends BaseServlet {
 		}else if(super.request.getParameter("comment")!=null)
 
 	{
-			String[] pageParam = super.getInputParameter(
-					"s_g_id"
-					, "info_nm" 
-					
-					Info_DTO info = new Info_DTO();
-					info.setInfo_DTO(pageParam[0]);
-					info.setInfo_DTO(pageParam[1]);
-					
-					SearchService service = new SearchService();
-					List<null> commentList = searchCommentBykey(pageParam[0],pageParam[1]);
-					super.request.setAttribute("detailList", detailList);
-					return "adcommentSearch";
-		}
+		String info_id = super.request.getParameter("info_id");
+
+		SearchService service = new SearchService();
+		List<Info_DTO> commentList = service.searchCommentBykey(info_id);
+		super.request.setAttribute("detailList", detailList);
+		return "adcommentSearch";
+	}
 
 }

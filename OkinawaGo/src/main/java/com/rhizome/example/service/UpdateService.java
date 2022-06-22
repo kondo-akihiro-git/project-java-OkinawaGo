@@ -13,11 +13,11 @@ public class UpdateService extends BaseService {
 	/**
 	 * 管理者側でスポットの登録を行う--------------------------------------------------------------------------
 	 */
-public int registerSpot(Info_DTO info) throws Exception {
+public int empInsert(String s_g_id, String info_nm, String area_id, String address, String post_cord, String info_img, String cr_mana) throws Exception {
 		Okinawa_DAO dao = new Okinawa_DAO(this.con);
 		int count = -1;
 				try{
-					count = dao.insertSpot(info);
+					count = dao.insertSpot(s_g_id, info_nm, area_id, address, post_cord, info_img, cr_mana);
 					this.con.comit();
 					} catch (Exception e) {
 			e.printStackTrace();
@@ -34,7 +34,7 @@ public int registerGou(Info_DTO info) throws Exception {
 		Okinawa_DAO dao = new Okinawa_DAO(this.con);
 		int count = -1;
 				try{
-					count = dao.insertGou(info);
+					count = dao.InfoInsert(info);
 					this.con.comit();
 					} catch (Exception e) {
 			e.printStackTrace();
@@ -101,4 +101,5 @@ public int registerGou(Info_DTO info) throws Exception {
 					DbUtil.closeConnection(this.con);
 				}
 				return count;
+	}
 }

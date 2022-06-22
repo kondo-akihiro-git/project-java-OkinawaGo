@@ -65,11 +65,11 @@ public class SearchService extends BaseService(){
 	 * 選択された写真から詳細情報を取得するDAOメソッドをどうするか(06/22)
 	 * 
 	 */
-	public List<Info_DTO> searchDetailBykey(String img) throws Exception {
+	public List<Info_DTO> searchDetailBykey(String info_id) throws Exception {
 		Okinawa_DAO dao = new Okinawa_DAO(this.con);
 		Info_DTO list = null; // メソッドの戻り値のデータ型がわかっていません…ごめんなさい(06/20)。
 		try {
-			list = dao.findDetailByIdName(img); // カテゴリーIDと名前からグルメ詳細情報を取得
+			list = dao.selectByInfoId(info_id); // カテゴリーIDと名前からグルメ詳細情報を取得
 		} finally {
 			DbUtil.closeConnection(this.con);
 		}
@@ -80,7 +80,7 @@ public class SearchService extends BaseService(){
 	 * 管理者トップ画面からコメント一覧ページに遷移-------------------------------------------------------------------
 	 */
 
-	public List<Comment_DTO> searchCommentBykey(Integer info_id) throws Exception {
+	public List<Comment_DTO> searchCommentBykey(String info_id) throws Exception {
 		Okinawa_DAO dao = new Okinawa_DAO(this.con);
 		List<Comment_DTO> list = null;
 		try {
@@ -94,15 +94,15 @@ public class SearchService extends BaseService(){
 	/**
 	 * ユーザー側でのグルメ検索画面からカテゴリー検索後、検索結果画面に遷移-------------------------------------------------------------------
 	 */
-	public List<Info_DTO> conditionalSearch(Integer id, String[] checkedbox) throws Exception {
+	public List<Info_DTO> conditionalSearch(Integer area_id, String[] checkedbox) throws Exception {
 		Okinawa_DAO dao = new Okinawa_DAO(this.con);
 		List<Info_DTO> list = null;
 		try {
-			list = dao.findByIdList(checkedbox, id); //地域IDとチェックボックスからスポット・グルメの一覧を取得
+			list = dao.GurumeSelect(area_id, checkbox); //地域IDとチェックボックスからスポット・グルメの一覧を取得
 		}finnaly {
 			DbUtil.closeConnection(this.con);
 		}
-		return list
+		return list;
 	}
 
 }　
