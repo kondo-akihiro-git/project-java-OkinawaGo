@@ -1,13 +1,20 @@
-package com.rhizome.example.userpage;
+package main.java.com.rhizome.example.userpage;
 
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
-import org.apache.coyote.Request;
+import main.java.com.rhizome.example.dao.Okinawa_DAO;
+import main.java.com.rhizome.example.userpage.base.BaseServlet;
 
 @WebServlet(name = "comment", urlPatterns = { "/comment" })
 public class CommentAction extends BaseServlet {
+	
+	@Override
+	protected String getPageName() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 
 	protected String doAction() {
 
@@ -25,4 +32,6 @@ public class CommentAction extends BaseServlet {
 
 		return "detail";
 	}
+
+	
 }

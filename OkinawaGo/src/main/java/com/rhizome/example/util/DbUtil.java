@@ -1,4 +1,4 @@
-
+package main.java.com.rhizome.example.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
