@@ -292,8 +292,6 @@ public class Okinawa_DAO {
 			sql.append("    " + INFO_TBL_NAME);
 			this.stmt = con.prepareStatement(sql.toString());
 			rs = stmt.executeQuery();
-			int infoId;
-			infoId = rs.getInt(INFO_ID);
 			while (rs.next()) {
 				list.add(rowMappingInfoId(rs));
 			}
@@ -309,7 +307,7 @@ public class Okinawa_DAO {
 				sql.append(" ) ");
 				sql.append(" VALUES ");
 				sql.append(" ( ");
-				sql.append("    " + infoId);
+				sql.append("    " + list);
 				sql.append("   ," + cate);
 				sql.append(" ) ");
 				this.stmt = con.prepareStatement(sql.toString());
