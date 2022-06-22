@@ -13,12 +13,14 @@ public class AddInfoAction extends BaseServlet {
 
 	@Override
 	protected String doAction() throws Exception {
+		
+	
 //スポットかグルメか判断
 String cate = super.getInputParamert("cate");
-String[] paramList;
+
 //IDが25以下の場合、スポット------------------------------------------------------------------------------
-if(cate.equalus("スポット")) {
-		paramList = super.getInputParameter(
+if(cate.equals("スポット")) {
+		String[] paramList = super.getInputParameter(
 				"info_nm"		// 0
 				,"area_id"	// 1
 				,"post"		// 2 //掲載情報テーブル修正後再度確認
@@ -31,9 +33,8 @@ if(cate.equalus("スポット")) {
 		super.request.setAttribute("address", paramList[3]);
 		super.request.setAttribute("info_img", paramList[4]);
 //IDが25より大きい場合、グルメ----------------------------------------------------------------------------
-}else if(param > 25) {
-	paramList = super.getInputParameter(
-		paramList = super.getInputParameter(
+}else if(cate.equals("グルメ")) {
+		String[] paramList = super.getInputParameter(
 				"info_nm"		// 0
 				,"area_id"	// 1
 				,"post"		// 2 //掲載情報テーブル修正後再度確認
@@ -54,6 +55,5 @@ if(super.request.getParameter("back") != null) {
 	return "adInsert_input.jsp";
 }else {
 	return 	"adInsertConfirm";
-}
 }
 }
