@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rhizome.example.util.DbUtil;
+
 public class Okinawa_DAO {
 	//infoテーブル
 	private static final String INFO_TBL_NAME = "info_m";
@@ -173,9 +175,50 @@ public class Okinawa_DAO {
 		}
 	}
 
+	//(スポット)掲載情報テーブルへの新規登録
+	public void empInsert(String s_g_id, String info_nm, String area_id, String address, String post_cord, String info_img, String cr_mana)
+			throws NumberFormatException, SQLException, ClassNotFoundException {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" INSERT " + " INTO ");
+		sql.append("    " + INFO_TBL_NAME);
+		sql.append(" ( ");
+		sql.append("    " + S_G_ID);
+		sql.append("   ," + INFO_NM);
+		sql.append("   ," + INFO_TABLE_AREA_ID);
+		sql.append("   ," + ADDRESS);
+		sql.append("   ," + POST_CORD);
+		sql.append("   ," + INFO_IMG);
+		sql.append("   ," + CR_DATE);
+		sql.append("   ," + CR_MANA);
+		sql.append(" ) ");
+		sql.append(" VALUES ");
+		sql.append(" ( ");
+		sql.append("    " + " ? ");
+		sql.append("   ," + " ? ");
+		sql.append("   ," + " ? ");
+		sql.append("   ," + " ? ");
+		sql.append("   ," + " ? ");
+		sql.append("   ," + " ? ");
+		sql.append("   ," + " now() ");
+		sql.append("   ," + " ? ");
+		sql.append(" ) ");
+		try {
+			this.stmt = con.prepareStatement(sql.toString());
+			stmt.setInt(1, Integer.parseInt(s_g_id));
+			stmt.setString(2, info_nm);
+			stmt.setInt(3, Integer.parseInt(area_id));
+			stmt.setString(4, address);
+			stmt.setString(5, post_cord);
+			stmt.setString(6, info_img);
+			stmt.setString(7, cr_mana);
+			stmt.executeUpdate();
+		} finally {
+			DbUtil.closeStatement(this.stmt);
+		}
+	}
 	
-	//掲載情報テーブルへの新規登録
-	public void InfoInsert(int s_g_id, String info_nm, int area_id, String address, String post_cord, String info_img, String cr_mana, String[] cateList)
+	//(グルメ)掲載情報テーブルへの新規登録
+	public void InfoInsert(String s_g_id, String info_nm, String area_id, String address, String post_cord, String info_img, String cr_mana, String[] cateList)
 			throws NumberFormatException, SQLException, ClassNotFoundException {
 		StringBuilder sql = new StringBuilder();
 		
@@ -270,7 +313,7 @@ public class Okinawa_DAO {
 	}
 	
 	//グルメ条件検索
-	public List<Info_DTO> GurumeSelect(int area_id, String[] checkedbox) throws SQLException, ClassNotFoundException, NumberFormatException {
+	public List<Info_DTO> GurumeSelect(String area_id, String[] checkedbox) throws SQLException, ClassNotFoundException, NumberFormatException {
 		List<Info_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		if (checkedbox.length == 1) {
