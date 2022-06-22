@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- Original CSS -->
+    <link rel="stylesheet" type="text/css" href="css/ad.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+	
+	<!--favicon-->
+	<link href="favicon.ico" rel="shortcut icon">
+
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'nvj0abk',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+   <title>管理者スポット/グルメ検索ページ｜OkinawaGo</title>
+</head>
+<body>
+<div class="content">
+<span class="login_name"><p>ログイン：山田</p></span>
+<h1><a href="adSearch.html"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
+<form action="adSearch_kekka.html" method="post" class="freeword_search" >
+  <input type="search" name="adSearch_kekka.html" placeholder="カフェ" class="input_var">
+  <input type="submit" value="検索" >
+</form>
+<h2>店名/スポット名</h2>
+<table>
+<tr>
+<td>カフェ　海の見えるカフェ</td>
+<td><form action="detail_kekkaGul.html" method="post"><input type="submit" value="詳細"  name="###"></form></td>
+<td><form onClick="buttonClick()" method="post"><input type="submit" value="削除"  name="###"></form></td>
+<td><form action="adcommentSearch.html" method="post"><input type="submit" value="コメント管理"  name="###"></form></td>
+</tr>
+<tr>
+<td>カフェ　沖縄</td>
+<td><form action="detail_kekkaGul.html" method="post"><input type="submit" value="詳細"  name="###"></form></td>
+<td><form action="adDelete_alert.html" method="post"><input type="submit" value="削除"  name="###"></form></td>
+<td><form action="adcommentSearch.html" method="post"><input type="submit" value="コメント管理"  name="###"></form></td>
+</tr>
+<tr>
+<td>カフェ　ヤンバルクイナ</td>
+<td><form action="detail_kekkaGul.html" method="post"><input type="submit" value="詳細"  name="###"></form></td>
+<td><form action="adDelete_alert.html" method="post"><input type="submit" value="削除"  name="###"></form></td>
+<td><form action="adcommentSearch.html" method="post"><input type="submit" value="コメント管理"  name="###"></form></td>
+</tr>
+<tr>
+<td>カフェ　ベリーカフェ</td>
+<td><form action="detail_kekkaGul.html" method="post"><input type="submit" value="詳細"  name="###"></form></td>
+<td><form action="adDelete_alert.html" method="post"><input type="submit" value="削除"  name="###"></form></td>
+<td><form action="adcommentSearch.html" method="post"><input type="submit" value="コメント管理"  name="###"></form></td>
+</tr>
+<tr>
+<td>カフェ　俺の沖縄カフェ</td>
+<td><form action="detail_kekkaGul.html" method="post"><input type="submit" value="詳細"  name="###"></form></td>
+<td><form action="adDelete_alert.html" method="post"><input type="submit" value="削除"  name="###"></form></td>
+<td><form action="adcommentSearch.html" method="post"><input type="submit" value="コメント管理"  name="###"></form></td>
+</tr>
+<tr>
+<td>カフェ　Welcome沖縄</td>
+<td><form action="detail_kekkaGul.html" method="post"><input type="submit" value="詳細"  name="###"></form></td>
+<td><form action="adDelete_alert.html" method="post"><input type="submit" value="削除"  name="###"></form></td>
+<td><form action="adcommentSearch.html" method="post"><input type="submit" value="コメント管理"  name="###"></form></td>
+</tr>
+<tr>
+<td>カフェ　アルマジロ</td>
+<td><form action="detail_kekkaGul.html" method="post"><input type="submit" value="詳細"  name="###"></form></td>
+<td><form action="adDelete_alert.html" method="post"><input type="submit" value="削除"  name="###"></form></td>
+<td><form action="adcommentSearch.html" method="post"><input type="submit" value="コメント管理"  name="###"></form></td>
+</tr>
+<tr>
+<td>カフェ　山の見えるカフェ</td>
+<td><form action="detail_kekkaGul.html" method="post"><input type="submit" value="詳細"  name="###"></form></td>
+<td><form action="adDelete_alert.html" method="post"><input type="submit" value="削除"  name="###"></form></td>
+<td><form action="adcommentSearch.html" method="post"><input type="submit" value="コメント管理"  name="###"></form></td>
+</tr>
+<tr>
+<td>カフェ　パンダカフェ</td>
+<td><form action="detail_kekkaGul.html" method="post"><input type="submit" value="詳細"  name="###"></form></td>
+<td><form action="adDelete_alert.html" method="post"><input type="submit" value="削除"  name="###"></form></td>
+<td><form action="adcommentSearch.html" method="post"><input type="submit" value="コメント管理"  name="###"></form></td>
+</tr>
+<tr>
+<td>カフェ　ナマケモノ</td>
+<td><form action="detail_kekkaGul.html" method="post"><input type="submit" value="詳細"  name="###"></form></td>
+<td><form action="adDelete_alert.html" method="post"><input type="submit" value="削除"  name="###"></form></td>
+<td><form action="adcommentSearch.html" method="post"><input type="submit" value="コメント管理"  name="###"></form></td>
+</tr>
+</table>
+<div class="pagenation">
+<ul>
+<li>前へ</li>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+<li>次へ</li>
+</ul>
+</div>
+<span class="insertButton">
+<a href="adInsert_Input.html">スポット/グルメ追加</a>
+</span>
+
+
+
+
+</div>
+
+
+</script>
+<script>
+function buttonClick(){
+	if(window.confirm('海の見えるカフェを削除しますか？')){ 
+	window.open('adDelete.html');
+	return true;
+	}}
+</script>
+<footer>
+<p>　</p>
+</footer>
+</body>
+</html>
+
