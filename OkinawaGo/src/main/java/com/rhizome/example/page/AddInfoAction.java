@@ -17,47 +17,39 @@ public class AddInfoAction extends BaseServlet {
 
 	@Override
 	protected String doAction() throws Exception {
-String param = super.getInputParamert("s_g_id");
-String[] paramList;
-if(param <= 25) {
-		paramList = super.getInputParameter(
-				,"info_nm"		// 0
-				,"area_id"	// 1
-				,"post"		// 2
-				,"address"	// 3
-				,"info_img"	// 4
-		);
-}else if(param > 25) {
-	paramList = super.getInputParameter(
-		paramList = super.getInputParameter(
-				,"info_nm"		// 0
-				,"area_id"	// 1
-				,"post"		// 2 //掲載情報テーブル修正後再度確認
-				,"address"	// 3
-				,"category_id" // 4
-				,"info_img"	// 5
-		);
-}
-		/*
-		 * 登録->内容編集時の値保持バグの修正
-		 */
+
+		// グルメかスポットのラジオボタンを取得
+		String name = super.request.getParamert("name");
+		Okinawa_DAO dao = new Okinawa_DAO();
 		
-			info_DTO info = new info_DTO();
-			info.setnull(param[0]);
-			info.setnull(param[1]);
-			info.setnull(param[2]);
-			info.setnull(param[3]);
-			info.setnull(param[4]);
-		if (param[0] == "グルメ") {
-			info.setnull(param[5]);
+		//スポットの追加
+		if (name.equals("スポット")) {
+			int s_g_id = super.request.getParamert("s_g_id");
+			String info_nm = super.request.getParamert("info_nm");
+			int area_id = super.request.getParameter("area_id");
+			String address = super.request.getParameter("address");
+			String post_cord = super.request.getParameter("post_cord");
+			String info_img = super.request.getParameter("info_img");
+			String cr_mana = super.request.getParameter("cr_mana");
+		
+			dao.empInsert(s_g_id,info_nm,area_id,address,post_cord,info_img,cr_mana);
+			
+		// グルメ追加
+		} else if (name.equals("グルメ")) {
+			int s_g_id = super.request.getParamert("s_g_id");
+			String info_nm = super.request.getParamert("info_nm");
+			int area_id = super.request.getParameter("area_id");
+			String address = super.request.getParameter("address");
+			String post_cord = super.request.getParameter("post_cord");
+			String info_img = super.request.getParameter("info_img");
+			String cr_mana = super.request.getParameter("cr_mana");
+			String[] cateList = super.request.getParameter("cateList");
+
+			
+			dao.InfoInsert(s_g_id, info_nm, area_id, address, post_cord, info_img, cr_mana, cateList);
+
 		}
-		UpdateService service = new UpdateService();
-		if(param[0] == "スポット") {
-		service.registerSpot(info);
-		}
-		else if(param[0] == "グルメ") {
-		service.registerGou(info);
-		}
+
 		return "adInsert";
 	}
 }

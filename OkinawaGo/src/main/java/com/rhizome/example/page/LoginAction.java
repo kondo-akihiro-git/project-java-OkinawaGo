@@ -28,7 +28,7 @@ public class LoginAction extends BaseServlet {
 			request.setAttribute("alertMsg", message)
 		}
 		super.session.setAttribute("LOGIN", loginData.get("null"));
-		super.request.getRequestDispatcher("adSearch.jsp");
+		return "adSearch";
 		
 	}
 }
