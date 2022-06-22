@@ -1,20 +1,24 @@
-package com.rhizome.example.page;
+package main.java.com.rhizome.example.page;
 
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
+import main.java.com.rhizome.example.dao.Okinawa_DAO;
+import main.java.com.rhizome.example.entity.Comment_DTO;
+import main.java.com.rhizome.example.entity.Info_DTO;
+import main.java.com.rhizome.example.page.base.BaseServlet;
+
 @WebServlet(name = "select", urlPatterns = { "/select" })
 public class SelectAction extends BaseServlet {
 
-	@Override
 	protected String getPageName() {
 		return "adSearch";
 	}
 
 	protected String doAction() throws Exception {
 
-		Okinawa_DAO dao = new Okinawa_DAO();
+		Okinawa_DAO dao = new Okinawa_DAO(null);
 
 		if (super.request.getParameter("text") != null) {
 
@@ -49,9 +53,10 @@ public class SelectAction extends BaseServlet {
 
 			List<Comment_DTO> commentList = dao.selectComment(info_id);
 			
-			super.request.setAttribute("detailList", detailList);
+			super.request.setAttribute("commentList", commentList);
 			return "adcommentSearch";
 		}
+		return getPageName();
 
 	}
 }

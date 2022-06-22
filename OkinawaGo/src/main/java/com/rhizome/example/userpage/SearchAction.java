@@ -1,14 +1,21 @@
-package com.rhizome.example.userpage;
+
+
+import java.util.List;
+
+import javax.servlet.annotation.WebServlet;
+
+import main.java.com.rhizome.example.dao.Okinawa_DAO;
+import main.java.com.rhizome.example.page.base.BaseServlet;
 
 @WebServlet(name = "search", urlPatterns = { "/search" })
-public class SelectAction extends BaseServlet {
+public class SearchAction extends BaseServlet {
 
 	public String doAction() {
 
 String text;
 String value;
 Okinawa_DAO dao = new Okinawa_DAO();
-List<Info_DTO> infolist;
+List<Info_DTO> infolist = null;
 
 //検索トップ画面からフリーワードで検索した場合-------------------------------------------------------------
 if (super.request.getParameter("toptext") != null) {
@@ -35,9 +42,10 @@ if(super.request.getParameter("spottext") != null) {
 //グルメ検索画面からカテゴリー検索した場合
 	}else if(super.request.getParameter("map_category") !=null)
 	{
-		int id = super.request.getParameter("id"); // ラジオボタンでチェックされた値を取得
-		if (super.request.getParameter("gou_category" != null)) {
-			String[] list = super.request.getParameterValues("checkbox"); // チェックボックスの値を配列で取得 //チェックボックスでチェックされた値を取得
+		String[] list = null;
+		String id = super.request.getParameter("id"); // ラジオボタンでチェックされた値を取得
+		if (super.request.getParameter("gou_category") != null)) {
+			list = super.request.getParameterValues("checkbox"); // チェックボックスの値を配列で取得 //チェックボックスでチェックされた値を取得
 		}
 		infolist = dao.GurumeSelect(id, list);
 		
@@ -49,4 +57,10 @@ if(super.request.getParameter("spottext") != null) {
 
 	return"search";
 }
+
+	@Override
+	protected String getPageName() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }

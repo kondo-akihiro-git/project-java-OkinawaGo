@@ -1,3 +1,4 @@
+package main.java.com.rhizome.example.entity;
 
 public class Manager_DTO {
 	//管理者ID

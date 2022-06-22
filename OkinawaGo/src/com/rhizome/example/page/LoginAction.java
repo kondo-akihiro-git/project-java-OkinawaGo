@@ -4,6 +4,9 @@ import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 
+import main.java.com.rhizome.example.page.base.BaseServlet;
+import main.java.com.rhizome.example.service.SearchService;
+
 @WebServlet(name="login", urlPatterns={"/login"})
 public class LoginAction extends BaseServlet {
 
@@ -25,7 +28,7 @@ public class LoginAction extends BaseServlet {
 		if (loginData == null || loginData.get("Manager") == null) {
 			// ポップアップの表示方法不明
 			String message = "メールアドレスまたはパスワードが間違っています";
-			request.setAttribute("alertMsg", message)
+			request.setAttribute("alertMsg", message);
 		}
 		super.session.setAttribute("LOGIN_Manager", loginData.get("Manager"));
 		return "adSearch";
