@@ -27,7 +27,7 @@ public class LoginAction extends BaseServlet {
 			String message = "メールアドレスまたはパスワードが間違っています";
 			request.setAttribute("alertMsg", message)
 		}
-		super.session.setAttribute("LOGIN", loginData.get("null"));
+		super.session.setAttribute("LOGIN_Manager", loginData.get("Manager"));
 		return "adSearch";
 		
 	}
