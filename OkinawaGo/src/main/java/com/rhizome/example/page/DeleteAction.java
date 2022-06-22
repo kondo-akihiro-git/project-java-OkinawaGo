@@ -8,7 +8,7 @@ public class DeleteAction extends BaseServlet {
 	@Override
 	protected String getPageName() {
 		
-		if (super.request.getParameter("detail") != null) {
+		if (super.request.getParameter("infoDetail") != null) {
 		return "adcommentSearch";
 		} else if (super.request.getParameter("commntDelete") != null) {
 		return("adSearch")
@@ -19,29 +19,18 @@ public class DeleteAction extends BaseServlet {
 	protected String doAction() throws Exception {
 		
 		//トップページから遷移した時
-		if (super.request.getParameter("delete") != null) {
-		String[] pageParam = super.getInputParameter(
-				"s_g_id"
-				, "info_nm" 
+		if (super.request.getParameter("infoDelete") != null) {
+		String info_id = super.getParameter("info_id"); 
 				
-				Info_DTO info = new InfoDTO();
-				info.setS_g_id(pageParam[0]));
-				info.setInfo_nm(pageParam[1]);
+				Okinawa_DAO dao = new Okinawa_DAO();
+				dao.infoDelete(info_id);
 				
-				UpdateService service = new UpdateService();
-				service.deleteInfo(pageParam[0],pageParam[1]);
-				
-		//コメント検索画面から遷移された時		
+		//コメント検索画面から遷移した時		
 		} else if (super.request.getParameter("commentDelete") != null) {
-				"comment_nm"
-				,"comment_tx"
+		String comment_id = super.getParameter("comment_id");
 				
-				Comment_DTO comment = new Comment_DTO();
-				comment.setComment_nm(pageParam[0]);
-				comment.setComment_tx(pageParam[1]);
-				
-				UpdateService service = new UpdateService();
-				service.deleteComment(pageParam[0],pageParam[1]);
+				Okinawa_DAO dao = new Okinawa_DAO();
+				dao.commentDelete(comment_id);
 				
 		}
 		return "adDelete";

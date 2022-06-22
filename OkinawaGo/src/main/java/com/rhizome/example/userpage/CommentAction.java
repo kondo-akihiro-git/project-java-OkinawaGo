@@ -14,8 +14,8 @@ public class CommentAction extends BaseServlet {
 	String comment_tx = super.request.getParameter("comment_tx");
 	String comment_img = super.request.getParameter("comment_img");
 
-	UpdateService service = new UpdateService();
-	List<comment_DTO> commentList =  service.commentInput(info_id,comment_id,comment_nm, comment_tx, comment_img);
+	Okinawa_DAO dao = new Okinawa_DAO();
+	List<comment_DTO> commentList =  dao.CommentInsert(info_id,comment_id,comment_nm, comment_tx, comment_img);
 
 	super.request.setAttribute("commentList",commentList); // リストのままsetAttributeするかどうか放置(06/17)。
 

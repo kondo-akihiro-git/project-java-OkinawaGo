@@ -2,7 +2,7 @@ import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(name = "select", urlPatterns = { "/select" })
+@WebServlet(name = "search", urlPatterns = { "/search" })
 public class ShowInfoAction extends BaseServlet {
 	//画像から詳細データを取得
 	protected String doAction() throws Exception {

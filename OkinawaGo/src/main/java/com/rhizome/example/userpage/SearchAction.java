@@ -1,4 +1,4 @@
-@WebServlet(name = "select", urlPatterns = { "/select" })
+@WebServlet(name = "search", urlPatterns = { "/search" })
 public class SelectAction extends BaseServlet {
 
 String text;
