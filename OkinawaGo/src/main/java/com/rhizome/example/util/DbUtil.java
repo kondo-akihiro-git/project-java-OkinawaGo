@@ -29,16 +29,23 @@ public class DbUtil {
 
 	// Connectionを単一のインスタンスとする
 	private static Connection con;
-
-	/**
-	 * DBのコネクションを取得
-	 */
+	
+	//ログイン用DBのコネクションを取得
 	public static Connection getConnection(boolean autoCommitFlg) throws ClassNotFoundException, SQLException {
 		if (con == null || con.isClosed()) {
 			Class.forName(DB_DRIVER);
 			con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
 		}
-		con.setAutoCommit(autoCommitFlg);
+		return con;
+	}
+	/**
+	 * DBのコネクションを取得
+	 */
+	public static Connection getConnection() throws ClassNotFoundException, SQLException {
+		if (con == null || con.isClosed()) {
+			Class.forName(DB_DRIVER);
+			con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+		}
 		return con;
 	}
 	/**
