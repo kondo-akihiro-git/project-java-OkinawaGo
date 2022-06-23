@@ -14,6 +14,7 @@ import main.java.com.rhizome.example.entity.Gurume_Category_DTO;
 import main.java.com.rhizome.example.entity.Info_DTO;
 import main.java.com.rhizome.example.entity.Info_id_DTO;
 import main.java.com.rhizome.example.entity.Info_id_img_DTO;
+import main.java.com.rhizome.example.entity.Manager_DTO;
 import main.java.com.rhizome.example.util.DbUtil;
 
 
@@ -58,6 +59,17 @@ public class Okinawa_DAO {
 	private static final String SPOT_GURUME_TABLE_NAME = "s_g_m";
 	private static final String SPOT_GURUME_S_G_ID= "s_g_id";
 	private static final String SPOT_GURUME_S_G_NM = "s_g_nm";
+	//Managerテーブル
+	private static final String MANAGER_TABLE_NAME = "manager_table";
+	private static final String MANAGER_ID = "manager_id";
+	private static final String MANAGER_NM = "manager_nm";
+	private static final String MANAGER_KN = "manager_kn";
+	private static final String MANAGER_MAIL = "manager_mail";
+	private static final String MANAGER_PASS = "manager_pass";
+	private static final String MANAGER_CR_DATE = "cr_date";
+	private static final String MANAGER_CR_MANA = "cr_mana";
+	private static final String MANAGER_UP_DATE = "up_date";
+	private static final String MANAGER_UP_MANA = "up_mana";
 
 	/** DBコネクション */
 	public Connection con;
@@ -75,6 +87,21 @@ public class Okinawa_DAO {
 	public Okinawa_DAO(Connection con) {
 		this.con = con;
 	}
+	
+	//rowMappingメソッド
+	public Manager_DTO rowMappingManager_m(ResultSet rs) throws SQLException {
+			Manager_DTO ManagerD = new Manager_DTO();
+			ManagerD.setManager_id(rs.getString(MANAGER_ID));
+			ManagerD.setManager_nm(rs.getString(MANAGER_NM));
+			ManagerD.setManager_kn(rs.getString(MANAGER_KN));
+			ManagerD.setManager_mail(rs.getString(MANAGER_MAIL));
+			ManagerD.setManager_pass(rs.getString(MANAGER_PASS));
+			ManagerD.setCr_date(rs.getString(MANAGER_CR_DATE));
+			ManagerD.setCr_mana(rs.getString(MANAGER_CR_MANA));
+			ManagerD.setUp_date(rs.getString(MANAGER_UP_DATE));
+			ManagerD.setUp_mana(rs.getString(MANAGER_UP_MANA));
+			return ManagerD;
+		}
 	
 	/**
 	 * DBから取得した検索結果（info_mテーブル）をDTO型のインスタンスにセットし、リストに格納する
@@ -111,6 +138,7 @@ public class Okinawa_DAO {
 		Info_id_img_DTO InfoD = new Info_id_img_DTO();
 		InfoD.setInfo_id(rs.getString(INFO_ID));
 		InfoD.setInfo_img(rs.getString(INFO_IMG));
+		InfoD.setS_g_id(rs.getString(INFO_IMG));
 		return InfoD;
 	}
 	
@@ -183,13 +211,11 @@ public class Okinawa_DAO {
 	 */
 	public Comment_DTO rowMappingComment_m(ResultSet rs) throws SQLException {
 		Comment_DTO InfoD = new Comment_DTO();
-		InfoD.setComment_id(rs.getInt(S_G_ID));
-		InfoD.setInfo_id(rs.getInt(INFO_ID));
-		InfoD.setComment_nm(rs.getString(S_G_ID));
-		InfoD.setComment_tx(rs.getString(INFO_NM));
-		InfoD.setComment_img(rs.getString(INFO_TABLE_AREA_ID));
-		InfoD.setCr_date(rs.getInt(ADDRESS));
-		InfoD.setCr_mana_id(rs.getInt(INFO_IMG));
+		InfoD.setComment_id(rs.getString(COMMENT_TABLE_COMMENT_ID));
+		InfoD.setInfo_id(rs.getString(INFO_ID));
+		InfoD.setComment_nm(rs.getString(COMMENT_TABLE_COMMENT_NM));
+		InfoD.setComment_tx(rs.getString(COMMENT_TABLE_COMMENT_TX));
+		InfoD.setComment_img(rs.getString(COMMENT_TABLE_COMMENT_IMG));
 		return InfoD;
 	}
 	
@@ -410,7 +436,7 @@ public class Okinawa_DAO {
 		StringBuilder sql = new StringBuilder();
 		if (checkedbox.length == 1) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -431,7 +457,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 2) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -454,7 +480,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 3) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + "IN" + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -479,7 +505,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 4) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -506,7 +532,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 5) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -535,7 +561,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 6) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -566,7 +592,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 7) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -717,6 +743,30 @@ public class Okinawa_DAO {
 	}
 	
 	//管理者ログイン
+	public Manager_DTO loginInfo(String mail, String pass) throws SQLException {
+		Manager_DTO manager = null;
+		StringBuilder sql = new StringBuilder();
+
+		// SQLの生成
+		sql.append(" SELECT * FROM " + MANAGER_TABLE_NAME);
+		sql.append(" WHERE" + MANAGER_MAIL +"="+ "?" +"AND"+ MANAGER_PASS + "=" +"?");
+
+		// Statementの生成および条件の設定
+		this.stmt = this.con.prepareStatement(sql.toString());
+		stmt.setString(1, mail);
+		stmt.setString(2, pass);
+
+		ResultSet rs = stmt.executeQuery();
+
+		// 主キー検索のため、0件、または1件と想定
+		if (rs.next()) {
+			manager = rowMappingManager_m(rs);
+		}
+
+		
+		DbUtil.closeStatement(this.stmt);
+		return manager;
+	}
 	
 	//管理者フリーワード検索
 	public List<Info_DTO> managerFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {

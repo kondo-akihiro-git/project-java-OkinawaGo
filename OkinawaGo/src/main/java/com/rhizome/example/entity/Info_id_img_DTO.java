@@ -6,6 +6,8 @@ public class Info_id_img_DTO {
 	private String info_id;
 	//写真
 	private String info_img;
+	//スポット・グルメID
+	private String s_g_id;
 
 	public String getInfo_id() {
 		return info_id;
@@ -19,5 +21,11 @@ public class Info_id_img_DTO {
 	}
 	public void setInfo_img(String string) {
 		this.info_img = string;
+	}
+	public String getS_g_id() {
+		return s_g_id;
+	}
+	public void setS_g_id(String s_g_id) {
+		this.s_g_id = s_g_id;
 	}
 }
