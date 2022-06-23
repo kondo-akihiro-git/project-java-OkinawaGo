@@ -28,20 +28,42 @@ public class SearchService extends BaseService{
 		return loginData;
 	}
 
-	/**
-	 * 管理者トップ画面からスポット・グルメ詳細ページに飛ぶ-------------------------------------------------------------------
-	 *　カテゴリーIDとスポット・グルメ名から詳細情報を取得するDAOメソッドをどうするか(06/22)。
-	 */
-	
-	//下のメソッドが必要かどうか要確認(06/22)
-	
 }
 
 
 
+
 /*
+ //MANAGERテーブル
+    private static final String MANAGER_TABLE_NAME = "manager_table";
+	private static final String MANAGER_ID = "manager_id";
+	private static final String MANAGER_NM = "manager_nm";
+	private static final String MANAGER_KN = "manager_kn";
+	private static final String MANAGER_MAIL = "manager_mail";
+	private static final String MANAGER_PASS = "manager_pass";
+	private static final String MANAGER_CR_DATE = "cr_date";
+	private static final String MANAGER_CR_MANA = "cr_mana";
+	private static final String MANAGER_UP_DATE = "up_date";
+	private static final String MANAGER_UP_MANA = "up_mana";
+
+
+
+//rowMappingメソッド
+public Manager_DTO rowMappingManager_m(ResultSet rs) throws SQLException {
+		Manager_DTO ManagerD = new Manager_DTO();
+		ManagerD.setManager_id(rs.getInt(MANAGER_ID));
+		ManagerD.setManager_nm(rs.getString(MANAGER_NM));
+		ManagerD.setMANAGER_kn(rs.getString(MANAGER_KN));
+		ManagerD.setManager_mail(rs.getString(MANAGER_MAIL));
+		ManagerD.setManager_pass(rs.getString(MANAGER_PASS));
+		ManagerD.setCr_date(rs.getString(MANAGER_CR_DATE));
+		ManagerD.setCr_mana(rs.getInt(MANAGER_CR_MANA));
+		ManagerD.setUp_date(rs.getString(MANAGER_UP_DATE));
+		ManagerD.setUp_mana(rs.getInt(MANAGER_UP_MANA));
+		return InfoD;
+	}
 //管理者ログイン機能
-public Manager_DTO selectLoginInfo(String mail, String pass) throws SQLException {
+public Manager_DTO loginInfo(String mail, String pass) throws SQLException {
 		Manager_DTO manager = null;
 		StringBuilder sql = new StringBuilder();
 
@@ -61,7 +83,7 @@ public Manager_DTO selectLoginInfo(String mail, String pass) throws SQLException
 			manager = rowMappingManager_m(rs);
 		}
 
-		// 見つからなかった
+		
 		DbUtil.colseStatement();
 		return manager;
 	}
