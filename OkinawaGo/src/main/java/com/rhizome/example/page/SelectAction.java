@@ -1,5 +1,6 @@
 package main.java.com.rhizome.example.page;
 
+import java.sql.Connection;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,7 @@ import main.java.com.rhizome.example.dao.Okinawa_DAO;
 import main.java.com.rhizome.example.entity.Comment_DTO;
 import main.java.com.rhizome.example.entity.Info_DTO;
 import main.java.com.rhizome.example.page.base.BaseServlet;
+import main.java.com.rhizome.example.util.DbUtil;
 
 @WebServlet(name = "select", urlPatterns = { "/select" })
 public class SelectAction extends BaseServlet {
@@ -18,14 +20,15 @@ public class SelectAction extends BaseServlet {
 
 	protected String doAction() throws Exception {
 
-		Okinawa_DAO dao = new Okinawa_DAO(null);
+		Connection con = DbUtil.getConnection();
+		Okinawa_DAO dao = new Okinawa_DAO(con);
 
 		if (super.request.getParameter("text") != null) {
 
 			String text = super.request.getParameter("text");
-			// 検索を行う
+			// フリーワード検索を行う
 
-			List<Info_DTO> spotInfolist = dao.selectByFreeWord("text");
+			List<Info_DTO> spotInfolist = dao.selectByFreeWord(text);//
 
 			// 検索結果の判定
 			if (spotInfolist == null || spotInfolist.size() == 0) {
@@ -33,8 +36,8 @@ public class SelectAction extends BaseServlet {
 			}
 			super.request.setAttribute("spotInfolist", spotInfolist);
 			return "adSearch";
- 
-			// 詳細画面に遷移
+
+			// 詳細ボタン押下後、詳細画面に遷移
 		} else if (super.request.getParameter("detail") != null) {
 
 			String info_id = super.request.getParameter("info_id");
