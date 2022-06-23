@@ -1,4 +1,4 @@
-package com.rhizome.example.page;
+package main.java.com.rhizome.example.page;
 
 import java.util.Map;
 
