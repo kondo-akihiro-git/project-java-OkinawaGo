@@ -1,9 +1,20 @@
+package main.java.com.rhizome.example.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import main.java.com.rhizome.example.entity.Area_DTO;
+import main.java.com.rhizome.example.entity.Category_DTO;
+import main.java.com.rhizome.example.entity.Comment_DTO;
+import main.java.com.rhizome.example.entity.Gurume_Category_DTO;
+import main.java.com.rhizome.example.entity.Info_DTO;
+import main.java.com.rhizome.example.entity.Info_id_DTO;
+import main.java.com.rhizome.example.entity.Info_id_img_DTO;
+import main.java.com.rhizome.example.util.DbUtil;
 
 
 
@@ -75,10 +86,10 @@ public class Okinawa_DAO {
 	 */
 	public Info_DTO rowMappingInfo(ResultSet rs) throws SQLException {
 		Info_DTO InfoD = new Info_DTO();
-		InfoD.setInfo_id(rs.getInt(INFO_ID));
-		InfoD.setS_g_id(rs.getInt(S_G_ID));
+		InfoD.setInfo_id(rs.getString(INFO_ID));
+		InfoD.setS_g_id(rs.getString(S_G_ID));
 		InfoD.setInfo_nm(rs.getString(INFO_NM));
-		InfoD.setArea_id(rs.getInt(INFO_TABLE_AREA_ID));
+		InfoD.setArea_id(rs.getString(INFO_TABLE_AREA_ID));
 		InfoD.setAddress(rs.getString(ADDRESS));
 		InfoD.setInfo_img(rs.getString(INFO_IMG));
 		InfoD.setCr_date(rs.getString(CR_DATE));
@@ -98,7 +109,7 @@ public class Okinawa_DAO {
 	 */
 	public Info_id_img_DTO rowMappingInfoIdImg(ResultSet rs) throws SQLException {
 		Info_id_img_DTO InfoD = new Info_id_img_DTO();
-		InfoD.setInfo_id(rs.getInt(INFO_ID));
+		InfoD.setInfo_id(rs.getString(INFO_ID));
 		InfoD.setInfo_img(rs.getString(INFO_IMG));
 		return InfoD;
 	}
@@ -158,7 +169,7 @@ public class Okinawa_DAO {
 	 */
 	public Info_id_DTO rowMappingInfoId(ResultSet rs) throws SQLException {
 		Info_id_DTO InfoD = new Info_id_DTO();
-		InfoD.setInfo_id(rs.getInt(MAX));
+		InfoD.setInfo_id(rs.getString(MAX));
 		return InfoD;
 	}
 	
@@ -342,7 +353,7 @@ public class Okinawa_DAO {
 			list.add(rowMappingInfoId(rs));
 			int max_id = 0;
 			for (Info_id_DTO r : list) {
-				max_id = r.getInfo_id();
+				max_id = Integer.parseInt(r.getInfo_id());
 			}
 			
 			//店カテゴリーテーブルへの情報登録

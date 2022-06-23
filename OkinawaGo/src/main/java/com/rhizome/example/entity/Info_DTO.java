@@ -3,15 +3,15 @@ package main.java.com.rhizome.example.entity;
 
 public class Info_DTO {
 	//情報ID
-	private int info_id;
+	private String info_id;
 	//スポット・グルメID
-	private int s_g_id;
+	private String s_g_id;
 	//名
 	private String info_nm;
 	//地域ID
-	private int area_id;
+	private String area_id;
 	//郵便番号
-	private String post_cord;
+	private String post_code;
 	//住所
 	private String address;
 	//写真
@@ -25,16 +25,16 @@ public class Info_DTO {
 	//更新者
 	private String up_mana;
 	
-	public int getInfo_id() {
+	public String getInfo_id() {
 		return info_id;
 	}
-	public void setInfo_id(int info_id) {
+	public void setInfo_id(String info_id) {
 		this.info_id = info_id;
 	}
-	public int getS_g_id() {
+	public String getS_g_id() {
 		return s_g_id;
 	}
-	public void setS_g_id(int s_g_id) {
+	public void setS_g_id(String s_g_id) {
 		this.s_g_id = s_g_id;
 	}
 	public String getInfo_nm() {
@@ -43,17 +43,17 @@ public class Info_DTO {
 	public void setInfo_nm(String info_nm) {
 		this.info_nm = info_nm;
 	}
-	public int getArea_id() {
+	public String getArea_id() {
 		return area_id;
 	}
-	public void setArea_id(int area_id) {
+	public void setArea_id(String area_id) {
 		this.area_id = area_id;
 	}
-	public String getPost_cord() {
-		return post_cord;
+	public String getPost_code() {
+		return post_code;
 	}
-	public void setPost_cord(String post_cord) {
-		this.post_cord = post_cord;
+	public void setPost_code(String post_code) {
+		this.post_code = post_code;
 	}
 	public String getAddress() {
 		return address;
