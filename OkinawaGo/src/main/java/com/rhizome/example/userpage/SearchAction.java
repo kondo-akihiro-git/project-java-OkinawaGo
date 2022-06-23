@@ -24,13 +24,13 @@ public class SearchAction extends BaseServlet {
 
 //検索トップ画面からフリーワードで検索した場合-------------------------------------------------------------
 		if (super.request.getParameter("toptext") != null) {
-			text = super.request.getParameter("text");
+			text = super.request.getParameter("toptext");
 			infolist = dao.selectByFreeWord(text);
 		}
 
 //スポット検索画面からフリーワードで検索した場合------------------------------------------------------------
 		if (super.request.getParameter("spottext") != null) {
-			text = super.request.getParameter("text");
+			text = super.request.getParameter("spottext");
 			infolist = dao.selectByFreeWord(text);
 
 //スポット検索画面のマップで検索した場合
@@ -41,19 +41,18 @@ public class SearchAction extends BaseServlet {
 //グルメ検索画面からフリーワードで検索した場合--------------------------------------------------------------
 		if (super.request.getParameter("goutext") != null) {
 
-			text = super.request.getParameter("area");
+			text = super.request.getParameter("goutext");
 			infolist = dao.selectByFreeWord(text);
 
 //グルメ検索画面からカテゴリー検索した場合
-		} else if (super.request.getParameter("map_category") != null) {
+		} else if (super.request.getParameter("category") != null) {
 			String[] list = null;
 			String id = super.request.getParameter("id"); // ラジオボタンでチェックされた値を取得
-			if (super.request.getParameter("gou_category") != null) {
-				list = super.request.getParameterValues("checkbox"); // チェックボックスの値を配列で取得 //チェックボックスでチェックされた値を取得
-				List<Info_id_img_DTO> List = null;
-				List = dao.GurumeSelect(id, list);
-				super.request.setAttribute("infolist", List);
-			}
+
+			list = super.request.getParameterValues("category"); // チェックボックスの値を配列で取得 //チェックボックスでチェックされた値を取得
+			List<Info_id_img_DTO> List = null;
+			List = dao.GurumeSelect(id, list);
+			super.request.setAttribute("infolist", List);
 
 		}
 		if (infolist == null || infolist.size() == 0) {
