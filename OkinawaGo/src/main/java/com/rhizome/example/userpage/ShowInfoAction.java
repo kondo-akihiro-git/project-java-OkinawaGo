@@ -10,7 +10,7 @@ import main.java.com.rhizome.example.entity.Info_DTO;
 import main.java.com.rhizome.example.userpage.base.BaseServlet;
 import main.java.com.rhizome.example.util.DbUtil;
 
-@WebServlet(name = "search", urlPatterns = { "/search" })
+@WebServlet(name = "showinfo", urlPatterns = { "/showinfo" })
 public class ShowInfoAction extends BaseServlet {
 	// 画像から詳細データを取得
 	protected String doAction() throws Exception {
