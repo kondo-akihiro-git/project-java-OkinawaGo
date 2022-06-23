@@ -1,5 +1,3 @@
-package main.java.com.rhizome.example.dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,11 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.com.rhizome.example.entity.Comment_DTO;
-import main.java.com.rhizome.example.entity.Info_DTO;
-import main.java.com.rhizome.example.entity.Info_id_DTO;
-import main.java.com.rhizome.example.entity.Info_id_img_DTO;
-import main.java.com.rhizome.example.util.DbUtil;
+
 
 public class Okinawa_DAO {
 	//infoテーブル
@@ -27,6 +21,7 @@ public class Okinawa_DAO {
 	private static final String CR_MANA = "cr_mana";
 	private static final String UP_DATE = "up_date";
 	private static final String UP_MANA = "up_mana";
+	private static final String MAX = "MAX(info_id)";
 	//areaテーブル
 	private static final String AREA_TABLE_NAME = "area_m";
 	private static final String AREA_TABLE_AREA_ID = "area_id";
@@ -109,6 +104,51 @@ public class Okinawa_DAO {
 	}
 	
 	/**
+	 * DBから取得した検索結果（Area_DTO）をDTO型のインスタンスにセットし、リストに格納する
+	 *
+	 * @param rs
+	 *            検索結果
+	 * @return リスト
+	 * @throws SQLException
+	 */
+	public Area_DTO rowMappingArea(ResultSet rs) throws SQLException {
+		Area_DTO InfoD = new Area_DTO();
+		InfoD.setArea_id(rs.getString(AREA_TABLE_AREA_ID));
+		InfoD.setArea_nm(rs.getString(AREA_NM));
+		return InfoD;
+	}
+	
+	/**
+	 * DBから取得した検索結果（Gurume_Category_DTO）をDTO型のインスタンスにセットし、リストに格納する
+	 *
+	 * @param rs
+	 *            検索結果
+	 * @return リスト
+	 * @throws SQLException
+	 */
+	public Gurume_Category_DTO rowMappingGurumeCategory(ResultSet rs) throws SQLException {
+		Gurume_Category_DTO InfoD = new Gurume_Category_DTO();
+		InfoD.setInfo_id(rs.getString(INFO_ID));
+		InfoD.setCategory_id(rs.getString(CATEGORY_TABLE_CATEGORY_ID));
+		return InfoD;
+	}
+	
+	/**
+	 * DBから取得した検索結果（Category_DTO）をDTO型のインスタンスにセットし、リストに格納する
+	 *
+	 * @param rs
+	 *            検索結果
+	 * @return リスト
+	 * @throws SQLException
+	 */
+	public Category_DTO rowMappingCategory(ResultSet rs) throws SQLException {
+		Category_DTO InfoD = new Category_DTO();
+		InfoD.setCategory_id(rs.getString(CATEGORY_TABLE_CATEGORY_ID));
+		InfoD.setCategory_nm(rs.getString(CATEGORY_NM));
+		return InfoD;
+	}
+	
+	/**
 	 * DBから取得した検索結果（info_id_DTO）をDTO型のインスタンスにセットし、リストに格納する
 	 *
 	 * @param rs
@@ -118,7 +158,7 @@ public class Okinawa_DAO {
 	 */
 	public Info_id_DTO rowMappingInfoId(ResultSet rs) throws SQLException {
 		Info_id_DTO InfoD = new Info_id_DTO();
-		InfoD.setInfo_id(rs.getInt(INFO_ID));
+		InfoD.setInfo_id(rs.getInt(MAX));
 		return InfoD;
 	}
 	
@@ -281,9 +321,9 @@ public class Okinawa_DAO {
 		sql.append(" ) ");
 		try {
 			this.stmt = con.prepareStatement(sql.toString());
-			stmt.setInt(1, s_g_id);
+			stmt.setInt(1, Integer.parseInt(s_g_id));
 			stmt.setString(2, info_nm);
-			stmt.setInt(3, area_id);
+			stmt.setInt(3, Integer.parseInt(area_id));
 			stmt.setString(4, address);
 			stmt.setString(5, post_code);
 			stmt.setString(6, info_img);
@@ -291,32 +331,38 @@ public class Okinawa_DAO {
 			stmt.executeUpdate();
 			
 			//情報ID取得
-			List<Info_Id_DTO> list = new ArrayList<>();
-			sql.append(" SELECT ");
-			sql.append("    " + " MAX( " + INFO_ID + ")");
-			sql.append(" FROM ");
-			sql.append("    " + INFO_TBL_NAME);
-			this.stmt = con.prepareStatement(sql.toString());
+			List<Info_id_DTO> list = new ArrayList<>();
+			StringBuilder sql1 = new StringBuilder();
+			sql1.append(" SELECT ");
+			sql1.append("    " + " MAX( " + INFO_ID + ")");
+			sql1.append(" FROM ");
+			sql1.append("    " + INFO_TBL_NAME);
+			this.stmt = con.prepareStatement(sql1.toString());
 			rs = stmt.executeQuery();
-			while (rs.next()) {
-				list.add(rowMappingInfoId(rs));
+			list.add(rowMappingInfoId(rs));
+			int max_id = 0;
+			for (Info_id_DTO r : list) {
+				max_id = r.getInfo_id();
 			}
 			
 			//店カテゴリーテーブルへの情報登録
 			for(int i = 0; i < cateList.length; i++) {
 				Integer cate = Integer.parseInt(cateList[i]);
-				sql.append(" INSERT " + " INTO ");
-				sql.append("    " + INFO_TBL_NAME);
-				sql.append(" ( ");
-				sql.append("    " + INFO_ID);
-				sql.append("   ," + CATEGORY_TABLE_CATEGORY_ID);
-				sql.append(" ) ");
-				sql.append(" VALUES ");
-				sql.append(" ( ");
-				sql.append("    " + list);
-				sql.append("   ," + cate);
-				sql.append(" ) ");
-				this.stmt = con.prepareStatement(sql.toString());
+				StringBuilder sql2 = new StringBuilder();
+				sql2.append(" INSERT " + " INTO ");
+				sql2.append("    " + GURUME_CATEGORY_TABLE_NAME);
+				sql2.append(" ( ");
+				sql2.append("    " + INFO_ID);
+				sql2.append("   ," + CATEGORY_TABLE_CATEGORY_ID);
+				sql2.append(" ) ");
+				sql2.append(" VALUES ");
+				sql2.append(" ( ");
+				sql2.append("    " + "?");
+				sql2.append("   ," + "?");
+				sql2.append(" ) ");
+				this.stmt = con.prepareStatement(sql2.toString());
+				stmt.setInt(1, max_id);
+				stmt.setInt(2, cate);
 				stmt.executeUpdate();
 			}
 		} finally {
@@ -336,7 +382,7 @@ public class Okinawa_DAO {
 		sql.append("    " + INFO_ID + " = " + "?");
 		try {
 			this.stmt = con.prepareStatement(sql.toString());
-			stmt.setString(1, info_id);
+			stmt.setInt(1, Integer.parseInt(info_id));
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				rtnList.add(rowMappingInfo(rs));
@@ -356,13 +402,13 @@ public class Okinawa_DAO {
 			sql.append("    " + INFO_ID + "," + INFO_IMG);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
-			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
 			sql.append(" WHERE ");
 			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
 			try {
 				int category_id = Integer.parseInt(checkedbox[0]);
 				this.stmt = con.prepareStatement(sql.toString());
-				stmt.setInt(1, area_id);
+				stmt.setInt(1, Integer.parseInt(area_id));
 				stmt.setInt(2, category_id);
 				rs = stmt.executeQuery();
 				while (rs.next()) {
@@ -377,14 +423,14 @@ public class Okinawa_DAO {
 			sql.append("    " + INFO_ID + "," + INFO_IMG);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
-			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
 			sql.append(" WHERE ");
-			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
 			try {
 				int category_id1 = Integer.parseInt(checkedbox[0]);
 				int category_id2 = Integer.parseInt(checkedbox[1]);
 				this.stmt = con.prepareStatement(sql.toString());
-				stmt.setInt(1, area_id);
+				stmt.setInt(1, Integer.parseInt(area_id));
 				stmt.setInt(2, category_id1);
 				stmt.setInt(3, category_id2);
 				rs = stmt.executeQuery();
@@ -400,15 +446,15 @@ public class Okinawa_DAO {
 			sql.append("    " + INFO_ID + "," + INFO_IMG);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
-			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + "IN" + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
 			sql.append(" WHERE ");
-			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
 			try {
 				int category_id = Integer.parseInt(checkedbox[0]);
 				int category_id1 = Integer.parseInt(checkedbox[1]);
 				int category_id2 = Integer.parseInt(checkedbox[2]);
 				this.stmt = con.prepareStatement(sql.toString());
-				stmt.setInt(1, area_id);
+				stmt.setInt(1, Integer.parseInt(area_id));
 				stmt.setInt(2, category_id);
 				stmt.setInt(3, category_id1);
 				stmt.setInt(4, category_id2);
@@ -425,16 +471,16 @@ public class Okinawa_DAO {
 			sql.append("    " + INFO_ID + "," + INFO_IMG);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
-			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
 			sql.append(" WHERE ");
-			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
 			try {
 				int category_id = Integer.parseInt(checkedbox[0]);
 				int category_id1 = Integer.parseInt(checkedbox[1]);
 				int category_id2 = Integer.parseInt(checkedbox[2]);
 				int category_id3 = Integer.parseInt(checkedbox[3]);
 				this.stmt = con.prepareStatement(sql.toString());
-				stmt.setInt(1, area_id);
+				stmt.setInt(1, Integer.parseInt(area_id));
 				stmt.setInt(2, category_id);
 				stmt.setInt(3, category_id1);
 				stmt.setInt(4, category_id2);
@@ -452,9 +498,9 @@ public class Okinawa_DAO {
 			sql.append("    " + INFO_ID + "," + INFO_IMG);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
-			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
 			sql.append(" WHERE ");
-			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
 			try {
 				int category_id = Integer.parseInt(checkedbox[0]);
 				int category_id1 = Integer.parseInt(checkedbox[1]);
@@ -462,7 +508,7 @@ public class Okinawa_DAO {
 				int category_id3 = Integer.parseInt(checkedbox[3]);
 				int category_id4 = Integer.parseInt(checkedbox[4]);
 				this.stmt = con.prepareStatement(sql.toString());
-				stmt.setInt(1, area_id);
+				stmt.setInt(1, Integer.parseInt(area_id));
 				stmt.setInt(2, category_id);
 				stmt.setInt(3, category_id1);
 				stmt.setInt(4, category_id2);
@@ -481,9 +527,9 @@ public class Okinawa_DAO {
 			sql.append("    " + INFO_ID + "," + INFO_IMG);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
-			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
 			sql.append(" WHERE ");
-			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
 			try {
 				int category_id = Integer.parseInt(checkedbox[0]);
 				int category_id1 = Integer.parseInt(checkedbox[1]);
@@ -492,7 +538,7 @@ public class Okinawa_DAO {
 				int category_id4 = Integer.parseInt(checkedbox[4]);
 				int category_id5 = Integer.parseInt(checkedbox[5]);
 				this.stmt = con.prepareStatement(sql.toString());
-				stmt.setInt(1, area_id);
+				stmt.setInt(1, Integer.parseInt(area_id));
 				stmt.setInt(2, category_id);
 				stmt.setInt(3, category_id1);
 				stmt.setInt(4, category_id2);
@@ -512,9 +558,9 @@ public class Okinawa_DAO {
 			sql.append("    " + INFO_ID + "," + INFO_IMG);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
-			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + "AND" + INFO_ID + "IN" + "(" + "SELECT" + INFO_ID + "FROM" +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
 			sql.append(" WHERE ");
-			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + "OR" + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
+			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
 			try {
 				int category_id = Integer.parseInt(checkedbox[0]);
 				int category_id1 = Integer.parseInt(checkedbox[1]);
@@ -524,7 +570,7 @@ public class Okinawa_DAO {
 				int category_id5 = Integer.parseInt(checkedbox[5]);
 				int category_id6 = Integer.parseInt(checkedbox[6]);
 				this.stmt = con.prepareStatement(sql.toString());
-				stmt.setInt(1, area_id);
+				stmt.setInt(1, Integer.parseInt(area_id));
 				stmt.setInt(2, category_id);
 				stmt.setInt(3, category_id1);
 				stmt.setInt(4, category_id2);
@@ -652,11 +698,103 @@ public class Okinawa_DAO {
 		sql.append("    " + COMMENT_TABLE_COMMENT_ID + " = " + " ? ");
 		try {
 			this.stmt = con.prepareStatement(sql.toString());
-			stmt.setString(1, comment_id);
+			stmt.setInt(1, Integer.parseInt(comment_id));
 			stmt.executeUpdate();
 		} finally {
 			DbUtil.closeStatement(this.stmt);
 		}
+	}
+	
+	//管理者ログイン
+	
+	//管理者フリーワード検索
+	public List<Info_DTO> managerFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
+		List<Info_DTO> rtnList = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT ");
+		sql.append("    " + "*");
+		sql.append(" FROM ");
+		sql.append("    " + INFO_TBL_NAME);
+		sql.append(" WHERE ");
+		sql.append("    " + INFO_NM + " LIKE " + "'%" + "?" + "%'");
+		sql.append(" OR ");
+		sql.append("    " + ADDRESS + " LIKE " + "'%" + "?" + "%'");
+		try {
+			this.stmt = con.prepareStatement(sql.toString());
+			stmt.setString(1, huri_wa_do);
+			stmt.setString(2, huri_wa_do);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				rtnList.add(rowMappingInfo(rs));
+			}
+			
+			if (rtnList == null || rtnList.size() == 0) {
+				List<Area_DTO> rtnList1 = new ArrayList<>();
+				StringBuilder sql1 = new StringBuilder();
+				sql1.append(" SELECT ");
+				sql1.append("    " + "*");
+				sql1.append(" FROM ");
+				sql1.append("    " + AREA_TABLE_NAME);
+				sql1.append(" WHERE ");
+				sql1.append("    " + AREA_NM + " LIKE " + "'%" + "?" + "%'");
+					this.stmt = con.prepareStatement(sql.toString());
+					stmt.setString(1, huri_wa_do);
+					rs = stmt.executeQuery();
+					while (rs.next()) {
+						rtnList1.add(rowMappingArea(rs));
+					}
+					
+					if (rtnList1 == null || rtnList1.size() == 0) {
+						List<Category_DTO> rtnList2 = new ArrayList<>();
+						StringBuilder sql2 = new StringBuilder();
+						sql2.append(" SELECT ");
+						sql2.append("    " + "*");
+						sql2.append(" FROM ");
+						sql2.append("    " + CATEGORY_TABLE_NAME);
+						sql2.append(" WHERE ");
+						sql2.append("    " + CATEGORY_NM + " LIKE " + "'%" + "?" + "%'");
+							this.stmt = con.prepareStatement(sql.toString());
+							stmt.setString(1, huri_wa_do);
+							rs = stmt.executeQuery();
+							while (rs.next()) {
+								rtnList2.add(rowMappingCategory(rs));
+							}
+							
+							if (rtnList2 == null || rtnList2.size() == 0) {
+								//どこにもない場合
+							} else {
+								String category = ((Category_DTO) rtnList2).getCategory_id();
+								List<Gurume_Category_DTO> rtnList3 = new ArrayList<>();
+								StringBuilder sql3 = new StringBuilder();
+								sql3.append(" SELECT ");
+								sql3.append("    " + "*");
+								sql3.append(" FROM ");
+								sql3.append("    " + GURUME_CATEGORY_TABLE_NAME);
+								sql3.append(" WHERE ");
+								sql3.append("    " + CATEGORY_TABLE_CATEGORY_ID + " = " + "?");
+									this.stmt = con.prepareStatement(sql.toString());
+									stmt.setString(1, category);
+									rs = stmt.executeQuery();
+									while (rs.next()) {
+										rtnList3.add(rowMappingGurumeCategory(rs));
+									}
+								String cateInfoId =  ((Gurume_Category_DTO) rtnList3).getInfo_id();
+								Okinawa_DAO dao = new Okinawa_DAO(this.con);
+								List<Info_DTO> cateList = dao.selectByInfoId(cateInfoId);
+								rtnList = cateList;
+							}
+							
+					} else {
+						String area = ((Area_DTO) rtnList1).getArea_id();
+						Okinawa_DAO dao = new Okinawa_DAO(this.con);
+						List<Info_DTO> areaList = dao.selectByArea(area);
+						rtnList = areaList;
+					}
+			}
+		} finally {
+			DbUtil.closeStatement(this.stmt);
+		}
+		return rtnList;
 	}
 	
 }
