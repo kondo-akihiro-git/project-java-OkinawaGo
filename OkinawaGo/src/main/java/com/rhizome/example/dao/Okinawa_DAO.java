@@ -138,7 +138,7 @@ public class Okinawa_DAO {
 		Info_id_img_DTO InfoD = new Info_id_img_DTO();
 		InfoD.setInfo_id(rs.getString(INFO_ID));
 		InfoD.setInfo_img(rs.getString(INFO_IMG));
-		InfoD.setS_g_id(rs.getString(INFO_IMG));
+		InfoD.setS_g_id(rs.getString(S_G_ID));
 		return InfoD;
 	}
 	
