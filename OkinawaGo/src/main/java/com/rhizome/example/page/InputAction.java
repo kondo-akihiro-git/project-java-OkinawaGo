@@ -14,7 +14,7 @@ public class InputAction extends BaseServlet {
 //スポットかグルメか判断
 		String cate = super.request.getParameter("cate");
 
-//IDが25以下の場合、スポット------------------------------------------------------------------------------
+//スポット------------------------------------------------------------------------------
 		if (cate.equals("スポット")) {
 			String[] paramList = super.getInputParameter("info_nm" // 0
 					, "area_id" // 1
@@ -22,12 +22,13 @@ public class InputAction extends BaseServlet {
 					, "address" // 3
 					, "info_img" // 4
 			);
+			super.request.setAttribute("cate", cate);
 			super.request.setAttribute("info_nm", paramList[0]);
 			super.request.setAttribute("area_id", paramList[1]);
 			super.request.setAttribute("post", paramList[2]);
 			super.request.setAttribute("address", paramList[3]);
 			super.request.setAttribute("info_img", paramList[4]);
-//IDが25より大きい場合、グルメ----------------------------------------------------------------------------
+//グルメ----------------------------------------------------------------------------
 		} else if (cate.equals("グルメ")) {
 			String[] paramList = super.getInputParameter("info_nm" // 0
 					, "area_id" // 1
@@ -36,6 +37,7 @@ public class InputAction extends BaseServlet {
 					, "category_id" // 4
 					, "info_img" // 5
 			);
+			super.request.setAttribute("cate", cate);
 			super.request.setAttribute("info_nm", paramList[0]);
 			super.request.setAttribute("area_id", paramList[1]);
 			super.request.setAttribute("post", paramList[2]);

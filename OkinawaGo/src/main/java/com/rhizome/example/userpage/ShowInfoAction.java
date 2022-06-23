@@ -16,20 +16,19 @@ public class ShowInfoAction extends BaseServlet {
 	protected String doAction() throws Exception {
 		String info_img = super.request.getParameter("info_img");
 		String info_id = super.request.getParameter("info_id");
-				
+
 		Connection con = DbUtil.getConnection();
-				Okinawa_DAO dao = new Okinawa_DAO(con);
-				List<Info_DTO> list = dao.selectByInfoId(info_id);//画像から詳細データを取得するDAOメソッドが必要
-				
-				super.request.setAttribute("info_img", info_img);
-				super.request.setAttribute("list", list);
-				
-				return "detail";
+		Okinawa_DAO dao = new Okinawa_DAO(con);
+		List<Info_DTO> list = dao.selectByInfoId(info_id);// 画像から詳細データを取得するDAOメソッドが必要
+
+		super.request.setAttribute("info_img", info_img);
+		super.request.setAttribute("list", list);
+
+		return "detail";
 	}
 
 	@Override
 	protected String getPageName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return "search";
 	}
 }

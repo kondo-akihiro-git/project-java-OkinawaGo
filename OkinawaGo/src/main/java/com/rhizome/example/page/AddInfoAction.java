@@ -1,10 +1,13 @@
 
 package main.java.com.rhizome.example.page;
 
+import java.sql.Connection;
+
 import javax.servlet.annotation.WebServlet;
 
 import main.java.com.rhizome.example.dao.Okinawa_DAO;
 import main.java.com.rhizome.example.page.base.BaseServlet;
+import main.java.com.rhizome.example.util.DbUtil;
 
 @WebServlet(name = "addinfo", urlPatterns = { "/addinfo" })
 public class AddInfoAction extends BaseServlet {
@@ -16,9 +19,10 @@ public class AddInfoAction extends BaseServlet {
 
 		// グルメかスポットのラジオボタンを取得
 		String name = super.request.getParameter("name");
-		Okinawa_DAO dao = new Okinawa_DAO(null);
-		
-		//スポットの追加
+		Connection con = DbUtil.getConnection();
+		Okinawa_DAO dao = new Okinawa_DAO(con);
+
+		// スポットの追加
 		if (name.equals("スポット")) {
 			String s_g_id = super.request.getParameter("s_g_id");
 			String info_nm = super.request.getParameter("info_nm");
@@ -27,10 +31,10 @@ public class AddInfoAction extends BaseServlet {
 			String post_cord = super.request.getParameter("post_cord");
 			String info_img = super.request.getParameter("info_img");
 			String cr_mana = super.request.getParameter("cr_mana");
-		
-			dao.spotInsert(s_g_id,info_nm,area_id,address,post_cord,info_img,cr_mana);
-			
-		// グルメ追加
+
+			dao.spotInsert(s_g_id, info_nm, area_id, address, post_cord, info_img, cr_mana);
+
+			// グルメ追加
 		} else if (name.equals("グルメ")) {
 			String s_g_id = super.request.getParameter("s_g_id");
 			String info_nm = super.request.getParameter("info_nm");
@@ -41,7 +45,6 @@ public class AddInfoAction extends BaseServlet {
 			String cr_mana = super.request.getParameter("cr_mana");
 			String[] cateList = super.request.getParameterValues("cateList");
 
-			
 			dao.InfoInsert(s_g_id, info_nm, area_id, address, post_cord, info_img, cr_mana, cateList);
 
 		}
