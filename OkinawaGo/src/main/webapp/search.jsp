@@ -58,7 +58,7 @@
 <body>
 	<div class="content">
 		<h1>
-			<a href="index.html"><img src="img/logo.jpg" alt="ロゴ"></a>
+			<a href="index.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
 		</h1>
 	     <c:if test="${alartMsg != null}">
 			<div class="error">
@@ -67,23 +67,15 @@
 				</c:forEach>
 			</div>
 		</c:if>
-		<%for(List<Info_id_img_DTO> list : request.getAttribute("infolist")){%>
-		<% if(list.getInfo_id().equals("###")){ %>
-		<h2><%=requst.getAttribute("###") %>のスポット</h2>
-		<% }else if(){%>
-		<h2><%=requst.getAttribute("###") %>の<%=requst.getAttribute("###") %></h2>
-		<% }else if(){%>
-		<h2>フリーワード：<%=requst.getAttribute("###") %></h2>
-		<% } %>
-		<% } %>
+<h2>aaa</h2>
 		
 		<div class="wrapper pagenation_block">
-		<%for(List<Info_id_img_DTO> list : request.getAttribute("infolist")){%>
+		
 			<dl class="box1">
 				<dd>
 					<form method="post" name="###" action="showinfo">
-					<img src="<%=list.getInfo_img()%>">
-   					<input type="hidden" name="user_name" value="<%=list.getInfo_id()%>">
+					<img src="img">
+   					<input type="hidden" name="user_name" value="img">
 					</form>
 					
 			</dd>
@@ -105,7 +97,7 @@
 			</dl>
 			
 		</div>
-		<% } %>
+
 	</div>
 
 	<footer>

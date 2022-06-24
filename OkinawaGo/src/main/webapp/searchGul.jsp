@@ -31,7 +31,7 @@
 
 <body>
 <div class="content">
-<h1><a href="index.html"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
+<h1><a href="index.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 	     <c:if test="${alartMsg != null}">
 			<div class="error">
 				<c:forEach items="${ alartMsg }" var="errList">
@@ -40,16 +40,16 @@
 			</div>
 		</c:if>
 <h2>フリーワード検索</h2>
-<form action="select" method="post" class="freeword_search">
-  <input type="search" name="goutext" class="input_var">
-  <input type="submit" value="&#xf002;" class="fas">
+<form action="search" method="post" class="freeword_search">
+  <input type="search" name="goutext" class="input_var" required>
+  <input type="submit" value="&#xf002;" class="fas" required>
 </form>
 <h2>グルメ検索</h2>
 <div class="imagemap">
 <img src="img/map.jpg" alt="マップ">
 </div>
 
-<form action="select" class="buttons" >
+<form action="search" class="buttons" >
 <li>地域</li>
 <ul>
 <li><input type="radio" name="id" value="area_ya">やんばる周辺</li>

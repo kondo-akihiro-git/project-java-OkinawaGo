@@ -36,7 +36,6 @@ public abstract class BaseServlet extends HttpServlet {
 		this.session = request.getSession();
 
 		this.message = null;
-
 		String nextPage = this.getPageName();
 		try {
 			// ログインチェック

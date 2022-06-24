@@ -22,7 +22,8 @@ public class SelectAction extends BaseServlet {
 
 		Connection con = DbUtil.getConnection();
 		Okinawa_DAO dao = new Okinawa_DAO(con);
-
+		String str = super.request.getParameter("spotmap");
+		System.out.println(str);
 		if (super.request.getParameter("text") != null) {
 
 			String text = super.request.getParameter("text");

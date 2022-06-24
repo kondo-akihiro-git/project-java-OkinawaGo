@@ -40,8 +40,8 @@
 		</c:if>
 <h2>フリーワード検索</h2>
 <form action="search" method="post" class="input">
-  <input type="search" name="toptext" class="input_var">
-  <input type="submit" value="&#xf002;" class="fas">
+  <input type="search" name="toptext" class="input_var" required>
+  <input type="submit" value="&#xf002;" class="fas" required>
 </form>
 
  
