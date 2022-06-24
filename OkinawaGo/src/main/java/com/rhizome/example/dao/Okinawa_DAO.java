@@ -60,7 +60,7 @@ public class Okinawa_DAO {
 	private static final String SPOT_GURUME_S_G_ID= "s_g_id";
 	private static final String SPOT_GURUME_S_G_NM = "s_g_nm";
 	//Managerテーブル
-	private static final String MANAGER_TABLE_NAME = "manager_table";
+	private static final String MANAGER_TABLE_NAME = "manager_m";
 	private static final String MANAGER_ID = "manager_id";
 	private static final String MANAGER_NM = "manager_nm";
 	private static final String MANAGER_KN = "manager_kn";
@@ -372,14 +372,17 @@ public class Okinawa_DAO {
 			StringBuilder sql1 = new StringBuilder();
 			sql1.append(" SELECT ");
 			sql1.append("    " + " MAX( " + INFO_ID + ")");
-			sql1.append(" FROM ");
+			sql1.append("  " + "FROM ");
 			sql1.append("    " + INFO_TBL_NAME);
 			this.stmt = con.prepareStatement(sql1.toString());
 			rs = stmt.executeQuery();
-			list.add(rowMappingInfoId(rs));
+			while (rs.next()) {
+				list.add(rowMappingInfoId(rs));
+			}
 			int max_id = 0;
-			for (Info_id_DTO r : list) {
-				max_id = Integer.parseInt(r.getInfo_id());
+			for (Info_id_DTO id : list) {
+				
+				max_id = Integer.parseInt(id.getInfo_id());
 			}
 			
 			//店カテゴリーテーブルへの情報登録
@@ -483,7 +486,7 @@ public class Okinawa_DAO {
 			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
-			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + "IN" + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
+			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
 			sql.append(" WHERE ");
 			sql.append("    " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + " OR " + GURUME_CATEGORY_CATEGORY_ID + " = " + "?" + ")");
 			try {
@@ -660,13 +663,13 @@ public class Okinawa_DAO {
 		sql.append(" FROM ");
 		sql.append("    " + INFO_TBL_NAME);
 		sql.append(" WHERE ");
-		sql.append("    " + INFO_NM + " LIKE " + "'%" + "?" + "%'");
+		sql.append("    " + INFO_NM + " LIKE "  + "?" );
 		sql.append(" OR ");
-		sql.append("    " + ADDRESS + " LIKE " + "'%" + "?" + "%'");
+		sql.append("    " + ADDRESS + " LIKE " +  "?" );
 		try {
 			this.stmt = con.prepareStatement(sql.toString());
-			stmt.setString(1, huri_wa_do);
-			stmt.setString(2, huri_wa_do);
+			stmt.setString(1, "%"+huri_wa_do+"%");
+			stmt.setString(2, "%"+huri_wa_do+"%");
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				rtnList.add(rowMappingInfo(rs));
@@ -700,30 +703,40 @@ public class Okinawa_DAO {
 		return rtnList;
 	}
 	
-	//情報掲載テーブル情報削除
-	public void infoDelete(String info_id) throws ClassNotFoundException, SQLException {
-		StringBuilder sql = new StringBuilder();
+	// 情報掲載テーブル情報削除
+		public void infoDelete(String info_id) throws ClassNotFoundException, SQLException {
+			StringBuilder sql = new StringBuilder();
 
-		sql.append(" DELETE " + " FROM ");
-		sql.append("    " + COMMENT_TABLE_NAME);
-		sql.append(" WHERE ");
-		sql.append("    " + INFO_ID + " = " + " ? ");
-		try {
-			this.stmt = con.prepareStatement(sql.toString());
-			stmt.setString(1, info_id);
-			stmt.executeUpdate();
-			
 			sql.append(" DELETE " + " FROM ");
-			sql.append("    " + INFO_TBL_NAME);
+			sql.append("    " + COMMENT_TABLE_NAME);
 			sql.append(" WHERE ");
 			sql.append("    " + INFO_ID + " = " + " ? ");
+			try {
 				this.stmt = con.prepareStatement(sql.toString());
 				stmt.setString(1, info_id);
 				stmt.executeUpdate();
-		} finally {
-			DbUtil.closeStatement(this.stmt);
+				StringBuilder sql2 = new StringBuilder();
+				sql2.append(" DELETE " + " FROM ");
+				sql2.append("    " + GURUME_CATEGORY_TABLE_NAME);
+				sql2.append(" WHERE ");
+				sql2.append("    " + INFO_ID + " = " + " ? ");
+				this.stmt = con.prepareStatement(sql2.toString());
+				stmt.setString(1, info_id);
+				stmt.executeUpdate();
+				StringBuilder sql1 = new StringBuilder();
+				sql1.append(" DELETE " + " FROM ");
+				sql1.append("    " + INFO_TBL_NAME);
+				sql1.append(" WHERE ");
+				sql1.append("    " + INFO_ID + " = " + " ? ");
+				this.stmt = con.prepareStatement(sql1.toString());
+				stmt.setString(1, info_id);
+				stmt.executeUpdate();
+
+			} finally {
+				DbUtil.closeStatement(this.stmt);
+			}
 		}
-	}
+
 	
 	//コメント削除
 	public void commentDelete(String comment_id) throws ClassNotFoundException, SQLException {
@@ -735,7 +748,7 @@ public class Okinawa_DAO {
 		sql.append("    " + COMMENT_TABLE_COMMENT_ID + " = " + " ? ");
 		try {
 			this.stmt = con.prepareStatement(sql.toString());
-			stmt.setInt(1, Integer.parseInt(comment_id));
+			stmt.setString(1, comment_id);
 			stmt.executeUpdate();
 		} finally {
 			DbUtil.closeStatement(this.stmt);
