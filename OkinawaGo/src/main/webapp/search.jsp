@@ -73,7 +73,7 @@
 		<div class="wrapper pagenation_block">
 
 			<dl class="box1">
-				<c:forEach items="${ infoList }" var="Info">
+				<c:forEach items="${ infolist }" var="Info">
 					<c:out value="${InfoD.info_id}" />
 					<dd>
 
@@ -86,20 +86,27 @@
 				</c:forEach>
 			</dl>
 			<dl class="box2">
-				<%@ page import="java.util.*"%>
+				 <%@ page import="java.util.*"%>
 				<%@ page import="java.util.ArrayList,java.util.HashMap"%>
-				<%@ page import="main.java.com.rhizome.example.entity.Info_DTO" %>
+				<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
 				<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
+				<%@ page
+					import="main.java.com.rhizome.example.entity.Info_id_img_DTO"%>
+				<%@ page
+					import="main.java.com.rhizome.example.userpage.base.BaseUser"%>
+				<%@ page import= "main.java.com.rhizome.example.util.DbUtil"%>
 				<%
-				 ArrayList<String> list = 
-				 (ArrayList<String>)request.getAttribute("infoList");
-				for (String r : list) {
-					String id = 
-							(String)request.getAttribute("info_id");
+				ArrayList<Info_DTO> list = (ArrayList<Info_DTO>)request.getAttribute("infolist");
+				for (Info_DTO r : list) {
+					//String id = (String) request.getAttribute("info_id");
 
-					System.out.println(id);
-				}
-				%><dd>
+					System.out.println(r.getInfo_id());
+					System.out.println(r.getInfo_img());
+					%>
+					<%=r.getInfo_id()  %>
+				<%}
+				%>
+				<dd>
 					<a href="showinfo"><img src="${InfoD.Info_img}"></a>
 				</dd>
 
