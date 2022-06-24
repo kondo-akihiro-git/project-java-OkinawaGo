@@ -12,14 +12,13 @@ public class LoginAction extends BaseServlet {
 
 	@Override
 	protected String getPageName() {
-		return "login";
+		return "adlogin";
 	}
 
 	@Override
 	protected String doAction() throws Exception {
 		// 画面入力項目の取得
 		String[] param = super.getInputParameter("mail", "pass");
-		
 		// ログイン処理
 		SearchService service = new SearchService();
 		Map<String, Object> loginData = service.doLogin(param[0], param[1]);

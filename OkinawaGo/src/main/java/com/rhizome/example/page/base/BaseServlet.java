@@ -40,7 +40,7 @@ public abstract class BaseServlet extends HttpServlet {
 		String nextPage = this.getPageName();
 		try {
 			// ログインチェック
-			if (!"login".equals(this.getPageName())) {
+			if (!"adlogin".equals(this.getPageName())) {
 				if (session != null) {
 
 					Manager_DTO manager = (Manager_DTO) session.getAttribute("LOGIN");

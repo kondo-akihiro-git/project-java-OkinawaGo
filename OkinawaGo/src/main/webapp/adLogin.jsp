@@ -38,9 +38,9 @@
 				</c:forEach>
 			</div>
 		</c:if>
-<form action="adSearch.html" method="post" class="form">
-<p><input type="email" placeholder="メールアドレス" name="mail" /></p>
-<p><input type="password" placeholder="パスワード" name="pass" /></p>
+<form action="login" method="post" class="form">
+<p><input type="email" placeholder="メールアドレス" name="mail" required/></p>
+<p><input type="password" placeholder="パスワード" name="pass" required/></p>
 <button type=“submit”>ログイン</button>
 </form>
 </div>

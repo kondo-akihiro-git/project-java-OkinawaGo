@@ -66,9 +66,9 @@
 	<div class="content">
 		<span class="login_name"><p>ログイン：${ sessionScope.LOGIN_EMP.LOGIN.loginad }</p></span>
 		<h1>
-			<a href="adLogin.html"><img src="img/logo.jpg" alt="ロゴ"></a>
+			<a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
 		</h1>
-		<form action="adSearch_kekka.html" method="post"
+		<form action="adSearch_kekka.jsp" method="post"
 			class="freeword_search">
 			<input type="search" name="text"
 				placeholder="コメント" class="input_var"> <input
@@ -104,7 +104,7 @@
 				
 		</div>
 
-		<span class="insertButton"> <a href="adInsert_Input.html">スポット/グルメ追加</a>
+		<span class="insertButton"> <a href="adInsert_Input.jsp">スポット/グルメ追加</a>
 		</span>
 
 		<script>

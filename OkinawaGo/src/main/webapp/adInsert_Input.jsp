@@ -31,7 +31,7 @@
 <body>
 <div class="content">
 <span class="login_name"><p>ログイン：${ sessionScope.LOGIN_EMP.LOGIN.loginad }</p></span>
-<h1><a href="adLogin.html"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
+<h1><a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 
 <table class="form">
 <form action="input" method="post">
@@ -61,7 +61,7 @@ onclick="document.getElementById('cate').style.display = 'inline';">グルメ</t
 <tr>
 <td><input type="text" name="address" required placeholder="住所"></td>
 </tr>
-<tr id="category_id">
+<tr id="cate">
 <td  class="buttons">
 <ul>
 <li><input type="checkbox" name="category_id" value="1">レストラン</li>
@@ -80,8 +80,6 @@ onclick="document.getElementById('cate').style.display = 'inline';">グルメ</t
 <tr>
 <td>
 <button type=“submit”>登録内容確認</button>
-<br>
-<button onClick="window.location.href = 'adInsertComfirm_kekkaGul.html'">登録内容確認（モックアップ作成用グルメ選択時)</button>
 </td>
 </tr>
 </form>
