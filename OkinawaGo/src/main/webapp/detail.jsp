@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Iterator" %>
 <!doctype html>
 <html lang="ja">
   <head>
@@ -33,37 +35,46 @@
 </head>
 
 <body>
+
 <div class="content">
 <h1><a href="index.html"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 <a href="javascript:history.back();"><i class="fas fa-arrow-left"></i>前のページへ戻る</a>
 <div class="topImg"><img src="img/02DSC04487.jpg" alt="？？の写真"></div>
-<h2>豊崎美らSUNビーチ</h2>
+<c:if test = "${ list != null}" }>
+<c:forEach items = "${ list }" var = "list"> 
+<h2><c:out value = "$list,infoD.info_nm}"/></h2>
 <table>
 <tr>
 <td rowspan="2" class="addressTd">場所</td>
-<td>〒901-0225</td>
+<td><c:out value = "$list,infoD.post_code}"/></td>
 </tr>
 <tr>
-<td>沖縄県豊見城市豊崎５−１</td>
+<td><c:out value = "$list,infoD.address}"/></td>
 </tr>
 </table>
+</c:forEach>
+</c:if>
 <table id='messages'>
 
+<c:if test = "${ commentList != null } ">
+<c:forEach items = "${ commentList }" var = "list">
 </table>
 
 <h3>コメント</h3>
 <table>
 <tr>
-<td>沖縄Love</td>
-<td>素敵なビーチでした！</td>
+<td><c:out value = "$list,infoD.comment_nm}"/></td>
+<td><c:out value = "$list,infoD.comment_tx}"/></td>
 <td class="commentImg" ><img src="img/01IMG_2382.jpg"></td>
 </tr>
 <tr>
-<td>サトウキビ</td>
-<td>楽しかったです</td>
+<td><c:out value = "$list,infoD.comment_nm}"/></td>
+<td><c:out value = "$list,infoD.comment_tx}"/></td>
 <td class="commentImg"><img src="img/038G8A1044_i.jpg"></td>
 </tr>
 </table>
+</c:if>
+</c:forEach>
 
 <form action="detail.html" method="post" id="commentForm" name="commentForm">
 <p><input type="text" name="????" required maxlength="20" placeholder="ユーザー名（20字まで）"  class="comment_name"></p>
@@ -82,7 +93,6 @@
   <div class="box3"><a href="###"><img src="img/oki_062.jpg" alt="グルメの写真"></a></div>
 </div>
 </div>
-
 
 <script>
 var element = document.getElementById( "commentForm" );

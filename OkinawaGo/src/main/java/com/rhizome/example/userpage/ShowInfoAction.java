@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.annotation.WebServlet;
 
 import main.java.com.rhizome.example.dao.Okinawa_DAO;
+import main.java.com.rhizome.example.entity.Comment_DTO;
 import main.java.com.rhizome.example.entity.Info_DTO;
 import main.java.com.rhizome.example.userpage.base.BaseServlet;
 import main.java.com.rhizome.example.util.DbUtil;
@@ -20,9 +21,11 @@ public class ShowInfoAction extends BaseServlet {
 		Connection con = DbUtil.getConnection();
 		Okinawa_DAO dao = new Okinawa_DAO(con);
 		List<Info_DTO> list = dao.selectByInfoId(info_id);// 画像から詳細データを取得するDAOメソッドが必要
-
+		List<Comment_DTO> commentList = dao.selectComment(info_id);		
+		
 		super.request.setAttribute("info_img", info_img);
 		super.request.setAttribute("list", list);
+		super.request.setAttribute("commentList", commentList);
 
 		return "detail";
 	}
