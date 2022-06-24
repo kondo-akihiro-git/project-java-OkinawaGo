@@ -781,8 +781,8 @@ public class Okinawa_DAO {
 		return manager;
 	}
 	
-	//管理者フリーワード検索
-	public List<Info_DTO> manageFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
+	//管理者フリーワード検索変更後
+	/*public List<Info_DTO> manageFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
 		List<Info_DTO> rtnList = new ArrayList<>();
 		List<Category_DTO> rtnList1 = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
@@ -872,10 +872,10 @@ public class Okinawa_DAO {
 			DbUtil.closeStatement(this.stmt);
 		}
 		return rtnList;
-	}
+	}*/
 	
-	//管理者フリーワード検索
-	/*public List<Info_DTO> managerFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
+	//管理者フリーワード検索変更前
+	public List<Info_DTO> managerFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
 		List<Info_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		sql.append(" SELECT ");
@@ -962,6 +962,6 @@ public class Okinawa_DAO {
 			DbUtil.closeStatement(this.stmt);
 		}
 		return rtnList;
-	}*/
+	}
 	
 }
