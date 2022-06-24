@@ -42,14 +42,14 @@
 <div class="topImg"><img src="img/02DSC04487.jpg" alt="？？の写真"></div>
 <c:if test = "${ list != null}" }>
 <c:forEach items = "${ list }" var = "list"> 
-<h2><c:out value = "$list,infoD.info_nm}"/></h2>
+<h2><c:out value = "${ list.info_nm }" /></h2>
 <table>
 <tr>
 <td rowspan="2" class="addressTd">場所</td>
-<td><c:out value = "$list,infoD.post_code}"/></td>
+<td><c:out value = "${ list.post_code}"/></td>
 </tr>
 <tr>
-<td><c:out value = "$list,infoD.address}"/></td>
+<td><c:out value = "${ list.address}"/></td>
 </tr>
 </table>
 </c:forEach>
@@ -63,13 +63,13 @@
 <h3>コメント</h3>
 <table>
 <tr>
-<td><c:out value = "$list,infoD.comment_nm}"/></td>
-<td><c:out value = "$list,infoD.comment_tx}"/></td>
+<td><c:out value = "${ list.comment_nm}"/></td>
+<td><c:out value = "${ list.comment_tx}"/></td>
 <td class="commentImg" ><img src="img/01IMG_2382.jpg"></td>
 </tr>
 <tr>
-<td><c:out value = "$list,infoD.comment_nm}"/></td>
-<td><c:out value = "$list,infoD.comment_tx}"/></td>
+<td><c:out value = "${ list.comment_nm}"/></td>
+<td><c:out value = "${ list.comment_tx}"/></td>
 <td class="commentImg"><img src="img/038G8A1044_i.jpg"></td>
 </tr>
 </table>
