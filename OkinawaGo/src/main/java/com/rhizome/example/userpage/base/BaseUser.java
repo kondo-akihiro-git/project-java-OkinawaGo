@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 //entityのインポート
 //import 
 
-public abstract class BaseServlet extends HttpServlet {
+public abstract class BaseUser extends HttpServlet {
 	// -------------------------------------- プロパティ群
 	/** HttpServletRequest */
 	protected HttpServletRequest request;

@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import main.java.com.rhizome.example.dao.Okinawa_DAO;
 import main.java.com.rhizome.example.entity.Comment_DTO;
 import main.java.com.rhizome.example.entity.Info_DTO;
-import main.java.com.rhizome.example.page.base.BaseServlet;
+import main.java.com.rhizome.example.userpage.base.BaseUser;
 import main.java.com.rhizome.example.util.DbUtil;
 
 @WebServlet(name = "select", urlPatterns = { "/select" })
-public class SelectAction extends BaseServlet {
+public class SelectAction extends BaseUser {
 
 	protected String getPageName() {
 		return "adSearch";

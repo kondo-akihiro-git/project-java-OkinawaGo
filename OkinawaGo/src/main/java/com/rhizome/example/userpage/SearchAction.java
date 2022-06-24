@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import main.java.com.rhizome.example.dao.Okinawa_DAO;
 import main.java.com.rhizome.example.entity.Info_DTO;
 import main.java.com.rhizome.example.entity.Info_id_img_DTO;
-import main.java.com.rhizome.example.page.base.BaseServlet;
+import main.java.com.rhizome.example.userpage.base.BaseUser;
 import main.java.com.rhizome.example.util.DbUtil;
 
 @WebServlet(name = "search", urlPatterns = { "/search" })
-public class SearchAction extends BaseServlet {
+public class SearchAction extends BaseUser {
 
 	public String doAction() throws Exception {
 

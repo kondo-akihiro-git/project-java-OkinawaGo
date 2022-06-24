@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import main.java.com.rhizome.example.dao.Okinawa_DAO;
 import main.java.com.rhizome.example.entity.Comment_DTO;
 import main.java.com.rhizome.example.entity.Info_DTO;
-import main.java.com.rhizome.example.userpage.base.BaseServlet;
+import main.java.com.rhizome.example.userpage.base.BaseUser;
 import main.java.com.rhizome.example.util.DbUtil;
 
 @WebServlet(name = "showinfo", urlPatterns = { "/showinfo" })
-public class ShowInfoAction extends BaseServlet {
+public class ShowInfoAction extends BaseUser {
 	// 画像から詳細データを取得
 	protected String doAction() throws Exception {
 		String info_img = super.request.getParameter("info_img");

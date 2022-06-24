@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import javax.servlet.annotation.WebServlet;
 
 import main.java.com.rhizome.example.dao.Okinawa_DAO;
-import main.java.com.rhizome.example.userpage.base.BaseServlet;
+import main.java.com.rhizome.example.userpage.base.BaseUser;
 import main.java.com.rhizome.example.util.DbUtil;
 
 @WebServlet(name = "comment", urlPatterns = { "/comment" })
-public class CommentAction extends BaseServlet {
+public class CommentAction extends BaseUser {
 
 	@Override
 	protected String getPageName() {
