@@ -127,7 +127,7 @@
 	<script>
 		function buttonClick() {
 			if (window.confirm('<%=request.getAttribute("name") %>を削除しますか？')) {
-				window.open('select');
+				window.open('delete');
 				return true;
 			}
 		}

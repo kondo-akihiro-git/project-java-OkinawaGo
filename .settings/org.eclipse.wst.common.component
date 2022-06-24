@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                
+                    
+    
     
     
     <wb-module deploy-name="group-development-2">
-                                
-        
-        
-        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/OkinawaGo/src"/>
-                                
+        <wb-resource deploy-path="/" source-path="/OkinawaGo/src/main/webapp"/>
+                                        
         
-        
-        <property name="context-root" value="group-development-2"/>
-                                
         
         
         <property name="java-output-path" value="/group-development-2/bin"/>
-                            
+        <property name="context-root" value="okinawago"/>
+                                    
+    
     
     
     </wb-module>
-            
+                
+
 
 
 </project-modules>

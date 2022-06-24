@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html lang="ja">
 <head>
@@ -77,25 +78,30 @@
 
 		
 		<div class="pagenation_block">
+		<%-- <%@page import ="java.util.List"%>
+		<%@page import = "java.util.ArrayList" %>
+		<%@page import = "main.java.com.rhizome.example.entity.Info_DTO" %>
+		<jsp:useBean id="list" class="main.java.com.rhizome.example.entity.Info_DTO" scope="request" />
+		<%=list.getInfo_id() %> --%>
 				
-				<% for(List<Comment_DTO> list : request.getAttribute("list")){ %>
-				<h2><%=list.getInfo_nm() %></h2>
-				<% } %>
-				<% for(List<Comment_DTO> list : request.getAttribute("detailList")){ %>
 				
+				<c:forEach items="${ list }" var="list">
+				<c:out value="${ list.InfoD.info_nm }" />
+			</c:forEach>
+
 			<dl>
 				<dd>
 					<table>
 						<tr>
-							<td><%=list.getComment_tx() %></td>
+							<td></td>
 							<td><form onClick="buttonClick()" method="post">
-									<input type="submit" value="削除" name="<%=list.getComment_id() %>">
+									<input type="submit" value="削除" name="">
 								</form></td>
 						</tr>
 					</table>
 				</dd>
 			</dl>
-				<%	} %>
+				
 		</div>
 
 		<span class="insertButton"> <a href="adInsert_Input.html">スポット/グルメ追加</a>

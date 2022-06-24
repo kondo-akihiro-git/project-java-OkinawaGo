@@ -30,7 +30,7 @@
 </head>
 <body>
 <div class="content">
-<h1><a href="index.html"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
+<h1><a href="index.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 	     <c:if test="${alartMsg != null}">
 			<div class="error">
 				<c:forEach items="${ alartMsg }" var="errList">
@@ -45,7 +45,7 @@
 </form>
 
  
-<a href="searchSpo.html">
+<a href="searchSpo.jsp">
 <h2>スポット検索</h2>
 <div class="wrapper">
   <div class="box1"><img src="img/02DSC03208_i.jpg" alt="海の写真"></div>
@@ -53,7 +53,7 @@
   <div class="box3"><img src="img/038G8A0663_i.jpg" alt="海の写真"></div>
 </div>
 </a>
-<a href="searchGul.html">
+<a href="searchGul.jsp">
 <h2>グルメ検索</h2>
 <div class="wrapper">
   <div class="box1"><img src="img/ogasuta458A8086.jpg" alt="グルメの写真"></div>
@@ -63,7 +63,7 @@
 </a>
 
 
-<div class="adLink"><a href="adLogin.html">管理者の方はこちら</a></div>
+<div class="adLink"><a href="adLogin.jsp">管理者の方はこちら</a></div>
 </div>
 
 <footer>
