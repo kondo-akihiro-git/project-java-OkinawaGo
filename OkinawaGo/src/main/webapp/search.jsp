@@ -104,11 +104,12 @@
 					System.out.println(r.getInfo_img());
 					%>
 					<%=r.getInfo_id()  %>
+				
+				<dd>
+					<a href="showinfo"><img src="img/<%=r.getInfo_img()%>"></a>
+				</dd>
 				<%}
 				%>
-				<dd>
-					<a href="showinfo"><img src="${InfoD.Info_img}"></a>
-				</dd>
 
 			</dl>
 			<dl class="box3">
