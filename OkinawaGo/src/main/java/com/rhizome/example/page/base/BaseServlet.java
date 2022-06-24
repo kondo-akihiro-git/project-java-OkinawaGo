@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import main.java.com.rhizome.example.entity.Manager_DTO;
-
 //entityのインポート
 //import 
 
@@ -38,18 +36,6 @@ public abstract class BaseServlet extends HttpServlet {
 		this.message = null;
 		String nextPage = this.getPageName();
 		try {
-			// ログインチェック
-			if (!"adLogin".equals(this.getPageName())) {
-				if (session != null) {
-
-					Manager_DTO manager = (Manager_DTO) session.getAttribute("LOGIN");
-					if ((manager == null || "".equals(manager.getManager_id()))) {
-						nextPage = "adLogin";
-
-						throw new Exception("不正なログイン、またはログイン有効期間が過ぎています");
-					}
-				}
-			}
 
 			// 画面ごとの処理
 			nextPage = this.doAction();
