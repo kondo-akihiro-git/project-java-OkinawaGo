@@ -883,13 +883,13 @@ public class Okinawa_DAO {
 		sql.append(" FROM ");
 		sql.append("    " + INFO_TBL_NAME);
 		sql.append(" WHERE ");
-		sql.append("    " + INFO_NM + " LIKE " + "'%" + "?" + "%'");
+		sql.append("    " + INFO_NM + " LIKE " + "?" );
 		sql.append(" OR ");
-		sql.append("    " + ADDRESS + " LIKE " + "'%" + "?" + "%'");
+		sql.append("    " + ADDRESS + " LIKE " + "?" );
 		try {
 			this.stmt = con.prepareStatement(sql.toString());
-			stmt.setString(1, huri_wa_do);
-			stmt.setString(2, huri_wa_do);
+			stmt.setString(1, "%"+huri_wa_do+"%");
+			stmt.setString(2, "%"+huri_wa_do+"%");
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				rtnList.add(rowMappingInfo(rs));
@@ -903,9 +903,9 @@ public class Okinawa_DAO {
 				sql1.append(" FROM ");
 				sql1.append("    " + AREA_TABLE_NAME);
 				sql1.append(" WHERE ");
-				sql1.append("    " + AREA_NM + " LIKE " + "'%" + "?" + "%'");
+				sql1.append("    " + AREA_NM + " LIKE " + "?" );
 					this.stmt = con.prepareStatement(sql.toString());
-					stmt.setString(1, huri_wa_do);
+					stmt.setString(1, "%"+huri_wa_do+"%");
 					rs = stmt.executeQuery();
 					while (rs.next()) {
 						rtnList1.add(rowMappingArea(rs));
@@ -919,9 +919,9 @@ public class Okinawa_DAO {
 						sql2.append(" FROM ");
 						sql2.append("    " + CATEGORY_TABLE_NAME);
 						sql2.append(" WHERE ");
-						sql2.append("    " + CATEGORY_NM + " LIKE " + "'%" + "?" + "%'");
+						sql2.append("    " + CATEGORY_NM + " LIKE " + "?" );
 							this.stmt = con.prepareStatement(sql.toString());
-							stmt.setString(1, huri_wa_do);
+							stmt.setString(1, "%"+huri_wa_do+"%");
 							rs = stmt.executeQuery();
 							while (rs.next()) {
 								rtnList2.add(rowMappingCategory(rs));
