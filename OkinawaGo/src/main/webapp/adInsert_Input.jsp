@@ -36,9 +36,9 @@
 <table class="form">
 <form action="input" method="post">
 <tr class="radiobotton">
-<td><input type="radio" name="cate" value="スポット" required 
+<td><input type="radio" name="s_g_id" value="スポット" required 
 onclick="document.getElementById('cate').style.display = 'none';" >スポット
-<input type="radio" name="cate" value="グルメ" required 
+<input type="radio" name="s_g_id" value="グルメ" required 
 onclick="document.getElementById('cate').style.display = 'inline';">グルメ</td>
 </tr>
 <tr>
@@ -56,7 +56,7 @@ onclick="document.getElementById('cate').style.display = 'inline';">グルメ</t
 </select></td>
 </tr>
 <tr>
-<td><input type="text" name="post" required placeholder="郵便番号"></td>
+<td><input type="text" name="post_cord" required placeholder="郵便番号"></td>
 </tr>
 <tr>
 <td><input type="text" name="address" required placeholder="住所"></td>

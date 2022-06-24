@@ -24,9 +24,10 @@ h1 img{
 width:35%;
 height:35%;
 }
-.error p{
-background-color:#FF0000;
+.error{
 text-align:center;
+background-color:#fa9696;
+padding:20px;
 }
 .freeword_search{
 text-align:center;

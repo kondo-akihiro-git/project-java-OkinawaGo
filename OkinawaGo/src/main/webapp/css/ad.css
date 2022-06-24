@@ -14,7 +14,9 @@ font-style: normal;
 margin-bottom:3%;
 }
 .error{
-background-color:#FF0000;
+text-align:center;
+background-color:#fa9696;
+padding:20px;
 }
 h1{
 text-align:center;
@@ -25,11 +27,7 @@ width:15%;
 height:15%;
 }
 
-.errmsg{
-text-align:center;
-background-color:#fa9696;
-padding:20px;
-}
+
 .login_name{
 text-align:right;
 }
