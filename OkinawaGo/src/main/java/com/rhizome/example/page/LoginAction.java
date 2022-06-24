@@ -12,7 +12,7 @@ public class LoginAction extends BaseServlet {
 
 	@Override
 	protected String getPageName() {
-		return "adlogin";
+		return "adLogin";
 	}
 
 	@Override

@@ -31,6 +31,8 @@
 <body>
 <div class="content">
 <h1><a href="adLogin.html"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
+<%=request.getAttribute("alartMsg") %>
+<c:out value="${alartMsg}" />
 	     <c:if test="${alartMsg != null}">
 			<div class="error">
 				<c:forEach items="${ alartMsg }" var="errList">

@@ -75,31 +75,29 @@
 		</form>
 		<div class="pagenation_block">
 		<% if(request.getAttribute("searchlist") != null){ %>
-		<% for(List<Info_DTO> list : request.getAttribute("searchlist")){ %>
+		
 			<dl>
 				<dd>
 					<table>
 						<tr>
-							<td><%=list.getInfo_nm() %></td>
+							<td>タイトル</td>
 							<td><form action="select" method="post">
-									<input type="submit" value="<%=list.getInfo_id() %>"
+									<input type="submit" value="情報掲載ID"
 										name="info_id">詳細
 								</form></td>
 							<td><form onClick="buttonClick()" method="post">
-									<input type="submit" value="<%=list.getInfo_id() %>"
+									<input type="submit" value="情報掲載ID"
 										name="info_id>">削除
 								</form></td>
 							<td><form action="select" method="post">
-									<input type="submit" value="<%=list.getInfo_id() %>"
+									<input type="submit" value="情報掲載ID"
 										name="info_id">コメント管理
 								</form></td>
 						</tr>
 					</table>
 				</dd>
 			</dl>
-			<% } %>
-			<% } %>
-		</div>
+			<% } %>		</div>
 
 
 		<span class="insertButton"> <a href="select">スポット/グルメ追加</a>
