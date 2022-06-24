@@ -22,15 +22,13 @@ public class SelectAction extends BaseServlet {
 
 		Connection con = DbUtil.getConnection();
 		Okinawa_DAO dao = new Okinawa_DAO(con);
-		String str = super.request.getParameter("spotmap");
-		System.out.println(str);
 		if (super.request.getParameter("text") != null) {
 
 			String text = super.request.getParameter("text");
 			// フリーワード検索を行う
 
 			List<Info_DTO> spotInfolist = dao.selectByFreeWord(text);//
-
+			
 			// 検索結果の判定
 			if (spotInfolist == null || spotInfolist.size() == 0) {
 				throw new Exception("入力された条件で情報が見つかりませんでした");

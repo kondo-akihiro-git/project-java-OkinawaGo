@@ -65,6 +65,12 @@
 <body>
 	<div class="content">
 		<span class="login_name"><p>ログイン：${ sessionScope.LOGIN_EMP.LOGIN.loginad }</p></span>
+			<div class="error">
+			<%String mes = (String) request.getAttribute("alertMsg");%>
+			<%if (mes != null) {%>
+			<%=mes%>
+			<%}%>
+		</div>
 		<h1>
 			<a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
 		</h1>

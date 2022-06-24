@@ -24,11 +24,15 @@ h1 img{
 width:35%;
 height:35%;
 }
-
+.error p{
+background-color:#FF0000;
+text-align:center;
+}
 .freeword_search{
 text-align:center;
 margin-bottom:5%;
 margin-top:5%;
+font-size:2vw;
 }
 .input_var{
 border: 1px solid #bfbfbf;

@@ -32,42 +32,41 @@
 <body>
 <div class="content">
 <h1><a href="index.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
-	     <c:if test="${alartMsg != null}">
 			<div class="error">
-				<c:forEach items="${ alartMsg }" var="errList">
-					<c:out value="${errList}" />
-				</c:forEach>
-			</div>
-		</c:if>
+			<%String mes = (String) request.getAttribute("alertMsg");%>
+			<%if (mes != null) {%>
+			<%=mes%>
+			<%}%>
+		</div>
 <h2>フリーワード検索</h2>
 <form action="search" method="post" class="freeword_search">
-  <input type="search" name="goutext" class="input_var" required>
-  <input type="submit" value="&#xf002;" class="fas" required>
+  <input type="search" name="goutext" class="input_var">
+  <input type="submit" value="&#xf002;" class="fas">
 </form>
 <h2>グルメ検索</h2>
 <div class="imagemap">
 <img src="img/map.jpg" alt="マップ">
 </div>
 
-<form action="search" class="buttons" >
+<form action="search" class="buttons" required>
 <li>地域</li>
 <ul>
-<li><input type="radio" name="id" value="area_ya">やんばる周辺</li>
-<li><input type="radio" name="id" value="are_am">アメリカンヴィレッジ周辺</li>
-<li><input type="radio" name="id" value="area_he">ひめゆりの搭周辺</li>
-<li><input type="radio" name="id" value="area_na">那覇市</li>
-<li><input type="radio" name="id" value="area_ch">美ら海水族館周辺</li>
-<li><input type="radio" name="id" value="area_ao">青の洞窟周辺</li>
+<li><input type="radio" name="id" value="1">やんばる周辺</li>
+<li><input type="radio" name="id" value="2">アメリカンヴィレッジ周辺</li>
+<li><input type="radio" name="id" value="3">ひめゆりの搭周辺</li>
+<li><input type="radio" name="id" value="4">那覇市</li>
+<li><input type="radio" name="id" value="5">美ら海水族館周辺</li>
+<li><input type="radio" name="id" value="6">青の洞窟周辺</li>
 </ul>
 <li>カテゴリー</li>
 <ul>
-<li><input type="checkbox" name="category" value="restaurant">レストラン</li>
-<li><input type="checkbox" name="category" value="cafe">カフェ</li>
-<li><input type="checkbox" name="category" value="izakaya">居酒屋</li>
-<li><input type="checkbox" name="category" value="lunch">ランチ</li>
-<li><input type="checkbox" name="category" value="dinner">ディナー</li>
-<li><input type="checkbox" name="category" value="okicook">沖縄料理</li>
-<li><input type="checkbox" name="category" value="sweets">スイーツ</li>
+<li><input type="checkbox" name="category" value="1">レストラン</li>
+<li><input type="checkbox" name="category" value="2">カフェ</li>
+<li><input type="checkbox" name="category" value="3">居酒屋</li>
+<li><input type="checkbox" name="category" value="4">ランチ</li>
+<li><input type="checkbox" name="category" value="5">ディナー</li>
+<li><input type="checkbox" name="category" value="6">沖縄料理</li>
+<li><input type="checkbox" name="category" value="7">スイーツ</li>
 </ul>
 <div class="submit_button"><button type="submit">検索</button></div>
 </form>

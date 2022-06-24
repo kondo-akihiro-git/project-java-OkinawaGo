@@ -33,13 +33,12 @@
 <h1><a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 <%=request.getAttribute("alartMsg") %>
 <c:out value="${alartMsg}" />
-	     <c:if test="${alartMsg != null}">
 			<div class="error">
-				<c:forEach items="${ alartMsg }" var="errList">
-					<c:out value="${errList}" />
-				</c:forEach>
-			</div>
-		</c:if>
+			<%String mes = (String) request.getAttribute("alertMsg");%>
+			<%if (mes != null) {%>
+			<%=mes%>
+			<%}%>
+		</div>
 <form action="login" method="post" class="form">
 <p><input type="email" placeholder="メールアドレス" name="mail" required/></p>
 <p><input type="password" placeholder="パスワード" name="pass" required/></p>
