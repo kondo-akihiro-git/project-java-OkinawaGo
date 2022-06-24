@@ -749,7 +749,7 @@ public class Okinawa_DAO {
 
 		// SQLの生成
 		sql.append(" SELECT * FROM " + MANAGER_TABLE_NAME);
-		sql.append(" WHERE" + MANAGER_MAIL +"="+ "?" +"AND"+ MANAGER_PASS + "=" +"?");
+		sql.append(" WHERE " + MANAGER_MAIL +" = "+ " ? " +" AND "+ MANAGER_PASS + " = " + " ? ");
 
 		// Statementの生成および条件の設定
 		this.stmt = this.con.prepareStatement(sql.toString());
