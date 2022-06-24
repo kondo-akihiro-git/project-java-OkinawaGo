@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ja">
 <head>
@@ -60,43 +60,63 @@
 		<h1>
 			<a href="index.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
 		</h1>
-	     <c:if test="${alartMsg != null}">
+		<c:if test="${alartMsg != null}">
 			<div class="error">
 				<c:forEach items="${ alartMsg }" var="errList">
 					<c:out value="${errList}" />
 				</c:forEach>
 			</div>
 		</c:if>
-<h2>aaa</h2>
-		
+
+		<h2>aaa</h2>
+
 		<div class="wrapper pagenation_block">
-		
+
 			<dl class="box1">
-				<dd>
-					<form method="post" name="###" action="showinfo">
-					<img src="img">
-   					<input type="hidden" name="user_name" value="img">
-					</form>
-					
-			</dd>
+				<c:forEach items="${ infoList }" var="Info">
+					<c:out value="${InfoD.info_id}" />
+					<dd>
+
+						<form method="post" name="###" action="showinfo">
+							<img src="${InfoD.info_img} " alt="konnnitiha"> <input
+								type="hidden" name="user_name" value="${InfoD.info_id}">
+						</form>
+
+					</dd>
+				</c:forEach>
 			</dl>
 			<dl class="box2">
-				<dd>
-					<a href="showinfo"><img src="list.getInfo_img()"></a>
-			</dd>
+				<%@ page import="java.util.*"%>
+				<%@ page import="java.util.ArrayList,java.util.HashMap"%>
+				<%@ page import="main.java.com.rhizome.example.entity.Info_DTO" %>
+				<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
+				<%
+				 ArrayList<String> list = 
+				 (ArrayList<String>)request.getAttribute("infoList");
+				for (String r : list) {
+					String id = 
+							(String)request.getAttribute("info_id");
+
+					System.out.println(id);
+				}
+				%><dd>
+					<a href="showinfo"><img src="${InfoD.Info_img}"></a>
+				</dd>
+
 			</dl>
 			<dl class="box3">
 				<dd>
-					<a href="showinfo"><img src="list.getInfo_img()"></a>
-			</dd>
+					<a href="showinfo"><img src="${InfoD.Info_img}"></a>
+				</dd>
 			</dl>
 			<dl class="box4">
 				<dd>
-					<a href="showinfo"><img src="list.getInfo_img()"></a>
-			</dd>
+					<a href="showinfo"><img src="${InfoD.Info_img}"></a>
+				</dd>
 			</dl>
-			
+
 		</div>
+
 
 	</div>
 
