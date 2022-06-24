@@ -1,12 +1,15 @@
 package main.java.com.rhizome.example.page.base;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import main.java.com.rhizome.example.entity.Manager_DTO;
 
 //entityのインポート
 //import 
@@ -35,7 +38,21 @@ public abstract class BaseServlet extends HttpServlet {
 
 		this.message = null;
 		String nextPage = this.getPageName();
-		try {
+			try {
+				if (!"adLogin".equals(this.getPageName())) {
+					if (session != null) {
+						@SuppressWarnings("unchecked")
+						List<Manager_DTO> managerList = (List<Manager_DTO>) session.getAttribute("LOGIN_Manager");
+						
+						if (
+								(managerList == null || managerList.size() == 0)
+							){
+							nextPage = "adLogin";
+
+							throw new Exception("不正なログイン、またはログイン有効期間が過ぎています");
+						}
+					}
+				}
 
 			// 画面ごとの処理
 			nextPage = this.doAction();

@@ -33,14 +33,17 @@ public abstract class BaseServlet extends HttpServlet {
 		this.response = response;
 		this.session = request.getSession();
 
-		String nextPage = null;
-		try {
-			nextPage = this.doAction();
-		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-
+		String nextPage = this.getPageName();
+		
+		
+			try {
+				nextPage = this.doAction();
+			} catch (Exception e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		
+		request.setAttribute("alertMsg", this.message);
 		request.getRequestDispatcher(nextPage + ".jsp").forward(request, response);
 	}
 

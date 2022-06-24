@@ -756,8 +756,8 @@ public class Okinawa_DAO {
 	}
 	
 	//管理者ログイン
-	public Manager_DTO loginInfo(String mail, String pass) throws SQLException {
-		Manager_DTO manager = null;
+	public List<Manager_DTO> loginInfo(String mail, String pass) throws SQLException {
+		List<Manager_DTO> managerList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 
 		// SQLの生成
@@ -772,13 +772,12 @@ public class Okinawa_DAO {
 		ResultSet rs = stmt.executeQuery();
 
 		// 主キー検索のため、0件、または1件と想定
-		if (rs.next()) {
-			manager = rowMappingManager_m(rs);
+		rs = stmt.executeQuery();
+		while (rs.next()) {
+			managerList.add(rowMappingManager_m(rs));
 		}
-
-		
 		DbUtil.closeStatement(this.stmt);
-		return manager;
+		return managerList;
 	}
 	
 	//管理者フリーワード検索変更後
