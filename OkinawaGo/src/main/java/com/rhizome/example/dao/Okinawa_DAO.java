@@ -769,7 +769,100 @@ public class Okinawa_DAO {
 	}
 	
 	//管理者フリーワード検索
-	public List<Info_DTO> managerFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
+	public List<Info_DTO> manageFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
+		List<Info_DTO> rtnList = new ArrayList<>();
+		List<Category_DTO> rtnList1 = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT ");
+		sql.append("    " + "*");
+		sql.append(" FROM ");
+		sql.append("    " + CATEGORY_TABLE_NAME);
+		sql.append(" WHERE ");
+		sql.append("    " + CATEGORY_NM + " LIKE " + "'%" + "?" + "%'");
+		try {
+			this.stmt = con.prepareStatement(sql.toString());
+			stmt.setString(1, huri_wa_do);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				rtnList1.add(rowMappingCategory(rs));
+			}
+		
+			if (rtnList1 == null || rtnList1.size() == 0) {
+				List<Area_DTO> rtnList2 = new ArrayList<>();
+				StringBuilder sql1 = new StringBuilder();
+				sql1.append(" SELECT ");
+				sql1.append("    " + "*");
+				sql1.append(" FROM ");
+				sql1.append("    " + AREA_TABLE_NAME);
+				sql1.append(" WHERE ");
+				sql1.append("    " + AREA_NM + " LIKE " + "'%" + "?" + "%'");
+				
+					this.stmt = con.prepareStatement(sql1.toString());
+					stmt.setString(1, huri_wa_do);
+					rs = stmt.executeQuery();
+					while (rs.next()) {
+						rtnList2.add(rowMappingArea(rs));
+					}
+					
+					if (rtnList2 == null || rtnList2.size() == 0) {
+						StringBuilder sql2 = new StringBuilder();
+						sql2.append(" SELECT ");
+						sql2.append("    " + "*");
+						sql2.append(" FROM ");
+						sql2.append("    " + INFO_TBL_NAME);
+						sql2.append(" WHERE ");
+						sql2.append("    " + INFO_NM + " LIKE " + "'%" + "?" + "%'");
+						sql2.append(" OR ");
+						sql2.append("    " + ADDRESS + " LIKE " + "'%" + "?" + "%'");
+							this.stmt = con.prepareStatement(sql2.toString());
+							stmt.setString(1, huri_wa_do);
+							stmt.setString(2, huri_wa_do);
+							rs = stmt.executeQuery();
+							while (rs.next()) {
+								rtnList.add(rowMappingInfo(rs));
+							}
+							
+							if (rtnList == null || rtnList.size() == 0) {
+								//どこにもない場合
+							} else {}
+							
+					} else {
+						String area = ((Area_DTO) rtnList1).getArea_id();
+						Okinawa_DAO dao = new Okinawa_DAO(this.con);
+						List<Info_DTO> areaList = dao.selectByArea(area);
+						rtnList = areaList;
+					}
+			} else {
+				String category = ((Category_DTO) rtnList).getCategory_id();
+				List<Gurume_Category_DTO> rtnList3 = new ArrayList<>();
+				StringBuilder sql3 = new StringBuilder();
+				sql3.append(" SELECT ");
+				sql3.append("    " + "*");
+				sql3.append(" FROM ");
+				sql3.append("    " + GURUME_CATEGORY_TABLE_NAME);
+				sql3.append(" WHERE ");
+				sql3.append("    " + CATEGORY_TABLE_CATEGORY_ID + " = " + "?");
+					this.stmt = con.prepareStatement(sql3.toString());
+					stmt.setString(1, category);
+					rs = stmt.executeQuery();
+					while (rs.next()) {
+						rtnList3.add(rowMappingGurumeCategory(rs));
+					}
+				String cateInfoId =  ((Gurume_Category_DTO) rtnList3).getInfo_id();
+				Okinawa_DAO dao = new Okinawa_DAO(this.con);
+				List<Info_DTO> cateList = dao.selectByInfoId(cateInfoId);
+				rtnList = cateList;
+			
+			
+			}
+		} finally {
+			DbUtil.closeStatement(this.stmt);
+		}
+		return rtnList;
+	}
+	
+	//管理者フリーワード検索
+	/*public List<Info_DTO> managerFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
 		List<Info_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		sql.append(" SELECT ");
@@ -856,6 +949,6 @@ public class Okinawa_DAO {
 			DbUtil.closeStatement(this.stmt);
 		}
 		return rtnList;
-	}
+	}*/
 	
 }
