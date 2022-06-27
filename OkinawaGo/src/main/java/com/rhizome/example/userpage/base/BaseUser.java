@@ -37,7 +37,7 @@ public abstract class BaseUser extends HttpServlet {
 		
 		
 			try {
-				nextPage = this.doAction();
+				nextPage = this.doPost();
 			} catch (Exception e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
@@ -63,5 +63,5 @@ public abstract class BaseUser extends HttpServlet {
 	// -------------------------------------- 抽象メソッド群
 	protected abstract String getPageName();
 
-	protected abstract String doAction() throws Exception;
+	protected abstract String doPost() throws Exception;
 }

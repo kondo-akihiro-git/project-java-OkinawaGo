@@ -14,7 +14,7 @@ import main.java.com.rhizome.example.util.DbUtil;
 @WebServlet(name = "search", urlPatterns = { "/search" })
 public class SearchAction extends BaseUser {
 
-	public String doAction() throws Exception {
+	public String doPost() throws Exception {
 
 		String text;
 		String value;

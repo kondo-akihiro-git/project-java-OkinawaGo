@@ -110,7 +110,7 @@
 				
 				<% if(r.getComment_img() != null){%>
 				
-				<td class="commentImg"><img src="<%=r.getComment_img() %>"></td>
+				<td class="commentImg"><img src="/group-development-2/upload/<%=r.getComment_img() %>"></td>
 				<% }else if(r.getComment_img() == null){ %>
 					<td></td>
 				<% } %>
@@ -120,7 +120,7 @@
 
 
 		<form action="comment" method="post" id="commentForm"
-			name="commentForm">
+			name="commentForm" enctype="multipart/form-data">
 			<p>
 				<input type="text" name="comment_nm" required maxlength="20"
 					placeholder="ユーザー名（20字まで）" class="comment_name">
@@ -128,8 +128,7 @@
 			<textarea name="comment_tx" required maxlength="140"
 				placeholder="本文（140字まで）" class="comment_text"></textarea>
 			<p>
-				<input type="file" id="avatar" name="comment_img"
-					accept="image/png, image/jpeg">
+				<input type="file" id="avatar" name="comment_img" accept="image/png, image/jpeg">
 			</p>
 			<input type="hidden" name="info_id" value="<%=request.getAttribute("info_id") %>">
 			<input type="hidden" name="info_img" value="<%=request.getAttribute("info_img")%>">
@@ -158,7 +157,7 @@
 			<dd>
 			<td class="ta">
 			<form method="post" action="showinfo" class="input">
-			<input type="image" class="inputimg" src="img/<%=recomlist.get(i).getInfo_img()%>"  class="inputimg">
+			<input type="file" class="inputimg" src="img/<%=recomlist.get(i).getInfo_img()%>"  class="inputimg">
 			<input type="hidden" name="info_img" value="<%=recomlist.get(i).getInfo_img()%>">
 			<input type="hidden" name="info_id" value="<%=recomlist.get(i).getInfo_id()%>">
 			<input type="hidden" name="area_id" value="<%=recomlist.get(i).getArea_id()%>">

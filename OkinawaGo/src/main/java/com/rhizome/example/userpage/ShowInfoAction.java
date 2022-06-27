@@ -17,7 +17,7 @@ import main.java.com.rhizome.example.util.DbUtil;
 @WebServlet(name = "showinfo", urlPatterns = { "/showinfo" })
 public class ShowInfoAction extends BaseUser {
 	// 画像から詳細データを取得
-	protected String doAction() throws Exception {
+	protected String doPost() throws Exception {
 		List<Info_DTO> recom = new ArrayList<>();
 		String info_img = super.request.getParameter("info_img");
 		String info_id = super.request.getParameter("info_id");
