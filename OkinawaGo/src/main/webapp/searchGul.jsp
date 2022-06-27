@@ -68,6 +68,7 @@
 <li><input type="checkbox" name="category" value="6">沖縄料理</li>
 <li><input type="checkbox" name="category" value="7">スイーツ</li>
 </ul>
+<input type ="hidden" name="s_g_id" value="2">
 <div class="submit_button"><button type="submit">検索</button></div>
 </form>
 

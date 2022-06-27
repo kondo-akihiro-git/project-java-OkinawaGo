@@ -47,7 +47,8 @@ public class SearchAction extends BaseUser {
 			super.request.setAttribute("text", text);
 			super.request.setAttribute("infolist", infolist);
 //スポット検索画面のマップで検索した場合
-		} else if (super.request.getParameter("spotmap") != null) {
+		} else if (super.request.getParameter("spotmap") != null && super.request.getParameter("s_g_id").equals("1")) {
+			System.out.println("ddddd");
 			value = super.request.getParameter("spotmap");
 			area_nm = dao.searcharea_nm(value);
 			infolist = dao.selectByArea(value);
@@ -91,7 +92,8 @@ public class SearchAction extends BaseUser {
 			super.request.setAttribute("area_nm", area_nm);
 			super.request.setAttribute("cate_nm", cate_nm);
 //グルメ検索画面からエリアのみで検索した場合
-		}else if(super.request.getParameter("category") == null) {
+		}else if(super.request.getParameter("category") == null && super.request.getParameter("s_g_id").equals("2")) {
+			System.out.println("hhhh");
 			String id = super.request.getParameter("id");
 			area_nm = dao.searcharea_nm(id);
 			List<Info_id_img_DTO> List = null;
@@ -101,7 +103,6 @@ public class SearchAction extends BaseUser {
 			}
 			for(Info_id_img_DTO list_sg :  List ) {
 				super.request.setAttribute("check", list_sg.getS_g_id());
-				System.out.println(list_sg.getS_g_id());
 			}
 			super.request.setAttribute("infolist", List);
 			super.request.setAttribute("area_nm", area_nm);		

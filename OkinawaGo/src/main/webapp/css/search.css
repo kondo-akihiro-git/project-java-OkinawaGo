@@ -49,31 +49,32 @@ width:100%;
 height:100%;
 }
 
-.box1 {
+
+.wrapper dl:first-of-type {
   grid-column-start: 1;
-  grid-column-end: 6;
+  grid-column-end: 3;
   grid-row-start: 1;
-  grid-row-end: 4;
+  grid-row-end: 2;
 }
-.box2 {
+/* .wrapper form:nth-of-type(2) {
   grid-column-start: 1;
   grid-column-end: 2;
-  grid-row-start: 4;
-  grid-row-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 
-.box3 {
+.wrapper form:nth-of-type(3) {
   grid-column-start: 1;
   grid-column-end: 2;
-  grid-row-start: 5;
-  grid-row-end: 6;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
-.box4 {
+.wrapper form:last-of-type {
   grid-column-start: 2;
   grid-column-end:6;
-  grid-row-start: 4;
-  grid-row-end: 6;
-}
+  grid-row-start: 2;
+  grid-row-end: 3;
+} */
 
 
 .pagenation_block dl {

@@ -108,7 +108,7 @@
 			
 		</div>
 		<% }else if(request.getAttribute("check").equals("1")){ %>
-		<div class="pagenation_block">
+		<div class="pagenation_block wrapper">
 			
 			<%
 			ArrayList<Info_DTO> list_spo = (ArrayList<Info_DTO>) request.getAttribute("infolist");
