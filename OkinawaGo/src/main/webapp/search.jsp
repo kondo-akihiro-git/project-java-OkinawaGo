@@ -64,7 +64,7 @@
 		<%String[] cate_nm = (String[])request.getAttribute("cate_nm"); %>
 		<% if(request.getAttribute("text") != null){ %>
 		<h2>フリーワード：<%=request.getAttribute("text") %></h2>
-		<% }else if(request.getAttribute("area_nm") != null && cate_nm == null){ %>
+		<% }else if(request.getAttribute("area_nm") != null && cate_nm == null && request.getAttribute("check").equals("1")){ %>
 		<h2><%=area_nm %>のスポット</h2>
 		<% }else if(request.getAttribute("cate_nm") != null){ %>
 		<h2><%=area_nm %>の
@@ -74,8 +74,10 @@
 			<% } %>
 		<% } %>
 		</h2>
-		<% } %>
+		<% }else if(request.getAttribute("area_nm") != null && cate_nm == null && request.getAttribute("check").equals("2")) {%>
+		<h2><%=area_nm %>のグルメ</h2>
 		
+		<% } %>
 		<%@ page import="java.util.*"%>
 		<%@ page import="java.util.ArrayList,java.util.HashMap"%>
 		<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
@@ -85,7 +87,7 @@
 		<%@ page import="main.java.com.rhizome.example.util.DbUtil"%>
 		<%String check = (String)request.getAttribute("check"); %>
 		<% if(request.getAttribute("check").equals("2")){%>
-		<div class="pagenation_block">
+		<div class="pagenation_block ">
 			<%
 			ArrayList<Info_id_img_DTO> list = (ArrayList<Info_id_img_DTO>) request.getAttribute("infolist");
 			for (Info_id_img_DTO r : list) {
@@ -150,12 +152,6 @@
 				})
 			});
 		</script>
-		
-		<script>
-		var parents = document.getElementById('pagenation_block').childElementCount;
-		console.log(parents);
-		</script>
-		
-		
+
 </body>
 </html>

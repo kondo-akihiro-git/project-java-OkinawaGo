@@ -157,7 +157,7 @@
 			<dd>
 			<td class="ta">
 			<form method="post" action="showinfo" class="input">
-			<input type="file" class="inputimg" src="img/<%=recomlist.get(i).getInfo_img()%>"  class="inputimg">
+			<input type="image" class="inputimg" src="img/<%=recomlist.get(i).getInfo_img()%>"  class="inputimg">
 			<input type="hidden" name="info_img" value="<%=recomlist.get(i).getInfo_img()%>">
 			<input type="hidden" name="info_id" value="<%=recomlist.get(i).getInfo_id()%>">
 			<input type="hidden" name="area_id" value="<%=recomlist.get(i).getArea_id()%>">

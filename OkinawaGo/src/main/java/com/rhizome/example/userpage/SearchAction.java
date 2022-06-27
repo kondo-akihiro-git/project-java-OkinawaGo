@@ -15,7 +15,6 @@ import main.java.com.rhizome.example.util.DbUtil;
 public class SearchAction extends BaseUser {
 
 	public String doPost() throws Exception {
-
 		String text;
 		String value;
 		String area_nm;
@@ -91,6 +90,21 @@ public class SearchAction extends BaseUser {
 			super.request.setAttribute("infolist", List);
 			super.request.setAttribute("area_nm", area_nm);
 			super.request.setAttribute("cate_nm", cate_nm);
+//グルメ検索画面からエリアのみで検索した場合
+		}else if(super.request.getParameter("category") == null) {
+			String id = super.request.getParameter("id");
+			area_nm = dao.searcharea_nm(id);
+			List<Info_id_img_DTO> List = null;
+			List = dao.InfoSelectAll(id);
+			if (List == null || List.size() == 0) {
+				throw new Exception("入力された条件で情報が見つかりませんでした");
+			}
+			for(Info_id_img_DTO list_sg :  List ) {
+				super.request.setAttribute("check", list_sg.getS_g_id());
+				System.out.println(list_sg.getS_g_id());
+			}
+			super.request.setAttribute("infolist", List);
+			super.request.setAttribute("area_nm", area_nm);		
 		}
 
 		return "search";
