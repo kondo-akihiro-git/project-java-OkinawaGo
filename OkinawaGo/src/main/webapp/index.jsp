@@ -80,7 +80,7 @@ for (int i = 0; i< recom.size(); i++ ) {
 </a>
 
 
-<a href="searchSpo.jsp">
+<a href="searchGul.jsp">
 <h2>グルメ検索</h2>
 <table>
 <tr>

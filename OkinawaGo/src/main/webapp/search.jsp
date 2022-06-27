@@ -150,6 +150,12 @@
 				})
 			});
 		</script>
-
+		
+		<script>
+		var parents = document.getElementById('pagenation_block').childElementCount;
+		console.log(parents);
+		</script>
+		
+		
 </body>
 </html>
