@@ -44,7 +44,6 @@ public class ShowInfoAction extends BaseUser {
 		List<Info_DTO> recom = new ArrayList<>();
 		Connection con = DbUtil.getConnection();
 		Okinawa_DAO dao = new Okinawa_DAO(con);
-		System.out.println("showarea" + area_id + s_g_id);
 		if(s_g_id.equals("1")) {
 			infolist = dao.selectGulumeByArea(area_id);
 		}else if(s_g_id.equals("2")) {
