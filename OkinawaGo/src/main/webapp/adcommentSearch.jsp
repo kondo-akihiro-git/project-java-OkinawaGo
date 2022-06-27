@@ -72,7 +72,7 @@
 			</div>
 			<%}%>
 		<h1>
-			<a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
+			<a href="adSearch.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
 		</h1>
 		<form action="select" method="post" class="freeword_search">
 			<input type="search" name="text" placeholder="コメント" class="input_var"> 

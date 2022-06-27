@@ -44,25 +44,62 @@
   <input type="search" name="toptext" class="input_var">
   <input type="submit" value="&#xf002;" class="fas">
 </form>
+<%@ page import="java.util.*"%>
+<%@ page import="java.util.ArrayList,java.util.HashMap"%>
+<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
+<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
+<%@ page import="main.java.com.rhizome.example.userpage.base.BaseUser"%>
+<%@ page import="main.java.com.rhizome.example.userpage.ShowInfoAction"%>
+<%@ page import="main.java.com.rhizome.example.util.DbUtil"%>
 
- 
+<div class="recomend">
 <a href="searchSpo.jsp">
 <h2>スポット検索</h2>
-<div class="wrapper">
-  <div class="box1"><img src="img/02DSC03208_i.jpg" alt="海の写真"></div>
-  <div class="box2"><img src="img/02DSC04487.jpg" alt="海の写真"></div>
-  <div class="box3"><img src="img/038G8A0663_i.jpg" alt="海の写真"></div>
-</div>
-</a>
-<a href="searchGul.jsp">
-<h2>グルメ検索</h2>
-<div class="wrapper">
-  <div class="box1"><img src="img/ogasuta458A8086.jpg" alt="グルメの写真"></div>
-  <div class="box2"><img src="img/img_001.jpg" alt="グルメの写真"></div>
-  <div class="box3"><img src="img/oki_062.jpg" alt="グルメの写真"></div>
-</div>
+<table>
+<tr>
+<%
+ShowInfoAction show = new ShowInfoAction();
+int min = 1;
+int max = 5;
+Random random = new Random();
+int num = random.nextInt(max + min) + min;
+String area_id = Integer.valueOf(num).toString();
+String s_g_id = "2";
+List<Info_DTO> recom = new ArrayList<>();
+recom = show.getRecommendlist(area_id,s_g_id);
+%>
+<% 
+for (int i = 0; i< recom.size(); i++ ) {
+%>
+<td>
+<img src="img/<%=recom.get(i).getInfo_img()%>">
+</td>
+<%}%>
+</tr>
+</table>
 </a>
 
+
+<a href="searchSpo.jsp">
+<h2>グルメ検索</h2>
+<table>
+<tr>
+<%
+String s_g_id_g = "1";
+List<Info_DTO> recom_g = new ArrayList<>();
+recom_g = show.getRecommendlist(area_id,s_g_id_g);
+%>
+<% 
+for (int i = 0; i< recom_g.size(); i++ ) {
+%>
+<td>
+<img src="img/<%=recom_g.get(i).getInfo_img()%>">
+</td>
+<%}%>
+</tr>
+</table>
+</a>
+</div>
 
 <div class="adLink"><a href="adLogin.jsp">管理者の方はこちら</a></div>
 </div>

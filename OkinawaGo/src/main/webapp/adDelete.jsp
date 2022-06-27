@@ -31,7 +31,7 @@
 <body>
 <div class="content">
 <span class="login_name"><p>ログイン：<%=session.getAttribute("LOGIN_Manager_nm") %></p></span>
-<h1><a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
+<h1><a href="adSearch.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 		<!-- <c:if test="${errMsg != null}">
 			<div class="msgBox error">
 				<c:forEach items="${ errMsg }" var="errList">

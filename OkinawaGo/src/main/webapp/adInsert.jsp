@@ -31,7 +31,7 @@
 <body>
 <div class="content">
 <span class="login_name"><p>ログイン：<%=session.getAttribute("LOGIN_Manager_nm") %></p></span>
-<h1><a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
+<h1><a href="adSearch.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 
 
 <h3>登録完了しました！</h3>
