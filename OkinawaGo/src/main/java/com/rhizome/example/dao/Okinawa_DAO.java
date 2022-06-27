@@ -228,16 +228,17 @@ public class Okinawa_DAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public List<Info_DTO> InfoSelectAll() throws SQLException, ClassNotFoundException {
+	public List<Info_DTO> InfoSelectAll(String area_id) throws SQLException, ClassNotFoundException {
 		List<Info_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		sql.append(" SELECT ");
 		sql.append("    " + "*");
 		sql.append(" FROM ");
-		sql.append("    " + INFO_TBL_NAME);
+		sql.append("    " + INFO_TBL_NAME + " WHERE " + S_G_ID +" = " + "2" + " AND " + INFO_TABLE_AREA_ID +" = " + " ? " );
 		try {
 
 			this.stmt = con.prepareStatement(sql.toString());
+			stmt.setString(1, area_id);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				rtnList.add(rowMappingInfo(rs));
