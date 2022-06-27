@@ -32,15 +32,15 @@
 <body>
 <div class="content">
 <h1><a href="index.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
-			<div class="error">
 			<%String mes = (String) request.getAttribute("alertMsg");%>
 			<%if (mes != null) {%>
-			<%=mes%>
+			<div class="error">
+			<p><%=mes%></p>
+			</div>
 			<%}%>
-		</div>
 <h2>フリーワード検索</h2>
 <form action="search" method="post" class="freeword_search">
-  <input type="search" name="goutext" class="input_var">
+  <input type="search" name="goutext" class="input_var" required>
   <input type="submit" value="&#xf002;" class="fas">
 </form>
 <h2>グルメ検索</h2>
@@ -48,15 +48,15 @@
 <img src="img/map.jpg" alt="マップ">
 </div>
 
-<form action="search" class="buttons" required>
+<form action="search" class="buttons">
 <li>地域</li>
 <ul>
-<li><input type="radio" name="id" value="1">やんばる周辺</li>
-<li><input type="radio" name="id" value="2">アメリカンヴィレッジ周辺</li>
-<li><input type="radio" name="id" value="3">ひめゆりの搭周辺</li>
-<li><input type="radio" name="id" value="4">那覇市</li>
-<li><input type="radio" name="id" value="5">美ら海水族館周辺</li>
-<li><input type="radio" name="id" value="6">青の洞窟周辺</li>
+<li><input type="radio" name="id" value="1" required>やんばる周辺</li>
+<li><input type="radio" name="id" value="2" required>美ら海水族館周辺</li>
+<li><input type="radio" name="id" value="3" required>青の洞窟周辺</li>
+<li><input type="radio" name="id" value="4" required>アメリカンヴィレッジ周辺</li>
+<li><input type="radio" name="id" value="5" required>那覇市</li>
+<li><input type="radio" name="id" value="6" required>ひめゆりの塔の周辺</li>
 </ul>
 <li>カテゴリー</li>
 <ul>
@@ -77,5 +77,8 @@
 <footer>
 <p>　</p>
 </footer>
+
+
+
 </body>
 </html>

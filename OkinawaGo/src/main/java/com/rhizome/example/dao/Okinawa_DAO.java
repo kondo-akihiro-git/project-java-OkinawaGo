@@ -117,6 +117,7 @@ public class Okinawa_DAO {
 		InfoD.setS_g_id(rs.getString(S_G_ID));
 		InfoD.setInfo_nm(rs.getString(INFO_NM));
 		InfoD.setArea_id(rs.getString(INFO_TABLE_AREA_ID));
+		InfoD.setPost_code(rs.getString(POST_CODE));
 		InfoD.setAddress(rs.getString(ADDRESS));
 		InfoD.setInfo_img(rs.getString(INFO_IMG));
 		InfoD.setCr_date(rs.getString(CR_DATE));
@@ -128,7 +129,7 @@ public class Okinawa_DAO {
 	
 	/**
 	 * DBから取得した検索結果（info_id_img_DTO）をDTO型のインスタンスにセットし、リストに格納する
-	 *
+	 *+ "," + S_G_ID + "," + S_G_ID + "," + S_G_ID + "," + S_G_ID
 	 * @param rs
 	 *            検索結果
 	 * @return リスト
@@ -139,6 +140,7 @@ public class Okinawa_DAO {
 		InfoD.setInfo_id(rs.getString(INFO_ID));
 		InfoD.setInfo_img(rs.getString(INFO_IMG));
 		InfoD.setS_g_id(rs.getString(S_G_ID));
+		InfoD.setArea_id(rs.getString(AREA_TABLE_AREA_ID));
 		return InfoD;
 	}
 	
@@ -270,7 +272,6 @@ public class Okinawa_DAO {
 		sql.append("   ," + " ? ");
 		sql.append("   ," + " ? ");
 		sql.append("   ," + " ? ");
-		sql.append("   ," + " ? ");
 		sql.append("   ," + " now() ");
 		sql.append(" ) ");
 		try {
@@ -279,6 +280,7 @@ public class Okinawa_DAO {
 			stmt.setString(2, comment_nm);
 			stmt.setString(3, comment_tx);
 			stmt.setString(4, comment_img);
+			
 			stmt.executeUpdate();
 		} finally {
 			DbUtil.closeStatement(this.stmt);
@@ -320,7 +322,7 @@ public class Okinawa_DAO {
 			stmt.setString(4, address);
 			stmt.setString(5, post_code);
 			stmt.setString(6, info_img);
-			stmt.setString(7, cr_mana);
+			stmt.setInt(7, Integer.parseInt(cr_mana));
 			stmt.executeUpdate();
 		} finally {
 			DbUtil.closeStatement(this.stmt);
@@ -331,7 +333,9 @@ public class Okinawa_DAO {
 	public void InfoInsert(String s_g_id, String info_nm, String area_id, String address, String post_code, String info_img, String cr_mana, String[] cateList)
 			throws NumberFormatException, SQLException, ClassNotFoundException {
 		StringBuilder sql = new StringBuilder();
-		
+		for(String list:cateList){
+			System.out.println(list);
+		}
 		//情報掲載テーブルへの情報登録
 		sql.append(" INSERT " + " INTO ");
 		sql.append("    " + INFO_TBL_NAME);
@@ -371,7 +375,7 @@ public class Okinawa_DAO {
 			List<Info_id_DTO> list = new ArrayList<>();
 			StringBuilder sql1 = new StringBuilder();
 			sql1.append(" SELECT ");
-			sql1.append("    " + " MAX( " + INFO_ID + ")");
+			sql1.append("    " + " MAX(" + INFO_ID + ")");
 			sql1.append("  " + "FROM ");
 			sql1.append("    " + INFO_TBL_NAME);
 			this.stmt = con.prepareStatement(sql1.toString());
@@ -379,9 +383,9 @@ public class Okinawa_DAO {
 			while (rs.next()) {
 				list.add(rowMappingInfoId(rs));
 			}
+			
 			int max_id = 0;
 			for (Info_id_DTO id : list) {
-				
 				max_id = Integer.parseInt(id.getInfo_id());
 			}
 			
@@ -439,7 +443,7 @@ public class Okinawa_DAO {
 		StringBuilder sql = new StringBuilder();
 		if (checkedbox.length == 1) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID + "," + INFO_TABLE_AREA_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -460,7 +464,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 2) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID + "," + INFO_TABLE_AREA_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -482,8 +486,9 @@ public class Okinawa_DAO {
 			}
 			
 		} else if (checkedbox.length == 3) {
+			System.out.println( area_id + checkedbox[0]);
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID + "," + INFO_TABLE_AREA_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -508,7 +513,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 4) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID + "," + INFO_TABLE_AREA_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -535,7 +540,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 5) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID + "," + INFO_TABLE_AREA_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -564,7 +569,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 6) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID + "," + INFO_TABLE_AREA_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -595,7 +600,7 @@ public class Okinawa_DAO {
 			
 		} else if (checkedbox.length == 7) {
 			sql.append(" SELECT ");
-			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID);
+			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID + "," + INFO_TABLE_AREA_ID);
 			sql.append(" FROM ");
 			sql.append("    " + INFO_TBL_NAME);
 			sql.append(" WHERE " + INFO_TABLE_AREA_ID + "=" + "?" + " AND " + INFO_ID + " IN " + "(" + " SELECT " + INFO_ID + " FROM " +GURUME_CATEGORY_TABLE_NAME);
@@ -640,7 +645,7 @@ public class Okinawa_DAO {
 		sql.append(" FROM ");
 		sql.append("    " + INFO_TBL_NAME);
 		sql.append(" WHERE ");
-		sql.append("    " + INFO_TABLE_AREA_ID + " = " + "?");
+		sql.append("    " + INFO_TABLE_AREA_ID + " = " + "?" +  " AND " + S_G_ID + " = 1" );
 		try {
 			this.stmt = con.prepareStatement(sql.toString());
 			stmt.setString(1, area_id);
@@ -653,6 +658,28 @@ public class Okinawa_DAO {
 		}
 		return rtnList;
 	}
+	//スポット条件検索
+		public List<Info_DTO> selectGulumeByArea(String area_id) throws SQLException, ClassNotFoundException, NumberFormatException {
+			List<Info_DTO> rtnList = new ArrayList<>();
+			StringBuilder sql = new StringBuilder();
+			sql.append(" SELECT ");
+			sql.append("    " + "*");
+			sql.append(" FROM ");
+			sql.append("    " + INFO_TBL_NAME);
+			sql.append(" WHERE ");
+			sql.append("    " + INFO_TABLE_AREA_ID + " = " + "?" +  " AND " + S_G_ID + " = 2" );
+			try {
+				this.stmt = con.prepareStatement(sql.toString());
+				stmt.setString(1, area_id);
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					rtnList.add(rowMappingInfo(rs));
+				}
+			} finally {
+				DbUtil.closeStatement(this.stmt);
+			}
+			return rtnList;
+		}
 	
 	//フリーワード検索
 	public List<Info_DTO> selectByFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
@@ -689,7 +716,7 @@ public class Okinawa_DAO {
 		sql.append(" FROM ");
 		sql.append("    " + COMMENT_TABLE_NAME);
 		sql.append(" WHERE ");
-		sql.append("    " + INFO_ID + " = " + "?");
+		sql.append("    " + INFO_ID + " = " + " ? ");
 		try {
 			this.stmt = con.prepareStatement(sql.toString());
 			stmt.setString(1, info_id);
@@ -962,5 +989,28 @@ public class Okinawa_DAO {
 		}
 		return rtnList;
 	}
+
+	public String searcharea_nm(String value) throws SQLException, ClassNotFoundException, NumberFormatException {
+		StringBuilder sql = new StringBuilder();
+		String area_nm ="";
+		sql.append(" SELECT ");
+		sql.append("    " + AREA_NM);
+		sql.append(" FROM ");
+		sql.append("    " + AREA_TABLE_NAME);
+		sql.append(" WHERE ");
+		sql.append("    " + AREA_TABLE_AREA_ID + " = " + "?");
+		try {
+			this.stmt = con.prepareStatement(sql.toString());
+			stmt.setString(1, value);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				area_nm = rs.getString("area_nm");
+			}
+		} finally {
+			DbUtil.closeStatement(this.stmt);
+		}
+		return area_nm;
+	}
 	
+
 }

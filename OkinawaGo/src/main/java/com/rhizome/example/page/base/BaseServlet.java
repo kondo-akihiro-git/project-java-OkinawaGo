@@ -36,7 +36,7 @@ public abstract class BaseServlet extends HttpServlet {
 		this.response = response;
 		this.session = request.getSession();
 
-		this.message = null;
+		message = null;
 		String nextPage = this.getPageName();
 			try {
 				if (!"adLogin".equals(this.getPageName())) {

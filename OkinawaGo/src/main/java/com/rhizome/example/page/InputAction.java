@@ -12,39 +12,36 @@ public class InputAction extends BaseServlet {
 	protected String doAction() throws Exception {
 
 //スポットかグルメか判断
-		String cate = super.request.getParameter("cate");
+		String s_g_id = super.request.getParameter("s_g_id");
 
 //スポット------------------------------------------------------------------------------
-		if (cate.equals("スポット")) {
-			String[] paramList = super.getInputParameter("info_nm" // 0
-					, "area_id" // 1
-					, "post" // 2 //掲載情報テーブル修正後再度確認
-					, "address" // 3
-					, "info_img" // 4
-			);
-			super.request.setAttribute("cate", cate);
-			super.request.setAttribute("info_nm", paramList[0]);
-			super.request.setAttribute("area_id", paramList[1]);
-			super.request.setAttribute("post", paramList[2]);
-			super.request.setAttribute("address", paramList[3]);
-			super.request.setAttribute("info_img", paramList[4]);
-//グルメ----------------------------------------------------------------------------
-		} else if (cate.equals("グルメ")) {
-			String[] paramList = super.getInputParameter("info_nm" // 0
-					, "area_id" // 1
-					, "post" // 2 //掲載情報テーブル修正後再度確認
-					, "address" // 3
-					, "category_id" // 4
+		if (s_g_id.equals("1")) {
+			
+			String[] paramList = super.getInputParameter(
+					  "s_g_id"  // 0
+					, "info_nm" // 1
+					, "area_id" // 2
+					, "post_code" // 3 //掲載情報テーブル修正後再度確認
+					, "address" // 4
 					, "info_img" // 5
 			);
-			super.request.setAttribute("cate", cate);
-			super.request.setAttribute("info_nm", paramList[0]);
-			super.request.setAttribute("area_id", paramList[1]);
-			super.request.setAttribute("post", paramList[2]);
-			super.request.setAttribute("address", paramList[3]);
-			super.request.setAttribute("category_id", paramList[4]);
-			super.request.setAttribute("info_img", paramList[5]);
-		}
+//
+//グルメ----------------------------------------------------------------------------
+		} else if (s_g_id.equals("2")) {
+			String[] paramList = super.getInputParameter(
+					  "s_g_id"  // 0
+					, "info_nm" // 1
+					, "area_id" // 2
+					, "post_code" // 3 //掲載情報テーブル修正後再度確認
+					, "address" // 4
+					, "info_img" // 5
+			);
+			
+			String[] cateList = super.request.getParameterValues("category_id"); 
+//			for(String lis: cateList) {
+//				System.out.println(lis);
+//			}
+			request.setAttribute("cateList", cateList);		}
 
 //クリックされたname属性がbackの場合、adInsert_input.jspに遷移、それ以外の場合adInsertConfirmに遷移--------
 		if (super.request.getParameter("back") != null) {

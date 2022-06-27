@@ -26,8 +26,8 @@ height:35%;
 }
 .error{
 text-align:center;
-background-color:#fa9696;
 padding:20px;
+background-color:rgb(255, 48, 48,0.5);
 }
 .freeword_search{
 text-align:center;

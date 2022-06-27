@@ -64,49 +64,58 @@
 </head>
 <body>
 	<div class="content">
-		<span class="login_name"><p>ログイン：${ sessionScope.LOGIN_EMP.LOGIN.loginad }</p></span>
-			<div class="error">
+		<span class="login_name"><p>ログイン：<%=session.getAttribute("LOGIN_Manager_nm") %></p></span>
 			<%String mes = (String) request.getAttribute("alertMsg");%>
 			<%if (mes != null) {%>
-			<%=mes%>
+			<div class="error">
+			<p><%=mes%></p>
+			</div>
 			<%}%>
-		</div>
 		<h1>
 			<a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
 		</h1>
-		<form action="select" method="post"
-			class="freeword_search">
-			<input type="search" name="text"
-				placeholder="コメント" class="input_var"> <input
-				type="submit" value="検索">
-		</form>
+		<form action="select" method="post" class="freeword_search">
+			<input type="search" name="text" placeholder="コメント" class="input_var"> 
+			<input type="submit" value="検索">
+		</form>			
+		<%@ page import="java.util.*"%>
+		<%@ page import="java.util.ArrayList,java.util.HashMap"%>
+		<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
+		<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
+		<%@ page import="main.java.com.rhizome.example.entity.Comment_DTO"%>
+		<%@ page import="main.java.com.rhizome.example.page.base.BaseServlet"%>
+		<%@ page import="main.java.com.rhizome.example.util.DbUtil"%>
 		
-
+		<%
+			ArrayList<Info_DTO> list_h = (ArrayList<Info_DTO>)request.getAttribute("list");
+			for (Info_DTO r : list_h) {
+			%>
+		<h2><%=r.getInfo_nm()%></h2>
+		<% } %>
 		
 		<div class="pagenation_block">
-		<%-- <%@page import ="java.util.List"%>
-		<%@page import = "java.util.ArrayList" %>
-		<%@page import = "main.java.com.rhizome.example.entity.Info_DTO" %>
-		<jsp:useBean id="list" class="main.java.com.rhizome.example.entity.Info_DTO" scope="request" />
-		<%=list.getInfo_id() %> --%>
-				
-				
-				<c:forEach items="${ list }" var="list">
-				<c:out value="${ list.InfoD.info_nm }" />
-			</c:forEach>
 
+
+		<%
+			ArrayList<Comment_DTO> list = (ArrayList<Comment_DTO>)request.getAttribute("commentList");
+			for (Comment_DTO c : list) {
+			%>
 			<dl>
 				<dd>
 					<table>
 						<tr>
-							<td></td>
-							<td><form onClick="buttonClick()" method="post">
-									<input type="submit" value="削除" name="">
+							<td><%=c.getComment_tx() %></td>
+							<td><form method="post" action="delete">
+									<input type="button" value="削除" id="<%=c.getComment_id()%>"> 
+									<input type="hidden"value="<%=c.getComment_tx()%>" name="comment_nm"> 
+									<input type="hidden" value="<%=c.getComment_id()%>" name="comment_id">
 								</form></td>
 						</tr>
 					</table>
 				</dd>
 			</dl>
+		<% } %>
+				
 				
 		</div>
 
@@ -114,13 +123,29 @@
 		</span>
 
 		<script>
-			function buttonClick() {
-				if (window.confirm('ああああああを削除しますか？')) {
-					window.open('adDelete.html');
+	<%
+	if (list != null) {
+	ArrayList<Comment_DTO> list_sc = (ArrayList<Comment_DTO>) request.getAttribute("commentList");
+	for (Comment_DTO r : list_sc) {
+	%>
+			var button = document.getElementById('<%=r.getComment_id()%>');
+			console.log("formId:" + button.id);
+			button.addEventListener('click', butotnClick);
+			
+			function butotnClick(event){
+		        var next_element =  event.target.nextElementSibling;
+		        var del_form = next_element.parentNode;
+		        var com = window.confirm(next_element.value + 'を削除しますか？');
+				if (com == true) {
+					del_form.submit();
 					return true;
-				}
-			}
-		</script>
+				} else{
+					return false;
+				}    
+		    }			
+<% } }%>
+
+	</script>
 		<script type="text/javascript">
 			$(function() {
 				$('.pagenation_block').paginathing({//親要素のclassを記述

@@ -8,6 +8,8 @@ public class Info_id_img_DTO {
 	private String info_img;
 	//スポット・グルメID
 	private String s_g_id;
+	//地域ID
+	private String area_id;
 
 	public String getInfo_id() {
 		return info_id;
@@ -27,5 +29,11 @@ public class Info_id_img_DTO {
 	}
 	public void setS_g_id(String s_g_id) {
 		this.s_g_id = s_g_id;
+	}
+	public String getArea_id() {
+		return area_id;
+	}
+	public void setArea_id(String area_id) {
+		this.area_id = area_id;
 	}
 }

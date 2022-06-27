@@ -18,35 +18,37 @@ public class AddInfoAction extends BaseServlet {
 	protected String doAction() throws Exception {
 
 		// グルメかスポットのラジオボタンを取得
-		String name = super.request.getParameter("name");
+		String s_g_id1 = super.request.getParameter("s_g_id");
 		Connection con = DbUtil.getConnection();
 		Okinawa_DAO dao = new Okinawa_DAO(con);
-
 		// スポットの追加
-		if (name.equals("スポット")) {
-			String s_g_id = super.request.getParameter("s_g_id");
-			String info_nm = super.request.getParameter("info_nm");
-			String area_id = super.request.getParameter("area_id");
-			String address = super.request.getParameter("address");
-			String post_cord = super.request.getParameter("post_cord");
-			String info_img = super.request.getParameter("info_img");
-			String cr_mana = super.request.getParameter("cr_mana");
+		if (s_g_id1.equals("1")) {
+			String[] paramList = super.getInputParameter(
+					  "s_g_id"  // 0
+					, "info_nm" // 1
+					, "area_id" // 2
+					, "post_code" // 3 //掲載情報テーブル修正後再度確認
+					, "address" // 4
+					, "info_img" // 5
+			);
 
-			dao.spotInsert(s_g_id, info_nm, area_id, address, post_cord, info_img, cr_mana);
+			dao.spotInsert(paramList[0], paramList[1], paramList[2], paramList[4], paramList[3], paramList[5], (String)super.session.getAttribute("LOGIN_Manager_id"));
 
 			// グルメ追加
-		} else if (name.equals("グルメ")) {
-			String s_g_id = super.request.getParameter("s_g_id");
-			String info_nm = super.request.getParameter("info_nm");
-			String area_id = super.request.getParameter("area_id");
-			String address = super.request.getParameter("address");
-			String post_cord = super.request.getParameter("post_cord");
-			String info_img = super.request.getParameter("info_img");
-			String cr_mana = super.request.getParameter("cr_mana");
+		} else if (s_g_id1.equals("2")) {
 			String[] cateList = super.request.getParameterValues("cateList");
-
-			dao.InfoInsert(s_g_id, info_nm, area_id, address, post_cord, info_img, cr_mana, cateList);
-
+			String[] paramList = super.getInputParameter(
+					  "s_g_id"  // 0
+					, "info_nm" // 1
+					, "area_id" // 2
+					, "post_code" // 3 //掲載情報テーブル修正後再度確認
+					, "address" // 4
+					, "info_img" // 5
+			);
+			for(String ki:cateList) {
+				System.out.println(ki);
+			}
+			dao.InfoInsert(paramList[0], paramList[1], paramList[2], paramList[4], paramList[3], paramList[5], (String)super.session.getAttribute("LOGIN_Manager_id"),cateList);
 		}
 
 		return "adInsert";

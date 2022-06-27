@@ -30,15 +30,15 @@
 </head>
 <body>
 <div class="content">
-<span class="login_name"><p>ログイン：${ sessionScope.LOGIN_EMP.LOGIN.loginad }</p></span>
+<span class="login_name"><p>ログイン：<%=session.getAttribute("LOGIN_Manager_nm") %></p></span>
 <h1><a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 
 <table class="form">
 <form action="input" method="post">
 <tr class="radiobotton">
-<td><input type="radio" name="s_g_id" value="スポット" required 
+<td><input type="radio" name="s_g_id" value="1" required 
 onclick="document.getElementById('cate').style.display = 'none';" >スポット
-<input type="radio" name="s_g_id" value="グルメ" required 
+<input type="radio" name="s_g_id" value="2" required 
 onclick="document.getElementById('cate').style.display = 'inline';">グルメ</td>
 </tr>
 <tr>
@@ -48,15 +48,17 @@ onclick="document.getElementById('cate').style.display = 'inline';">グルメ</t
 <td>
 <select name="area_id">
 <option value="1">やんばる周辺</option>
-<option value="2">アメリカンヴィレッジ周辺</option>
-<option value="3">ひめゆりの搭周辺</option>
-<option value="4">那覇市</option>
-<option value="5">美ら海水族館周辺</option>
-<option value="6">青の洞窟周辺</option>
+<option value="2">美ら海水族館周辺</option>
+<option value="3">青の洞窟周辺</option>
+<option value="4">アメリカンヴィレッジ周辺</option>
+<option value="5">那覇市</option>
+<option value="6">ひめゆりの搭周辺</option>
+
+
 </select></td>
 </tr>
 <tr>
-<td><input type="text" name="post_cord" required placeholder="郵便番号"></td>
+<td><input type="text" name="post_code" required placeholder="郵便番号"></td>
 </tr>
 <tr>
 <td><input type="text" name="address" required placeholder="住所"></td>

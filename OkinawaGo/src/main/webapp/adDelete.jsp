@@ -30,8 +30,8 @@
 </head>
 <body>
 <div class="content">
-<span class="login_name"><p>ログイン：山田</p></span>
-<h1><a href="adLogin.html"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
+<span class="login_name"><p>ログイン：<%=session.getAttribute("LOGIN_Manager_nm") %></p></span>
+<h1><a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 		<!-- <c:if test="${errMsg != null}">
 			<div class="msgBox error">
 				<c:forEach items="${ errMsg }" var="errList">
@@ -42,7 +42,7 @@
 
 <h3>削除完了しました！</h3>
 <div class="insertButton" style="text-align:center;">
-<a href="###" onClick="window.close()">続けて削除する</a>
+<a href="adSearch.jsp">続けて削除する</a>
 
 </div>
 </div>

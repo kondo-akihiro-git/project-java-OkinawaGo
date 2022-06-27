@@ -30,13 +30,13 @@
 </head>
 <body>
 <div class="content">
-<span class="login_name"><p>ログイン：${ sessionScope.LOGIN_EMP.LOGIN.loginad }</p></span>
-<h1><a href="adLogin.html"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
+<span class="login_name"><p>ログイン：<%=session.getAttribute("LOGIN_Manager_nm") %></p></span>
+<h1><a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 
 
 <h3>登録完了しました！</h3>
 <div class="insertButton" style="text-align:center;">
-<a href="adInsert_Input.html">続けて登録する</a>
+<a href="adInsert_Input.jsp">続けて登録する</a>
 </div>
 </div>
 <footer>

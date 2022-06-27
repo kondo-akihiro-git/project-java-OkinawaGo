@@ -60,90 +60,96 @@
 		<h1>
 			<a href="index.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
 		</h1>
-		<c:if test="${alartMsg != null}">
-			<div class="error">
-				<c:forEach items="${ alartMsg }" var="errList">
-					<c:out value="${errList}" />
-				</c:forEach>
-			</div>
-		</c:if>
-
-		<h2>aaa</h2>
-
-		<div class="wrapper pagenation_block">
-
-			<dl class="box1">
-				<c:forEach items="${ infolist }" var="Info">
-					<c:out value="${InfoD.info_id}" />
-					<dd>
-
-						<form method="post" name="###" action="showinfo">
-							<img src="${InfoD.info_img} " alt="konnnitiha"> <input
-								type="hidden" name="user_name" value="${InfoD.info_id}">
-						</form>
-
-					</dd>
-				</c:forEach>
+		<%String area_nm = (String)request.getAttribute("area_nm"); %>
+		<%String[] cate_nm = (String[])request.getAttribute("cate_nm"); %>
+		<% if(request.getAttribute("text") != null){ %>
+		<h2>フリーワード：<%=request.getAttribute("text") %></h2>
+		<% }else if(request.getAttribute("area_nm") != null && cate_nm == null){ %>
+		<h2><%=area_nm %>のスポット</h2>
+		<% }else if(request.getAttribute("cate_nm") != null){ %>
+		<h2><%=area_nm %>の
+		<%for(int i = 0; i< cate_nm.length;i ++){
+			if(cate_nm[i] != null){ %>
+				<%=cate_nm[i] %>
+			<% } %>
+		<% } %>
+		</h2>
+		<% } %>
+		
+		<%@ page import="java.util.*"%>
+		<%@ page import="java.util.ArrayList,java.util.HashMap"%>
+		<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
+		<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
+		<%@ page import="main.java.com.rhizome.example.entity.Info_id_img_DTO"%>
+		<%@ page import="main.java.com.rhizome.example.userpage.base.BaseUser"%>
+		<%@ page import="main.java.com.rhizome.example.util.DbUtil"%>
+		<%String check = (String)request.getAttribute("check"); %>
+		<% if(request.getAttribute("check").equals("2")){%>
+		<div class="pagenation_block">
+			<%
+			ArrayList<Info_id_img_DTO> list = (ArrayList<Info_id_img_DTO>) request.getAttribute("infolist");
+			for (Info_id_img_DTO r : list) {
+			%>
+			
+			<dl>
+			<dd>
+			<form method="post" action="showinfo" class="input">
+			<input type="image" src="img/<%=r.getInfo_img()%>"  class="inputimg">
+			<input type="hidden" name="info_img" value="<%=r.getInfo_img()%>">
+			<input type="hidden" name="info_id" value="<%=r.getInfo_id()%>">
+			<input type="hidden" name="area_id" value="<%=r.getArea_id()%>">
+			<input type="hidden" name="s_g_id" value="<%=r.getS_g_id()%>">
+			</form>
+			</dd>
 			</dl>
-			<dl class="box2">
-				 <%@ page import="java.util.*"%>
-				<%@ page import="java.util.ArrayList,java.util.HashMap"%>
-				<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
-				<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
-				<%@ page
-					import="main.java.com.rhizome.example.entity.Info_id_img_DTO"%>
-				<%@ page
-					import="main.java.com.rhizome.example.userpage.base.BaseUser"%>
-				<%@ page import= "main.java.com.rhizome.example.util.DbUtil"%>
-				<%
-				ArrayList<Info_DTO> list = (ArrayList<Info_DTO>)request.getAttribute("infolist");
-				for (Info_DTO r : list) {
-					//String id = (String) request.getAttribute("info_id");
-
-					System.out.println(r.getInfo_id());
-					System.out.println(r.getInfo_img());
-					%>
-					<%=r.getInfo_id()  %>
-				
-				<dd>
-					<a href="showinfo"><img src="img/<%=r.getInfo_img()%>"></a>
-				</dd>
-				<%}
-				%>
-
-			</dl>
-			<dl class="box3">
-				<dd>
-					<a href="showinfo"><img src="${InfoD.Info_img}"></a>
-				</dd>
-			</dl>
-			<dl class="box4">
-				<dd>
-					<a href="showinfo"><img src="${InfoD.Info_img}"></a>
-				</dd>
-			</dl>
-
+		<%}%>
+			
 		</div>
-
+		<% }else if(request.getAttribute("check").equals("1")){ %>
+		<div class="pagenation_block">
+			
+			<%
+			ArrayList<Info_DTO> list_spo = (ArrayList<Info_DTO>) request.getAttribute("infolist");
+			for (Info_DTO r : list_spo) {
+			%>
+			
+			<dl>
+			<dd>
+			<form method="post" action="showinfo" class="input">
+			<input type="image" src="img/<%=r.getInfo_img()%>"  class="inputimg">
+			<input type="hidden" name="info_img" value="<%=r.getInfo_img()%>">
+			<input type="hidden" name="info_id" value="<%=r.getInfo_id()%>">
+			<input type="hidden" name="area_id" value="<%=r.getArea_id()%>">
+			<input type="hidden" name="s_g_id" value="<%=r.getS_g_id()%>">
+			</form>
+			</dd>
+			</dl>
+			<%}%>
+		<%}%>
+			
+		</div>
+		
+		
+		
 
 	</div>
 
 	<footer>
 		<p></p>
 	</footer>
-	<script type="text/javascript">
-		$(function() {
-			$('.pagenation_block').paginathing({
-				perPage : 4,//1ページあたりの件数
-				prevText : '前へ',//前
-				nextText : '次へ',//次
-				activeClass : 'navi-active',
-				firstText : '最初のページ', // "最初ページ"
-				lastText : '最後のページ', // "最後のページ"
+		<script type="text/javascript">
+			$(function() {
+				$('.pagenation_block').paginathing({//親要素のclassを記述
+					perPage : 10,//1ページあたりの表示件数
+					prevText : '<i class="fas fa-angle-left"></i>',//1つ前のページへ移動するボタンのテキスト
+					nextText : '<i class="fas fa-angle-right"></i>',//1つ次のページへ移動するボタンのテキスト
+					activeClass : 'navi-active',//現在のページ番号に任意のclassを付与できます
+					firstText : '<i class="fas fa-angle-double-left"></i>', // "最初ページ"に移動するボタンのテキスト
+					lastText : '<i class="fas fa-angle-double-right"></i>', // "最後のページ"に移動するボタンのテキスト
 
-			})
-		});
-	</script>
+				})
+			});
+		</script>
 
 </body>
 </html>

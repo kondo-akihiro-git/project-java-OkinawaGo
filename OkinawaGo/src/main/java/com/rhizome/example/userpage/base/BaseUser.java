@@ -32,7 +32,7 @@ public abstract class BaseUser extends HttpServlet {
 		this.request = request;
 		this.response = response;
 		this.session = request.getSession();
-
+		message = null;
 		String nextPage = this.getPageName();
 		
 		
@@ -41,6 +41,7 @@ public abstract class BaseUser extends HttpServlet {
 			} catch (Exception e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
+				message = e.getMessage();
 			}
 		
 		request.setAttribute("alertMsg", this.message);

@@ -24,15 +24,16 @@ public class DeleteAction extends BaseServlet {
 		Connection con = DbUtil.getConnection();
 		Okinawa_DAO dao = new Okinawa_DAO(con);
 		// トップページから遷移した時
-		if (super.request.getParameter("infoDelete") != null) {
+		System.out.println("ssss");
+		if (super.request.getParameter("info_id") != null) {
 			String info_id = super.request.getParameter("info_id");
-
+			System.out.println(info_id);
 			dao.infoDelete(info_id);
 
 			// コメント検索画面から遷移した時
-		} else if (super.request.getParameter("commentDelete") != null) {
+		} else if (super.request.getParameter("comment_id") != null) {
 			String comment_id = super.request.getParameter("comment_id");
-
+			System.out.println(comment_id);
 			dao.commentDelete(comment_id);
 
 		}

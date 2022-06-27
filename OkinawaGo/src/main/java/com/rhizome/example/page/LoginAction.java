@@ -27,7 +27,8 @@ public class LoginAction extends BaseServlet {
 		Okinawa_DAO dao = new Okinawa_DAO(con);
 		List<Manager_DTO> loginData = dao.loginInfo(param[0], param[1]);
 		for(Manager_DTO login : loginData) {
-			
+			super.session.setAttribute("LOGIN_Manager_nm", login.getManager_nm());
+			super.session.setAttribute("LOGIN_Manager_id", login.getManager_id());
 		}
 		// 結果の取得（検索結果0件）
 		if (loginData == null || loginData.size() == 0) {
@@ -36,6 +37,7 @@ public class LoginAction extends BaseServlet {
 			throw new Exception("メールアドレスまたはパスワードが間違っています");
 			//request.setAttribute("alertMsg", message);
 		}
+
 		super.session.setAttribute("LOGIN_Manager", loginData);
 		return "adSearch";
 		

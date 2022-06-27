@@ -32,12 +32,12 @@
 <div class="content">
 <h1><a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
 
-			<div class="error">
 			<%String mes = (String) request.getAttribute("alertMsg");%>
 			<%if (mes != null) {%>
-			<%=mes%>
+			<div class="error">
+			<p><%=mes%></p>
+			</div>
 			<%}%>
-		</div>
 <form action="login" method="post" class="form">
 <p><input type="email" placeholder="メールアドレス" name="mail" required/></p>
 <p><input type="password" placeholder="パスワード" name="pass" required/></p>

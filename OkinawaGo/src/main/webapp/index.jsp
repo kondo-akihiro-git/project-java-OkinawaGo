@@ -31,13 +31,14 @@
 <body>
 <div class="content">
 <h1><a href="index.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
-	     <c:if test="${alartMsg != null}">
+			
+			<%String mes = (String) request.getAttribute("alertMsg");%>
+			<%if (mes != null) {%>
 			<div class="error">
-				<c:forEach items="${ alartMsg }" var="errList">
-					<c:out value="${errList}" />
-				</c:forEach>
+			<p><%=mes%></p>
 			</div>
-		</c:if>
+			<%}%>
+		
 <h2>フリーワード検索</h2>
 <form action="search" method="post" class="input">
   <input type="search" name="toptext" class="input_var">

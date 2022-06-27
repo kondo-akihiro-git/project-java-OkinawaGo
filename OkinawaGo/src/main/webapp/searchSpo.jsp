@@ -58,12 +58,12 @@
 			<a href="index.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
 		</h1>
 
-			<div class="error">
 			<%String mes = (String) request.getAttribute("alertMsg");%>
 			<%if (mes != null) {%>
-			<%=mes%>
+			<div class="error">
+			<p><%=mes%></p>
+			</div>
 			<%}%>
-		</div>
 		
 		<h2>フリーワード検索</h2>
 		<form action="search" method="post" class="freeword_search">
@@ -96,7 +96,7 @@
 							<area shape="poly" alt="アメリカンヴィレッジ周辺"
 								coords="1027,756,1076,832,1024,883,988,876,968,914,976,940,836,904,785,948,793,957,764,971,836,1039,837,1090,932,1231,913,1238,820,1138,771,1169,637,1410,592,1397,585,1352,487,1337,484,1315,622,1230,619,1183,593,1165,602,1137,589,1094,644,1079,659,1035,679,1008,686,973,757,914,767,918,770,904,836,859,858,864,878,848,880,840,889,838,906,843,915,842,922,815,952,806,968,793,975,787,1001,779,1019,766" />
 						</button>
-						<input type="hidden" name="spotmap" value="3">
+						<input type="hidden" name="spotmap" value="4">
 					</form>
 
 					<form method="post" action="search">
@@ -104,7 +104,7 @@
 							<area shape="poly" alt="青の洞窟周辺"
 								coords="941,752,961,797,922,811,909,843,889,835,863,865,835,857,767,903,683,972,647,1074,586,1094,542,1006,542,951,539,932,561,932,579,962,599,970,618,950,650,935,670,946,699,942,706,905,722,903,742,883,760,867,787,847,773,804,835,787,864,799,875,779,919,775,927,759,939,750,939,750" />
 						</button>
-						<input type="hidden" name="spotmap" value="4">
+						<input type="hidden" name="spotmap" value="3">
 					</form>
 
 					<form method="post" action="search">

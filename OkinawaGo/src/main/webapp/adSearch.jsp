@@ -24,7 +24,7 @@
 <script type='text/javascript'
 	src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
 	id='jquery-js'></script>
-<script src="paginathing.min.js"></script>
+<script src="js/paginathing.min.js"></script>
 <script>
 	(function(d) {
 		var config = {
@@ -57,79 +57,130 @@
 </head>
 <body>
 	<div class="content">
-		<span class="login_name"><p>ログイン：${ sessionScope.LOGIN_EMP.LOGIN.loginad }</p></span>
+		<span class="login_name"><p>
+				ログイン：<%=session.getAttribute("LOGIN_Manager_nm")%></p></span>
 		<h1>
-			<a href="adLogin.html"><img src="img/logo.jpg" alt="ロゴ"></a>
+			<a href="adLogin.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
 		</h1>
+		<%
+		String mes = (String) request.getAttribute("alertMsg");
+		%>
+		<%
+		if (mes != null) {
+		%>
 		<div class="error">
-			<%String mes = (String) request.getAttribute("alertMsg");%>
-			<%if (mes != null) {%>
-			<%=mes%>
-			<%}%>
+			<p><%=mes%></p>
 		</div>
+		<%
+		}
+		%>
 		<form action="select" method="post" class="freeword_search">
 			<input type="search" name="text" placeholder="店名/スポット名/住所"
-				class="input_var"> <input type="submit" value="検索">
+				class="input_var" required> <input type="submit" value="検索">
 		</form>
 		<div class="pagenation_block">
-			<%@ page import="java.util.ArrayList" %>
-			<%@ page import="java.util.List" %>
-			<% if(request.getAttribute("searchlist") != null){ %>
-			<% } %>
+			<%@ page import="java.util.*"%>
+			<%@ page import="java.util.ArrayList,java.util.HashMap"%>
+			<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
+			<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
+			<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
+			<%@ page import="main.java.com.rhizome.example.userpage.base.BaseUser"%>
+			<%@ page import="main.java.com.rhizome.example.util.DbUtil"%>
+			<%
+			ArrayList<Info_DTO> list = (ArrayList<Info_DTO>) request.getAttribute("spotInfolist");
+			if (list == null) {
+			%>
+			<table>
+			</table>
+			<%
+			} else if (list != null) {
+			for (Info_DTO r : list) {
+			%>
+			<dl>
+				<dd>
+					<table class="adsearchbutton">
+						<tr>
+							<td><%=r.getInfo_nm()%></td>
+							<td><form action="showinfo" method="post">
+									<input type="submit" value="詳細"> 
+									<input type="hidden" name="info_img" value="<%=r.getInfo_img()%>"> 
+									<input type="hidden" name="info_id" value="<%=r.getInfo_id()%>">
+									<input type="hidden" name="area_id" value="<%=r.getArea_id()%>">
+									<input type="hidden" name="s_g_id" value="<%=r.getS_g_id()%>">
+								</form></td>
+							<td><form method="post" action="delete" >
+									<input type="button" value="削除"  id="<%=r.getInfo_id()%>"> 
+									<input type="hidden"value="<%=r.getInfo_nm()%>"  name="info_nm"> 
+									<input type="hidden" value="<%=r.getInfo_id()%>" name="info_id" >
+								</form></td>
+							<td><form action="select" method="post">
+									<input type="submit" value="コメント管理"> 
+									<input type="hidden" value="<%=r.getInfo_id()%>" name="info_id">
+								</form></td>
+						</tr>
+					</table>
+				</dd>
+			</dl>
 
-					<dl>
-						<dd>
-							<table>
-								<tr>
-									<td>タイトル</td>
-									<td><form action="select" method="post">
-											<input type="submit" value="情報掲載ID"
-												name="info_id">詳細
-										</form></td>
-									<td><form onClick="buttonClick()" method="post">
-											<input type="submit" value="情報掲載ID"
-												name="info_id>">削除
-										</form></td>
-									<td><form action="select" method="post">
-											<input type="submit" value="情報掲載ID"
-												name="info_id">コメント管理
-										</form></td>
-								</tr>
-							</table>
-						</dd>
-					</dl>
-					</div>
+
+			<%
+			}
+			%>
+			<%
+			}
+			%>
+
+		</div>
 
 
-						<span class="insertButton"> <a href="adInsert_Input.jsp">スポット/グルメ追加</a>
-						</span>
+		<span class="insertButton"> <a href="adInsert_Input.jsp">スポット/グルメ追加</a>
+		</span>
 
-					</div>
+	</div>
 
-					<footer>
-						<p></p>
-					</footer>
+	<footer>
+		<p></p>
+	</footer>
 
-					<script type="text/javascript">
-						$(function() {
-					$('.pagenation_block').paginathing({//親要素のclassを記述
-						perPage : 10,//1ページあたりの表示件数
-						prevText : '<i class="fas fa-angle-left"></i>',//1つ前のページへ移動するボタンのテキスト
-						nextText : '<i class="fas fa-angle-right"></i>',//1つ次のページへ移動するボタンのテキスト
-						activeClass : 'navi-active',//現在のページ番号に任意のclassを付与できます
-						firstText : '<i class="fas fa-angle-double-left"></i>', // "最初ページ"に移動するボタンのテキスト
-						lastText : '<i class="fas fa-angle-double-right"></i>', // "最後のページ"に移動するボタンのテキスト
+		<script type="text/javascript">
+			$(function() {
+				$('.pagenation_block').paginathing({//親要素のclassを記述
+					perPage : 10,//1ページあたりの表示件数
+					prevText : '<i class="fas fa-angle-left"></i>',//1つ前のページへ移動するボタンのテキスト
+					nextText : '<i class="fas fa-angle-right"></i>',//1つ次のページへ移動するボタンのテキスト
+					activeClass : 'navi-active',//現在のページ番号に任意のclassを付与できます
+					firstText : '<i class="fas fa-angle-double-left"></i>', // "最初ページ"に移動するボタンのテキスト
+					lastText : '<i class="fas fa-angle-double-right"></i>', // "最後のページ"に移動するボタンのテキスト
 
-					})
-						});
-					</script>
+				})
+			});
+		</script>
 
-					<script>
-						function buttonClick() {
-					if (window.confirm('<%=request.getAttribute("name")
-				%>を削除しますか？')) {
-				window.open('delete'); return true; } }
-				</script>
+	<script>
+	<%
+	if (list != null) {
+	ArrayList<Info_DTO> list_sc = (ArrayList<Info_DTO>) request.getAttribute("spotInfolist");
+	for (Info_DTO r : list_sc) {
+	%>
+			var button = document.getElementById('<%=r.getInfo_id()%>');
+			console.log("formId:" + button.id);
+			button.addEventListener('click', butotnClick);
+			
+			function butotnClick(event){
+		        var next_element =  event.target.nextElementSibling;
+		        var del_form = next_element.parentNode;
+		        var com = window.confirm(next_element.value + 'を削除しますか？');
+				if (com == true) {
+					del_form.submit();
+					return true;
+				} else{
+					return false;
+				} 
+		        
+		    }
+<% } }%>
+
+	</script>
 </body>
 </html>
 
