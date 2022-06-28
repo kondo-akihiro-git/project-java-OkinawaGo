@@ -286,8 +286,7 @@ public class Manager_DAO {
 			System.out.println("5");
 			while (rs.next()) {
 				rtnList2.add(rowMappingCategory(rs));
-				System.out.println("1");
-				System.out.println("Category_id"+rtnList2.get(0).getCategory_id());
+				
 			}
 
 			if (rtnList2 == null || rtnList2.size() == 0) {
@@ -315,10 +314,8 @@ public class Manager_DAO {
 				Manager_DAO dao = new Manager_DAO(this.con);
 				for(int i= 0;i<rtnList3.size();i++) {
 					String cateInfoId = rtnList3.get(i).getInfo_id();
-					System.out.println(i);
-					System.out.println(cateInfoId);
 				cateList.add(dao.selectByInfoId(cateInfoId));
-				System.out.println(cateList.get(i).getInfo_id());
+				
 				}
 				//List<Info_DTO> cateList = dao.selectByInfoId(cateInfoId);
 				System.out.println("88888");
@@ -342,13 +339,9 @@ public class Manager_DAO {
 				rs = stmt.executeQuery();
 				while (rs.next()) {
 					List5.add(rowMappingInfo(rs));
-					System.out.println("3");
+					
 				}
-				/*String area =rtnList1.get(0).getArea_id();
-				Manager_DAO dao = new Manager_DAO(this.con);
-				//Manager_DAO dao = new Manager_DAO(this.con);
-				List<Info_DTO> areaList = dao.selectByArea(area);
-				System.out.println("99999");*/
+				
 				rtnList = List5;
 				
 				
