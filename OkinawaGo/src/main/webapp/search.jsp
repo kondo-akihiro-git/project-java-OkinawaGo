@@ -86,15 +86,13 @@
 		<%@ page import="main.java.com.rhizome.example.userpage.base.BaseUser"%>
 		<%@ page import="main.java.com.rhizome.example.util.DbUtil"%>
 		<%String check = (String)request.getAttribute("check"); %>
+		
 		<% if(request.getAttribute("check").equals("2")){%>
-		<div class="pagenation_block ">
+		<div class="pagenation_block wrapper">
 			<%
 			ArrayList<Info_id_img_DTO> list = (ArrayList<Info_id_img_DTO>) request.getAttribute("infolist");
 			for (Info_id_img_DTO r : list) {
 			%>
-			
-			<dl>
-			<dd>
 			<form method="post" action="showinfo" class="input">
 			<input type="image" src="img/<%=r.getInfo_img()%>"  class="inputimg">
 			<input type="hidden" name="info_img" value="<%=r.getInfo_img()%>">
@@ -102,11 +100,12 @@
 			<input type="hidden" name="area_id" value="<%=r.getArea_id()%>">
 			<input type="hidden" name="s_g_id" value="<%=r.getS_g_id()%>">
 			</form>
-			</dd>
-			</dl>
 		<%}%>
 			
 		</div>
+		
+		
+		
 		<% }else if(request.getAttribute("check").equals("1")){ %>
 		<div class="pagenation_block wrapper">
 			
@@ -114,22 +113,19 @@
 			ArrayList<Info_DTO> list_spo = (ArrayList<Info_DTO>) request.getAttribute("infolist");
 			for (Info_DTO r : list_spo) {
 			%>
-			
-			<dl>
-			<dd>
+		
 			<form method="post" action="showinfo" class="input">
-			<input type="image" src="img/<%=r.getInfo_img()%>"  class="inputimg">
+			<input type="image" src="img/<%=r.getInfo_img()%>" class="img">
 			<input type="hidden" name="info_img" value="<%=r.getInfo_img()%>">
 			<input type="hidden" name="info_id" value="<%=r.getInfo_id()%>">
 			<input type="hidden" name="area_id" value="<%=r.getArea_id()%>">
 			<input type="hidden" name="s_g_id" value="<%=r.getS_g_id()%>">
 			</form>
-			</dd>
-			</dl>
 			<%}%>
+		</div>
 		<%}%>
 			
-		</div>
+		
 		
 		
 		

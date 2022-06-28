@@ -99,7 +99,7 @@
 
 		<h3>コメント</h3>
 
-		<table>
+		<table class="comment">
 		<%
 			ArrayList<Comment_DTO> list_com = (ArrayList<Comment_DTO>) request.getAttribute("commentList");
 			for (Comment_DTO r : list_com) {
@@ -120,7 +120,7 @@
 
 
 		<form action="comment" method="post" id="commentForm"
-			name="commentForm" enctype="multipart/form-data">
+			name="commentForm" enctype="multipart/form-data" class="com">
 			<p>
 				<input type="text" name="comment_nm" required maxlength="20"
 					placeholder="ユーザー名（20字まで）" class="comment_name">
@@ -147,31 +147,23 @@
 			<%}else if(request.getAttribute("s_g_id").equals("2")){ %>
 			<h3>周辺のスポット</h3>
 			<%} %>
-			<table>
-			<tr>
+			<div class="wrapper">
 			<%
 			ArrayList<Info_DTO> recomlist = (ArrayList<Info_DTO>) request.getAttribute("recomlist");
 			for (int i = 0; i< recomlist.size(); i++ ) {
 			%>
-			<dl>
-			<dd>
-			<td class="ta">
-			<form method="post" action="showinfo" class="input">
+			
+			<form method="post" action="showinfo">
 			<input type="image" class="inputimg" src="img/<%=recomlist.get(i).getInfo_img()%>"  class="inputimg">
 			<input type="hidden" name="info_img" value="<%=recomlist.get(i).getInfo_img()%>">
 			<input type="hidden" name="info_id" value="<%=recomlist.get(i).getInfo_id()%>">
 			<input type="hidden" name="area_id" value="<%=recomlist.get(i).getArea_id()%>">
 			<input type="hidden" name="s_g_id" value="<%=recomlist.get(i).getS_g_id()%>">
-			
 			</form>
-			</td>
-			</dd>
-			</dl>
 			
 			<%}%>
-			</tr>
-			</table>
 
+</div>
 		</div>
 
 		<script>

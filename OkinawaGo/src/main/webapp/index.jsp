@@ -55,8 +55,6 @@
 <div class="recomend">
 <a href="searchSpo.jsp">
 <h2>スポット検索</h2>
-<table>
-<tr>
 <%
 ShowInfoAction show = new ShowInfoAction();
 int min = 1;
@@ -68,39 +66,38 @@ String s_g_id = "2";
 List<Info_DTO> recom = new ArrayList<>();
 recom = show.getRecommendlist(area_id,s_g_id);
 %>
+<div class="wrapper img">
 <% 
 for (int i = 0; i< recom.size(); i++ ) {
 %>
-<td>
+
 <img src="img/<%=recom.get(i).getInfo_img()%>">
-</td>
+
 <%}%>
-</tr>
-</table>
+</div>
 </a>
 
 
 <a href="searchGul.jsp">
 <h2>グルメ検索</h2>
-<table>
-<tr>
+
 <%
 String s_g_id_g = "1";
 List<Info_DTO> recom_g = new ArrayList<>();
 recom_g = show.getRecommendlist(area_id,s_g_id_g);
 %>
+<div class="wrapper img">
 <% 
 for (int i = 0; i< recom_g.size(); i++ ) {
 %>
-<td>
-<img src="img/<%=recom_g.get(i).getInfo_img()%>">
-</td>
-<%}%>
-</tr>
-</table>
-</a>
-</div>
 
+<img src="img/<%=recom_g.get(i).getInfo_img()%>">
+
+<%}%>
+</div>
+</a>
+
+</div>
 <div class="adLink"><a href="adLogin.jsp">管理者の方はこちら</a></div>
 </div>
 

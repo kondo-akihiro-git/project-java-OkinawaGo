@@ -6,6 +6,7 @@
 }
 
 body{
+
 }
 .content{
 margin:1% 18% 0% 18%;
@@ -56,6 +57,7 @@ h3{
 font-size:2vw;
 font-weight: 300;
 color:#000000;
+
 }
 
 
@@ -64,17 +66,23 @@ margin:0% auto;
 margin-bottom:2%;
 border-spacing : 0px 5px;
 border-collapse : separate ;
+
 }
 
 table td{
-font-size:1.6vw;
 font-weight: 200;
 color:#000000;
 padding:5px;
+width:13%;
+}
+table img{
+width: 100%;
+height:100%;
 }
 
 .addressTd{
-padding:0vw 7vw;
+padding:0vw 3vw 0vw 0vw;
+  text-align:right;
 }
 
 
@@ -83,7 +91,7 @@ width:25%;
 height:25%;
 }
 
-input{
+.com input{
 outline: none;
 width:100%;
 }
@@ -110,24 +118,48 @@ margin-top:3%;
 text-align: right;
 }
 
+.wrapper {
+  display: grid;
+  column-gap: 15px;
+  row-gap: 1em;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+
+}
+.wrapper input{
+width:100%;
+height:100%;	
+}
+
+form{
+width:100%;
+height:100%;
+}
+
+form:nth-of-type(4){
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+form:nth-of-type(5){
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+form:nth-of-type(6){
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
 
 .recomend{
 margin-top:5%;
-}
-
-.wrapper {
-
-}
-.pagenation_block dl {
-display:inline;
-}
-.pagenation_block dd {
-display:inline;
-}
-
-.input{
-display:inline;
-width:30%;
 }
 
 
@@ -177,11 +209,10 @@ border-spacing : 0px 1px;
 }
 
 table td{
-font-size:1.9vw;
+font-size:2vw;
 font-weight: 200;
+
 }
-
-
 .recomend{
 margin-top:3%;
 }
