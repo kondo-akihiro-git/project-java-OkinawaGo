@@ -75,7 +75,7 @@
 		}
 		%>
 		<form action="select" method="post" class="freeword_search">
-			<input type="search" name="text" placeholder="店名/スポット名/住所"
+			<input type="search" name="text" placeholder="店名/スポット名/住所/カテゴリ名"
 				class="input_var" required> <input type="submit" value="検索">
 		</form>
 		<div class="pagenation_block">

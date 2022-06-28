@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
+import main.java.com.rhizome.example.dao.Manager_DAO;
 import main.java.com.rhizome.example.dao.Okinawa_DAO;
 import main.java.com.rhizome.example.entity.Comment_DTO;
 import main.java.com.rhizome.example.entity.Info_DTO;
@@ -21,13 +22,13 @@ public class SelectAction extends BaseServlet {
 	protected String doAction() throws Exception {
 
 		Connection con = DbUtil.getConnection();
-		Okinawa_DAO dao = new Okinawa_DAO(con);
+		Manager_DAO dao = new Manager_DAO(con);
 		if (super.request.getParameter("text") != null) {
 
 			String text = super.request.getParameter("text");
 			// フリーワード検索を行う
 
-			List<Info_DTO> spotInfolist = dao.selectByFreeWord(text);//
+			List<Info_DTO> spotInfolist = dao.managerFreeWord(text);//
 			
 			// 検索結果の判定
 			if (spotInfolist == null || spotInfolist.size() == 0) {
@@ -51,10 +52,11 @@ public class SelectAction extends BaseServlet {
 		else if (super.request.getParameter("info_id") != null)
 
 		{
+			Okinawa_DAO dao1 = new Okinawa_DAO(con);
 			String info_id = super.request.getParameter("info_id");
 			
-			List<Info_DTO> list = dao.selectByInfoId(info_id);
-			List<Comment_DTO> commentList = dao.selectComment(info_id);
+			List<Info_DTO> list = dao1.selectByInfoId(info_id);
+			List<Comment_DTO> commentList = dao1.selectComment(info_id);
 			System.out.println("info_id" + info_id); 
 			for(Comment_DTO li:commentList) {
 				System.out.println("sel:com" + li.getComment_tx()); 

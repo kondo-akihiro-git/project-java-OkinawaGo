@@ -807,7 +807,27 @@ public class Okinawa_DAO {
 		DbUtil.closeStatement(this.stmt);
 		return managerList;
 	}
-	
+	public String searcharea_nm(String value) throws SQLException, ClassNotFoundException, NumberFormatException {
+		StringBuilder sql = new StringBuilder();
+		String area_nm ="";
+		sql.append(" SELECT ");
+		sql.append("    " + AREA_NM);
+		sql.append(" FROM ");
+		sql.append("    " + AREA_TABLE_NAME);
+		sql.append(" WHERE ");
+		sql.append("    " + AREA_TABLE_AREA_ID + " = " + "?");
+		try {
+			this.stmt = con.prepareStatement(sql.toString());
+			stmt.setString(1, value);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				area_nm = rs.getString("area_nm");
+			}
+		} finally {
+			DbUtil.closeStatement(this.stmt);
+		}
+		return area_nm;
+	}
 	//管理者フリーワード検索変更後
 	/*public List<Info_DTO> manageFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
 		List<Info_DTO> rtnList = new ArrayList<>();
@@ -902,7 +922,7 @@ public class Okinawa_DAO {
 	}*/
 	
 	//管理者フリーワード検索変更前
-	public List<Info_DTO> managerFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
+	/*public List<Info_DTO> managerFreeWord(String huri_wa_do) throws SQLException, ClassNotFoundException, NumberFormatException {
 		List<Info_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		sql.append(" SELECT ");
@@ -989,29 +1009,8 @@ public class Okinawa_DAO {
 			DbUtil.closeStatement(this.stmt);
 		}
 		return rtnList;
-	}
-
-	public String searcharea_nm(String value) throws SQLException, ClassNotFoundException, NumberFormatException {
-		StringBuilder sql = new StringBuilder();
-		String area_nm ="";
-		sql.append(" SELECT ");
-		sql.append("    " + AREA_NM);
-		sql.append(" FROM ");
-		sql.append("    " + AREA_TABLE_NAME);
-		sql.append(" WHERE ");
-		sql.append("    " + AREA_TABLE_AREA_ID + " = " + "?");
-		try {
-			this.stmt = con.prepareStatement(sql.toString());
-			stmt.setString(1, value);
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				area_nm = rs.getString("area_nm");
-			}
-		} finally {
-			DbUtil.closeStatement(this.stmt);
-		}
-		return area_nm;
-	}
+	}*/
+	
 	
 
 }
