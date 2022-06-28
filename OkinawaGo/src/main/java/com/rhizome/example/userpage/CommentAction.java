@@ -34,17 +34,18 @@ public class CommentAction extends BaseUser {
 		super.request.setCharacterEncoding("utf-8");
 		
 		String filename = null;
-		String nullimg = null;
-		
-		if (super.request.getParameter("comment_img") != null) {
-			Part part = super.request.getPart("comment_img");
-			filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-			String path = getServletContext().getRealPath("/upload");
-			part.write(path + File.separator + filename);
-		} else {
-			nullimg = null;
+		String imgcheck = "1";
+		Part part = super.request.getPart("comment_img");
+		filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+
+		if(filename.equals("")) {
+			imgcheck = "0"; 
 		}
 		
+		if (imgcheck.equals("1")) {
+			String path = getServletContext().getRealPath("/upload");
+			part.write(path + File.separator + filename);
+		}
 		// ユーザー名と投稿内容をデータベースに追加
 				List<Info_DTO> List = null;
 				List<Info_DTO> recom = new ArrayList<>();
@@ -56,10 +57,10 @@ public class CommentAction extends BaseUser {
 				String comment_tx = super.request.getParameter("comment_tx");
 				Connection con = DbUtil.getConnection();
 				Okinawa_DAO dao = new Okinawa_DAO(con);
-				if(super.request.getParameter("comment_img") != null) {
+				if(imgcheck.equals("1")) {
 					dao.CommentInsert(info_id, comment_nm, comment_tx, filename);
-				}else if(super.request.getParameter("comment_img") == null) {
-					dao.CommentInsert(info_id, comment_nm, comment_tx, nullimg);
+				}else if(imgcheck.equals("0")) {
+					dao.CommentInsert(info_id, comment_nm, comment_tx, null);
 				}
 				List = dao.selectByInfoId(info_id);
 				
