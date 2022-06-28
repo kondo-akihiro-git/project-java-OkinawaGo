@@ -71,13 +71,13 @@ onclick="document.getElementById('cate').style.display = 'inline';">グルメ</t
 <tr id="cate">
 <td  class="buttons">
 <ul>
-<li><input type="checkbox" name="category_id" value="1">レストラン</li>
-<li><input type="checkbox" name="category_id" value="2">カフェ</li>
-<li><input type="checkbox" name="category_id" value="3">居酒屋</li>
-<li><input type="checkbox" name="category_id" value="4">ランチ</li>
-<li><input type="checkbox" name="category_id" value="5">ディナー</li>
-<li><input type="checkbox" name="category_id" value="6">沖縄料理</li>
-<li><input type="checkbox" name="category_id" value="7">スイーツ</li>
+<li><input type="checkbox" name="category_id" value="1" id="cate">レストラン</li>
+<li><input type="checkbox" name="category_id" value="2" id="cate">カフェ</li>
+<li><input type="checkbox" name="category_id" value="3" id="cate">居酒屋</li>
+<li><input type="checkbox" name="category_id" value="4" id="cate">ランチ</li>
+<li><input type="checkbox" name="category_id" value="5" id="cate">ディナー</li>
+<li><input type="checkbox" name="category_id" value="6" id="cate">沖縄料理</li>
+<li><input type="checkbox" name="category_id" value="7" id="cate">スイーツ</li>
 </ul>
 </td>
 </tr>
@@ -98,6 +98,24 @@ onclick="document.getElementById('cate').style.display = 'inline';">グルメ</t
 <footer>
 <p>　</p>
 </footer>
+
+<script>
+    let arr_checkBoxes = document.getElementsByClassName("cate");
+    console.log(arr_checkBoxes);
+    let count = 0;
+    for (let i = 0; i < arr_checkBoxes.length; i++) {
+        if (arr_checkBoxes[i].checked) {
+            count++;
+        }
+    }
+    if (count > 0) {
+        return true;
+    } else {
+        window.alert("1つ以上選択してください。");
+        return false;
+    };
+ 
+</script>
 </body>
 </html>
 

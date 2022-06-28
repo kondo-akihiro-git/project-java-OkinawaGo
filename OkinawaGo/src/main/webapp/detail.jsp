@@ -71,6 +71,7 @@
 		<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
 		<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
 		<%@ page import="main.java.com.rhizome.example.entity.Comment_DTO"%>
+		<%@ page import="main.java.com.rhizome.example.entity.Menu_DTO"%>
 		<%@ page import="main.java.com.rhizome.example.userpage.base.BaseUser"%>
 		<%@ page import="main.java.com.rhizome.example.util.DbUtil"%>
 		
@@ -94,9 +95,37 @@
 		<% } %>
 		
 		
+		
+		
+		<% String check = (String)request.getAttribute("s_g_id"); %>
+		<% if(check.equals("2")){ %>
+		<%
+		ArrayList<Menu_DTO> menulist = (ArrayList<Menu_DTO>) request.getAttribute("pricelist");
+		if(menulist.size() != 0){ 
+		%>
+		<table>
+		<td class="addressTd">メニュー</td>
+		<% for (Menu_DTO r : menulist) {%>
+		<tr>
+				<td class="addressTd"><%=r.getPrice_nm()%> </td>
+				<td>&yen<%=r.getPrice() %></td>
+				
+		</tr>
+		<% } %>
+		</table>
+		<% } else if(menulist.size() == 0){%>
+		<% } %>
+		<% }if(check.equals("1")){ %>
+		<% } %>
+		
+
+		
 		<table id='messages'>
 		</table>
-
+		
+		
+		
+		
 		<h3>コメント</h3>
 
 		<table class="comment">
@@ -110,7 +139,7 @@
 				
 				<% if(r.getComment_img() != null){%>
 				
-				<td class="commentImg"><img src="/group-development-2/upload/<%=r.getComment_img() %>"></td>
+				<td class="commentImg"><img src="/okinawago/upload/<%=r.getComment_img() %>"></td>
 				<% }else if(r.getComment_img() == null){ %>
 					<td></td>
 				<% } %>

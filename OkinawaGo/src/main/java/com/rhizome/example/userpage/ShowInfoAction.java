@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import main.java.com.rhizome.example.dao.Okinawa_DAO;
 import main.java.com.rhizome.example.entity.Comment_DTO;
 import main.java.com.rhizome.example.entity.Info_DTO;
+import main.java.com.rhizome.example.entity.Menu_DTO;
 import main.java.com.rhizome.example.userpage.base.BaseUser;
 import main.java.com.rhizome.example.util.DbUtil;
 
@@ -28,6 +29,7 @@ public class ShowInfoAction extends BaseUser {
 		Okinawa_DAO dao = new Okinawa_DAO(con);
 		List<Info_DTO> list = dao.selectByInfoId(info_id);// 画像から詳細データを取得するDAOメソッドが必要
 		List<Comment_DTO> commentList = dao.selectComment(info_id);
+		List<Menu_DTO> priceList = dao.selectByPrice(info_id);
 		
 		recom = getRecommendlist(area_id , s_g_id);
 		super.request.setAttribute("info_id", info_id);
@@ -37,6 +39,11 @@ public class ShowInfoAction extends BaseUser {
 		super.request.setAttribute("s_g_id", s_g_id );
 		super.request.setAttribute("area_id", area_id );
 		super.request.setAttribute("recomlist", recom);
+		if(s_g_id.equals("2")){
+			super.request.setAttribute("pricelist", priceList);
+		}else if(s_g_id.equals("1")) {
+		}
+		
 		return "detail";
 	}
 	

@@ -90,7 +90,6 @@ recom_g = show.getRecommendlist(area_id,s_g_id_g);
 <% 
 for (int i = 0; i< recom_g.size(); i++ ) {
 %>
-
 <img src="img/<%=recom_g.get(i).getInfo_img()%>">
 
 <%}%>
