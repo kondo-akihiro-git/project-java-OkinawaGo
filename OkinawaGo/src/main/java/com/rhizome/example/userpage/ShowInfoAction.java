@@ -28,6 +28,7 @@ public class ShowInfoAction extends BaseUser {
 		Okinawa_DAO dao = new Okinawa_DAO(con);
 		List<Info_DTO> list = dao.selectByInfoId(info_id);// 画像から詳細データを取得するDAOメソッドが必要
 		List<Comment_DTO> commentList = dao.selectComment(info_id);
+		
 		recom = getRecommendlist(area_id , s_g_id);
 		super.request.setAttribute("info_id", info_id);
 		super.request.setAttribute("info_img", info_img);
@@ -54,9 +55,6 @@ public class ShowInfoAction extends BaseUser {
 			recom.add(infolist.get(i));
     	}
 
-//		for(Info_DTO ki:recom) {
-//			System.out.println("show_recom"+ki.getInfo_nm());
-//		}
 		return recom;
 	}
 
