@@ -57,14 +57,8 @@ public class SelectAction extends BaseServlet {
 			
 			List<Info_DTO> list = dao1.selectByInfoId(info_id);
 			List<Comment_DTO> commentList = dao1.selectComment(info_id);
-			System.out.println("info_id" + info_id); 
-			for(Comment_DTO li:commentList) {
-				System.out.println("sel:com" + li.getComment_tx()); 
-			}
-			for(Info_DTO lo :list) {
-				System.out.println("sel:list"+lo.getInfo_id());
-			}
 			
+
 			
 			super.request.setAttribute("commentList", commentList);
 			super.request.setAttribute("list", list);

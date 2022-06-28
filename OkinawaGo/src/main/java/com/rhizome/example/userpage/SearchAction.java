@@ -51,7 +51,6 @@ public class SearchAction extends BaseUser {
 			return name;
 //スポット検索画面のマップで検索した場合
 		} else if (super.request.getParameter("spotmap") != null && super.request.getParameter("s_g_id").equals("1")) {
-			System.out.println("ddddd");
 			value = super.request.getParameter("spotmap");
 			area_nm = dao.searcharea_nm(value);
 			infolist = dao.selectByArea(value);
@@ -98,8 +97,7 @@ public class SearchAction extends BaseUser {
 			super.request.setAttribute("cate_nm", cate_nm);
 			return name;
 //グルメ検索画面からエリアのみで検索した場合
-		}else if(super.request.getParameter("category") == null && super.request.getParameter("s_g_id").equals("2")) {
-			System.out.println("hhhh");															//"s_g_id"がnullエラー
+		}else if(super.request.getParameter("category") == null && super.request.getParameter("s_g_id").equals("2")) {													//"s_g_id"がnullエラー
 			String id = super.request.getParameter("id");
 			area_nm = dao.searcharea_nm(id);
 			List<Info_id_img_DTO> List = null;

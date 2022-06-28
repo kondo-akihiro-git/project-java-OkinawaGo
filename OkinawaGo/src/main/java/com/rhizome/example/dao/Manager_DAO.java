@@ -282,7 +282,6 @@ public class Manager_DAO {
 			stmt.setString(1, "%" + huri_wa_do + "%");
 			
 			rs = stmt.executeQuery();
-			System.out.println("5");
 			while (rs.next()) {
 				rtnList2.add(rowMappingCategory(rs));
 				
