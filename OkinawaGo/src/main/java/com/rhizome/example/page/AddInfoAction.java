@@ -45,9 +45,7 @@ public class AddInfoAction extends BaseServlet {
 					, "address" // 4
 					, "info_img" // 5
 			);
-			for(String ki:cateList) {
-				System.out.println(ki);
-			}
+			
 			dao.InfoInsert(paramList[0], paramList[1], paramList[2], paramList[4], paramList[3], paramList[5], (String)super.session.getAttribute("LOGIN_Manager_id"),cateList);
 		}
 
