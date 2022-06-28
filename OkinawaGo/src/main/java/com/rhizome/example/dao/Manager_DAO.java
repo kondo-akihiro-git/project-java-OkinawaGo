@@ -231,7 +231,6 @@ public class Manager_DAO {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				rtn = rowMappingInfo(rs);
-				System.out.println(rowMappingInfo(rs).getInfo_nm());
 			}
 		} finally {
 			DbUtil.closeStatement(this.stmt);
@@ -317,8 +316,6 @@ public class Manager_DAO {
 				cateList.add(dao.selectByInfoId(cateInfoId));
 				
 				}
-				//List<Info_DTO> cateList = dao.selectByInfoId(cateInfoId);
-				System.out.println("88888");
 				rtnList = cateList;
 				
 			}
