@@ -30,13 +30,20 @@ public class CommentAction extends BaseUser {
 	}
 
 	protected String doPost() throws NumberFormatException, ClassNotFoundException, SQLException, IOException, ServletException {
-		super.request.setCharacterEncoding("utf-8");
-		Part part=super.request.getPart("comment_img");
-		String filename=Paths.get(part.getSubmittedFileName()).getFileName().toString();
-		String path=getServletContext().getRealPath("/upload");
-		part.write(path+File.separator+filename);
-		System.out.println("2");
 		
+		super.request.setCharacterEncoding("utf-8");
+		
+		String filename = null;
+		String nullimg = null;
+		
+		if (super.request.getParameter("comment_img") != null) {
+			Part part = super.request.getPart("comment_img");
+			filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+			String path = getServletContext().getRealPath("/upload");
+			part.write(path + File.separator + filename);
+		} else {
+			nullimg = null;
+		}
 		
 		// ユーザー名と投稿内容をデータベースに追加
 				List<Info_DTO> List = null;
@@ -47,31 +54,20 @@ public class CommentAction extends BaseUser {
 				String s_g_id = super.request.getParameter("s_g_id");
 				String comment_nm = super.request.getParameter("comment_nm");
 				String comment_tx = super.request.getParameter("comment_tx");
-				//String comment_img = super.request.getParameter("comment_img");
 				Connection con = DbUtil.getConnection();
 				Okinawa_DAO dao = new Okinawa_DAO(con);
-				if(filename.length() != 0) {
+				if(super.request.getParameter("comment_img") != null) {
 					dao.CommentInsert(info_id, comment_nm, comment_tx, filename);
-				}else if(filename.length() == 0) {
-					dao.CommentInsert(info_id, comment_nm, comment_tx, null);
+				}else if(super.request.getParameter("comment_img") == null) {
+					dao.CommentInsert(info_id, comment_nm, comment_tx, nullimg);
 				}
 				List = dao.selectByInfoId(info_id);
-//				for(Info_DTO kis:List) {
-//					System.out.println("list"+kis.getInfo_nm());
-//				}
-				List<Comment_DTO> commentList = dao.selectComment(info_id);
-//				for(Comment_DTO ki:commentList) {
-//					System.out.println("recom"+ki.getComment_tx());
-//				}
 				
+				List<Comment_DTO> commentList = dao.selectComment(info_id);
 				
 				ShowInfoAction showinfo = new ShowInfoAction();
 				recom = showinfo.getRecommendlist(area_id,s_g_id);
-//				for(Info_DTO ki:recom) {
-//					System.out.println("recom"+ki.getInfo_nm());
-//				}
 				
-
 				super.request.setAttribute("list", List);
 				super.request.setAttribute("commentList", commentList);
 				super.request.setAttribute("info_id", info_id);
@@ -81,55 +77,4 @@ public class CommentAction extends BaseUser {
 				super.request.setAttribute("recomlist", recom);
 				return "detail";
 	}
-	
-	
-	
-	/*protected String doAction() throws NumberFormatException, ClassNotFoundException, SQLException, IOException, ServletException {
-		
-		
-		
-		// ユーザー名と投稿内容をデータベースに追加
-		List<Info_DTO> List = null;
-		List<Info_DTO> recom = new ArrayList<>();
-		String info_img = super.request.getParameter("info_img");
-		String info_id = super.request.getParameter("info_id");
-		String area_id = super.request.getParameter("area_id");
-		String s_g_id = super.request.getParameter("s_g_id");
-		String comment_nm = super.request.getParameter("comment_nm");
-		String comment_tx = super.request.getParameter("comment_tx");
-		String comment_img = super.request.getParameter("comment_img");
-		Connection con = DbUtil.getConnection();
-		Okinawa_DAO dao = new Okinawa_DAO(con);
-		if(comment_img.length() != 0) {
-			dao.CommentInsert(info_id, comment_nm, comment_tx, comment_img);
-		}else if(comment_img.length() == 0) {
-			dao.CommentInsert(info_id, comment_nm, comment_tx, null);
-		}
-		List = dao.selectByInfoId(info_id);
-//		for(Info_DTO kis:List) {
-//			System.out.println("list"+kis.getInfo_nm());
-//		}
-		List<Comment_DTO> commentList = dao.selectComment(info_id);
-//		for(Comment_DTO ki:commentList) {
-//			System.out.println("recom"+ki.getComment_tx());
-//		}
-		
-		
-		ShowInfoAction showinfo = new ShowInfoAction();
-		recom = showinfo.getRecommendlist(area_id,s_g_id);
-//		for(Info_DTO ki:recom) {
-//			System.out.println("recom"+ki.getInfo_nm());
-//		}
-		
-
-		super.request.setAttribute("list", List);
-		super.request.setAttribute("commentList", commentList);
-		super.request.setAttribute("info_id", info_id);
-		super.request.setAttribute("info_img", info_img);
-		super.request.setAttribute("s_g_id", s_g_id);
-		super.request.setAttribute("area_id", area_id);
-		super.request.setAttribute("recomlist", recom);
-		return "detail";
-	}*/
-
 }
