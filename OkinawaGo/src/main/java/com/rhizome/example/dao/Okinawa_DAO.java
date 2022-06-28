@@ -431,8 +431,8 @@ public class Okinawa_DAO {
 	}
 	
 	//料金IDを使って詳細情報を検索するメソッド
-	public List<Menu_DTO> selectByInfoId(String info_id) throws SQLException, ClassNotFoundException, NumberFormatException {
-		List<Menu_DTO> rtnList = new ArrayList<>();
+	public List<Info_DTO> selectByInfoId(String info_id) throws SQLException, ClassNotFoundException, NumberFormatException {
+		List<Info_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		sql.append(" SELECT ");
 		sql.append("    " + "*");
@@ -445,7 +445,7 @@ public class Okinawa_DAO {
 			stmt.setInt(1, Integer.parseInt(info_id));
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				rtnList.add(rowMappingPrice(rs));
+				rtnList.add(rowMappingInfo(rs));
 			}
 		} finally {
 			DbUtil.closeStatement(this.stmt);
@@ -454,8 +454,8 @@ public class Okinawa_DAO {
 	}
 	
 	//情報IDを使って詳細情報を検索するメソッド
-		public List<Info_DTO> selectByPrice(String info_id) throws SQLException, ClassNotFoundException, NumberFormatException {
-			List<Info_DTO> rtnList = new ArrayList<>();
+		public List<Menu_DTO> selectByPrice(String info_id) throws SQLException, ClassNotFoundException, NumberFormatException {
+			List<Menu_DTO> rtnList = new ArrayList<>();
 			StringBuilder sql = new StringBuilder();
 			sql.append(" SELECT ");
 			sql.append("    " + "*");
@@ -468,7 +468,7 @@ public class Okinawa_DAO {
 				stmt.setInt(1, Integer.parseInt(info_id));
 				rs = stmt.executeQuery();
 				while (rs.next()) {
-					rtnList.add(rowMappingInfo(rs));
+					rtnList.add(rowMappingPrice(rs));
 				}
 			} finally {
 				DbUtil.closeStatement(this.stmt);
@@ -789,6 +789,14 @@ public class Okinawa_DAO {
 				sql2.append(" WHERE ");
 				sql2.append("    " + INFO_ID + " = " + " ? ");
 				this.stmt = con.prepareStatement(sql2.toString());
+				stmt.setString(1, info_id);
+				stmt.executeUpdate();
+				StringBuilder sql3 = new StringBuilder();
+				sql3.append(" DELETE " + " FROM ");
+				sql3.append("    " + PRICE_TBL_NAME);
+				sql3.append(" WHERE ");
+				sql3.append("    " + INFO_ID + " = " + " ? ");
+				this.stmt = con.prepareStatement(sql3.toString());
 				stmt.setString(1, info_id);
 				stmt.executeUpdate();
 				StringBuilder sql1 = new StringBuilder();
