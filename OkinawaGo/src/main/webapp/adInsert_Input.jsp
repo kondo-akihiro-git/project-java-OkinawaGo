@@ -32,7 +32,12 @@
 <div class="content">
 <span class="login_name"><p>ログイン：<%=session.getAttribute("LOGIN_Manager_nm") %></p></span>
 <h1><a href="adSearch.jsp"><img src="img/logo.jpg" alt="ロゴ" ></a></h1>
-
+			<%String mes = (String) request.getAttribute("alertMsg");%>
+			<%if (mes != null) {%>
+			<div class="error">
+			<p><%=mes%></p>
+			</div>
+			<%}%>
 <table class="form">
 <form action="input" method="post">
 <tr class="radiobotton">

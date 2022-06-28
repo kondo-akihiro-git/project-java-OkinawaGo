@@ -8,6 +8,10 @@ import main.java.com.rhizome.example.page.base.BaseServlet;
 
 @WebServlet(name = "input", urlPatterns = { "/input" })
 public class InputAction extends BaseServlet {
+	@Override
+	protected String getPageName() {
+		return "adInsert_Input";
+	}
 
 	protected String doAction() throws Exception {
 
@@ -37,12 +41,14 @@ public class InputAction extends BaseServlet {
 					, "info_img" // 5
 			);
 			
+			if(super.request.getParameterValues("category_id") != null) {
 			String[] cateList = super.request.getParameterValues("category_id"); 
-//			for(String lis: cateList) {
-//				System.out.println(lis);
-//			}
-			request.setAttribute("cateList", cateList);		}
-
+			request.setAttribute("cateList", cateList);		
+			}else if(super.request.getParameterValues("category_id") == null) {
+				
+				throw new Exception("カテゴリーを必ず1つ選択して下さい");
+			}
+			}
 //クリックされたname属性がbackの場合、adInsert_input.jspに遷移、それ以外の場合adInsertConfirmに遷移--------
 		if (super.request.getParameter("back") != null) {
 			return "adInsert_input.jsp";
@@ -51,9 +57,5 @@ public class InputAction extends BaseServlet {
 		}
 	}
 
-	@Override
-	protected String getPageName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+
 }

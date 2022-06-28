@@ -76,7 +76,7 @@
 		%>
 		<form action="select" method="post" class="freeword_search">
 			<input type="search" name="text" placeholder="店名/スポット名/住所/カテゴリ名"
-				class="input_var"> <input type="submit" value="検索">
+				class="input_var"> <input type="submit" value="検索" required>
 		</form>
 		<div class="pagenation_block">
 			<%@ page import="java.util.*"%>
