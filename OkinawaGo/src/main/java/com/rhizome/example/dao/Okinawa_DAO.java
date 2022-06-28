@@ -349,9 +349,7 @@ public class Okinawa_DAO {
 	public void InfoInsert(String s_g_id, String info_nm, String area_id, String address, String post_code, String info_img, String cr_mana, String[] cateList)
 			throws NumberFormatException, SQLException, ClassNotFoundException {
 		StringBuilder sql = new StringBuilder();
-		for(String list:cateList){
-			System.out.println(list);
-		}
+		
 		//情報掲載テーブルへの情報登録
 		sql.append(" INSERT " + " INTO ");
 		sql.append("    " + INFO_TBL_NAME);
@@ -527,7 +525,7 @@ public class Okinawa_DAO {
 			}
 			
 		} else if (checkedbox.length == 3) {
-			System.out.println( area_id + checkedbox[0]);
+			
 			sql.append(" SELECT ");
 			sql.append("    " + INFO_ID + "," + INFO_IMG + "," + S_G_ID + "," + INFO_TABLE_AREA_ID);
 			sql.append(" FROM ");
