@@ -15,6 +15,7 @@ import main.java.com.rhizome.example.entity.Info_DTO;
 import main.java.com.rhizome.example.entity.Info_id_DTO;
 import main.java.com.rhizome.example.entity.Info_id_img_DTO;
 import main.java.com.rhizome.example.entity.Manager_DTO;
+import main.java.com.rhizome.example.entity.Menu_DTO;
 import main.java.com.rhizome.example.util.DbUtil;
 
 
@@ -70,7 +71,13 @@ public class Okinawa_DAO {
 	private static final String MANAGER_CR_MANA = "cr_mana";
 	private static final String MANAGER_UP_DATE = "up_date";
 	private static final String MANAGER_UP_MANA = "up_mana";
-
+	//s_g_priceテーブル
+	private static final String PRICE_TBL_NAME = "s_g_price";
+	private static final String PRICE_INFO_ID = "info_id";
+	private static final String PRICE_MENU_ID = "menu_id";
+	private static final String PRICE_NM = "price_nm";
+	private static final String PRICE = "price";
+	
 	/** DBコネクション */
 	public Connection con;
 	/** DBステートメント */
@@ -221,6 +228,14 @@ public class Okinawa_DAO {
 		return InfoD;
 	}
 	
+	public Menu_DTO rowMappingPrice(ResultSet rs) throws SQLException {
+		Menu_DTO InfoD = new Menu_DTO();
+		InfoD.setInfo_id(rs.getString(PRICE_INFO_ID));
+		InfoD.setMenu_id(rs.getString(PRICE_MENU_ID));
+		InfoD.setPrice_nm(rs.getString(PRICE_NM));
+		InfoD.setPrice(rs.getString(PRICE));
+		return InfoD;
+	}
 	/**
 	 * 情報掲載テーブル（info_m）の情報を全件取得する
 	 *
@@ -415,9 +430,9 @@ public class Okinawa_DAO {
 		}
 	}
 	
-	//情報IDを使って詳細情報を検索するメソッド
-	public List<Info_DTO> selectByInfoId(String info_id) throws SQLException, ClassNotFoundException, NumberFormatException {
-		List<Info_DTO> rtnList = new ArrayList<>();
+	//料金IDを使って詳細情報を検索するメソッド
+	public List<Menu_DTO> selectByInfoId(String info_id) throws SQLException, ClassNotFoundException, NumberFormatException {
+		List<Menu_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		sql.append(" SELECT ");
 		sql.append("    " + "*");
@@ -430,13 +445,38 @@ public class Okinawa_DAO {
 			stmt.setInt(1, Integer.parseInt(info_id));
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				rtnList.add(rowMappingInfo(rs));
+				rtnList.add(rowMappingPrice(rs));
 			}
 		} finally {
 			DbUtil.closeStatement(this.stmt);
 		}
 		return rtnList;
 	}
+	
+	//情報IDを使って詳細情報を検索するメソッド
+		public List<Info_DTO> selectByPrice(String info_id) throws SQLException, ClassNotFoundException, NumberFormatException {
+			List<Info_DTO> rtnList = new ArrayList<>();
+			StringBuilder sql = new StringBuilder();
+			sql.append(" SELECT ");
+			sql.append("    " + "*");
+			sql.append(" FROM ");
+			sql.append("    " + PRICE_TBL_NAME);
+			sql.append(" WHERE ");
+			sql.append("    " + INFO_ID + " = " + "?");
+			try {
+				this.stmt = con.prepareStatement(sql.toString());
+				stmt.setInt(1, Integer.parseInt(info_id));
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					rtnList.add(rowMappingInfo(rs));
+				}
+			} finally {
+				DbUtil.closeStatement(this.stmt);
+			}
+			return rtnList;
+		}
+	
+	
 	
 	//グルメ条件検索
 	public List<Info_id_img_DTO> GurumeSelect(String area_id, String[] checkedbox) throws SQLException, ClassNotFoundException, NumberFormatException {
