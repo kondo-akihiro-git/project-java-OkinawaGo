@@ -428,7 +428,7 @@ public class Okinawa_DAO {
 		}
 	}
 	
-	//料金IDを使って詳細情報を検索するメソッド
+	//情報IDを使って詳細情報を検索するメソッド
 	public List<Info_DTO> selectByInfoId(String info_id) throws SQLException, ClassNotFoundException, NumberFormatException {
 		List<Info_DTO> rtnList = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
@@ -451,7 +451,7 @@ public class Okinawa_DAO {
 		return rtnList;
 	}
 	
-	//情報IDを使って詳細情報を検索するメソッド
+	//料金IDを使って詳細情報を検索するメソッド
 		public List<Menu_DTO> selectByPrice(String info_id) throws SQLException, ClassNotFoundException, NumberFormatException {
 			List<Menu_DTO> rtnList = new ArrayList<>();
 			StringBuilder sql = new StringBuilder();
