@@ -67,7 +67,7 @@
 		
 		<h2>フリーワード検索</h2>
 		<form action="search" method="post" class="freeword_search">
-			<input type="search" name="spottext" class="input_var"> <input
+			<input type="search" name="spottext" class="input_var" required> <input
 				type="submit" value="&#xf002;" class="fas">
 		</form>
 		<h2>スポット検索</h2>

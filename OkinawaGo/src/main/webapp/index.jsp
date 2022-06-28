@@ -41,7 +41,7 @@
 		
 <h2>フリーワード検索</h2>
 <form action="search" method="post" class="input">
-  <input type="search" name="toptext" class="input_var">
+  <input type="search" name="toptext" class="input_var" required>
   <input type="submit" value="&#xf002;" class="fas">
 </form>
 <%@ page import="java.util.*"%>
@@ -98,7 +98,7 @@ for (int i = 0; i< recom_g.size(); i++ ) {
 </a>
 
 </div>
-<div class="adLink"><a href="adLogin.jsp">管理者の方はこちら</a></div>
+<div class="adLink"><a href="adLogin.jsp" target ="blank">管理者の方はこちら</a></div>
 </div>
 
 <footer>

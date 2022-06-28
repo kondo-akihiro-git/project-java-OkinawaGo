@@ -53,7 +53,7 @@
 		s.parentNode.insertBefore(tk, s)
 	})(document);
 </script>
-<title>検索トップ画面(スポット検索)｜OkinawaGo</title>
+<title>検索結果画面｜OkinawaGo</title>
 </head>
 <body>
 	<div class="content">
