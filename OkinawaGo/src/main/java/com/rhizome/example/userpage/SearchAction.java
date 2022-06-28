@@ -22,6 +22,7 @@ public class SearchAction extends BaseUser {
 		Connection con = DbUtil.getConnection();
 		Okinawa_DAO dao = new Okinawa_DAO(con);
 		List<Info_DTO> infolist = null;
+		String name = "search";
 
 //検索トップ画面からフリーワードで検索した場合-------------------------------------------------------------
 		if (super.request.getParameter("toptext") != null) {
@@ -34,6 +35,7 @@ public class SearchAction extends BaseUser {
 			super.request.setAttribute("text", text);
 			super.request.setAttribute("infolist", infolist);
 			super.request.setAttribute("check", "1");
+			return name;
 		}
 
 //スポット検索画面からフリーワードで検索した場合------------------------------------------------------------
@@ -46,6 +48,7 @@ public class SearchAction extends BaseUser {
 			super.request.setAttribute("check", "1");
 			super.request.setAttribute("text", text);
 			super.request.setAttribute("infolist", infolist);
+			return name;
 //スポット検索画面のマップで検索した場合
 		} else if (super.request.getParameter("spotmap") != null && super.request.getParameter("s_g_id").equals("1")) {
 			System.out.println("ddddd");
@@ -60,6 +63,7 @@ public class SearchAction extends BaseUser {
 			}
 			super.request.setAttribute("area_nm", area_nm);
 			super.request.setAttribute("infolist", infolist);
+			return name;
 		}
 //グルメ検索画面からフリーワードで検索した場合--------------------------------------------------------------
 		if (super.request.getParameter("goutext") != null) {
@@ -73,6 +77,7 @@ public class SearchAction extends BaseUser {
 			super.request.setAttribute("check", "1");
 			super.request.setAttribute("text", text);
 			super.request.setAttribute("infolist", infolist);
+			return name;
 //グルメ検索画面からカテゴリー検索した場合
 		} else if (super.request.getParameter("category") != null) {
 			String[] list = null;
@@ -91,9 +96,10 @@ public class SearchAction extends BaseUser {
 			super.request.setAttribute("infolist", List);
 			super.request.setAttribute("area_nm", area_nm);
 			super.request.setAttribute("cate_nm", cate_nm);
+			return name;
 //グルメ検索画面からエリアのみで検索した場合
 		}else if(super.request.getParameter("category") == null && super.request.getParameter("s_g_id").equals("2")) {
-			System.out.println("hhhh");
+			System.out.println("hhhh");															//"s_g_id"がnullエラー
 			String id = super.request.getParameter("id");
 			area_nm = dao.searcharea_nm(id);
 			List<Info_id_img_DTO> List = null;
@@ -108,7 +114,7 @@ public class SearchAction extends BaseUser {
 			super.request.setAttribute("area_nm", area_nm);		
 		}
 
-		return "search";
+		return name;
 	}
 
 	public String[] getCategoryNm(String[] list) {
