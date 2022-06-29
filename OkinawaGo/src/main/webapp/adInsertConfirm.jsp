@@ -129,7 +129,7 @@
 </form>
 </table>
 
-<span class="back"><a href="input"><i class="fas fa-arrow-left"></i>前のページへ戻る</a></span>
+<span class="back"><a href="javascript:history.back();"><i class="fas fa-arrow-left"></i>前のページへ戻る</a></span>
 </div>
 
 <footer>
