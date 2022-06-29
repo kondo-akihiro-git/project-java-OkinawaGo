@@ -16,6 +16,7 @@ import javax.servlet.http.Part;
 import main.java.com.rhizome.example.dao.Okinawa_DAO;
 import main.java.com.rhizome.example.entity.Comment_DTO;
 import main.java.com.rhizome.example.entity.Info_DTO;
+import main.java.com.rhizome.example.entity.Menu_DTO;
 import main.java.com.rhizome.example.userpage.base.BaseUser;
 import main.java.com.rhizome.example.util.DbUtil;
 
@@ -65,6 +66,7 @@ public class CommentAction extends BaseUser {
 				List = dao.selectByInfoId(info_id);
 				
 				List<Comment_DTO> commentList = dao.selectComment(info_id);
+				List<Menu_DTO> priceList = dao.selectByPrice(info_id);
 				
 				ShowInfoAction showinfo = new ShowInfoAction();
 				recom = showinfo.getRecommendlist(area_id,s_g_id);
@@ -76,6 +78,10 @@ public class CommentAction extends BaseUser {
 				super.request.setAttribute("s_g_id", s_g_id);
 				super.request.setAttribute("area_id", area_id);
 				super.request.setAttribute("recomlist", recom);
+				if(s_g_id.equals("2")){
+					super.request.setAttribute("pricelist", priceList);
+				}else if(s_g_id.equals("1")) {
+				}
 				return "detail";
 	}
 }
