@@ -53,11 +53,11 @@
 		}
 		%>
 		<table class="form">
-			<form action="input" method="post">
+			<form action="input" method="post" name="inp" >
 				<tr class="radiobotton">
-					<td><input type="radio" name="s_g_id" value="1" required
+					<td><input type="radio" name="s_g_id" value="1" required id= "a"
 						onclick="document.getElementById('cate').style.display = 'none';">スポット
-						<input type="radio" name="s_g_id" value="2" required
+						<input type="radio" name="s_g_id" value="2" required id= "a"
 						onclick="document.getElementById('cate').style.display = 'inline';">グルメ</td>
 				</tr>
 				<tr>
@@ -66,9 +66,9 @@
 				</tr>
 				<tr>
 					<td><select name="area_id">
-							<option value="1">やんばる周辺</option>
-							<option value="2">美ら海水族館周辺</option>
-							<option value="3">青の洞窟周辺</option>
+							<option value="1" >やんばる周辺</option>
+							<option value="2" >美ら海水族館周辺</option>
+							<option value="3" >青の洞窟周辺</option>
 							<option value="4">アメリカンヴィレッジ周辺</option>
 							<option value="5">那覇市</option>
 							<option value="6">ひめゆりの搭周辺</option>
@@ -112,22 +112,42 @@
 					<td>
 						<button type=“submit” onClick="return isCheck()">登録内容確認</button> 
 						<script>
-					
-						function isCheck() {
-						    let arr_checkBoxes = document.getElementsByClassName("check");
-						    console.log(arr_checkBoxes);
-						    let count = 0;
-						    for (let i = 0; i < arr_checkBoxes.length; i++) {
-						        if (arr_checkBoxes[i].checked) {
-						            count++;
-						        }
-						    }
-						    if (count > 0) {
-						        return true;
-						    } else {
-						        window.alert("1つ以上選択してください。");
-						        return false;
-						    };
+						/* window.addEventListener('DOMContentLoaded', function(){
+							var input_genders = document.querySelectorAll("input[name=s_g_id]");
+							for(var element of input_genders) {
+								element.addEventListener('change',function(){
+									if( this.checked ) {
+										console.log(this.value);
+									}
+								});
+							}
+							});
+ */						function isCheck() {
+	 for(var i=0; i<document.inp.s_g_id.length;i++){
+	        if(document.inp.s_g_id[i].checked){
+	            console.log(document.inp.s_g_id[i].value + "が選択されました。");
+	            var num = document.inp.s_g_id[i].value;
+				//console.log(num);
+				if(num==2){
+			    let arr_checkBoxes = document.getElementsByClassName("check");
+			    console.log(arr_checkBoxes);
+			    let count = 0;
+			    for (let i = 0; i < arr_checkBoxes.length; i++) {
+			        if (arr_checkBoxes[i].checked) {
+			            count++;
+			        }
+			    }
+			    if (count > 0) {
+			        return true;
+			    } else {
+			        window.alert("1つ以上選択してください。");
+			        return false;
+			    };
+			}
+	        }
+	    }
+							
+							
 						}
 						</script>
 </td>
