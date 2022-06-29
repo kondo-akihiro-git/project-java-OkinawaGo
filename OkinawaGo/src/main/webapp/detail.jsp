@@ -68,12 +68,12 @@
 		<a href="javascript:history.back();"><i class="fas fa-arrow-left"></i>前のページへ戻る</a>
 		<%@ page import="java.util.*"%>
 		<%@ page import="java.util.ArrayList,java.util.HashMap"%>
-		<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
-		<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
-		<%@ page import="main.java.com.rhizome.example.entity.Comment_DTO"%>
-		<%@ page import="main.java.com.rhizome.example.entity.Menu_DTO"%>
-		<%@ page import="main.java.com.rhizome.example.userpage.base.BaseUser"%>
-		<%@ page import="main.java.com.rhizome.example.util.DbUtil"%>
+		<%@ page import="main.java.com.crrypst.example.entity.Info_DTO"%>
+		<%@ page import="main.java.com.crrypst.example.dao.Okinawa_DAO"%>
+		<%@ page import="main.java.com.crrypst.example.entity.Comment_DTO"%>
+		<%@ page import="main.java.com.crrypst.example.entity.Menu_DTO"%>
+		<%@ page import="main.java.com.crrypst.example.userpage.base.BaseUser"%>
+		<%@ page import="main.java.com.crrypst.example.util.DbUtil"%>
 		
 		<%
 			ArrayList<Info_DTO> list = (ArrayList<Info_DTO>) request.getAttribute("list");

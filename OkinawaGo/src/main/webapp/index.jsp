@@ -46,11 +46,11 @@
 </form>
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.ArrayList,java.util.HashMap"%>
-<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
-<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
-<%@ page import="main.java.com.rhizome.example.userpage.base.BaseUser"%>
-<%@ page import="main.java.com.rhizome.example.userpage.ShowInfoAction"%>
-<%@ page import="main.java.com.rhizome.example.util.DbUtil"%>
+<%@ page import="main.java.com.crrypst.example.entity.Info_DTO"%>
+<%@ page import="main.java.com.crrypst.example.dao.Okinawa_DAO"%>
+<%@ page import="main.java.com.crrypst.example.userpage.base.BaseUser"%>
+<%@ page import="main.java.com.crrypst.example.userpage.ShowInfoAction"%>
+<%@ page import="main.java.com.crrypst.example.util.DbUtil"%>
 
 <div class="recomend">
 <a href="searchSpo.jsp">

@@ -77,11 +77,11 @@
 
 		<%@ page import="java.util.*"%>
 		<%@ page import="java.util.ArrayList,java.util.HashMap"%>
-		<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
-		<%@ page import="main.java.com.rhizome.example.dao.Okinawa_DAO"%>
-		<%@ page import="main.java.com.rhizome.example.entity.Comment_DTO"%>
-		<%@ page import="main.java.com.rhizome.example.page.base.BaseServlet"%>
-		<%@ page import="main.java.com.rhizome.example.util.DbUtil"%>
+		<%@ page import="main.java.com.crrypst.example.entity.Info_DTO"%>
+		<%@ page import="main.java.com.crrypst.example.dao.Okinawa_DAO"%>
+		<%@ page import="main.java.com.crrypst.example.entity.Comment_DTO"%>
+		<%@ page import="main.java.com.crrypst.example.page.base.BaseServlet"%>
+		<%@ page import="main.java.com.crrypst.example.util.DbUtil"%>
 		
 		<%
 			ArrayList<Info_DTO> list_h = (ArrayList<Info_DTO>)request.getAttribute("list");
