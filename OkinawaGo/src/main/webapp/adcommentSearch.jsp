@@ -74,10 +74,7 @@
 		<h1>
 			<a href="adSearch.jsp"><img src="img/logo.jpg" alt="ロゴ"></a>
 		</h1>
-		<form action="select" method="post" class="freeword_search">
-			<input type="search" name="text" placeholder="コメント" class="input_var"> 
-			<input type="submit" value="検索">
-		</form>			
+
 		<%@ page import="java.util.*"%>
 		<%@ page import="java.util.ArrayList,java.util.HashMap"%>
 		<%@ page import="main.java.com.rhizome.example.entity.Info_DTO"%>
