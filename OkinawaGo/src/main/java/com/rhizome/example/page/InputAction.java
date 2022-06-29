@@ -41,14 +41,11 @@ public class InputAction extends BaseServlet {
 					, "info_img" // 5
 			);
 			
-			if(super.request.getParameterValues("category_id") != null) {
+			
 			String[] cateList = super.request.getParameterValues("category_id"); 
 			request.setAttribute("cateList", cateList);		
-			}else if(super.request.getParameterValues("category_id") == null) {
-				
-				throw new Exception("カテゴリーを必ず1つ選択して下さい");
 			}
-			}
+			
 //クリックされたname属性がbackの場合、adInsert_input.jspに遷移、それ以外の場合adInsertConfirmに遷移--------
 		if (super.request.getParameter("back") != null) {
 			return "adInsert_input.jsp";
